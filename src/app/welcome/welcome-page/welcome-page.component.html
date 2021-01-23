@@ -1,0 +1,75 @@
+<div class="welcome-page" (window:scroll)="onWindowScroll($event)">
+    <div class="welcome-page-header" id="header">
+        <div class="pamo-title">Pamo</div>
+        <div class="right-block">
+            <div class="profil">Vous êtes professionnel de santé ?</div>
+            <div class="sign-in-up">
+                <mat-icon class="icone">person_outline</mat-icon>
+                <div class="action">
+                    <span class="title">Pas de compte</span>
+                    <span class="sub-title">créer un compte</span>
+                </div>
+            </div>
+            <div class="sign-in-up">
+                <mat-icon class="icone">person_outline</mat-icon>
+                <div class="action">
+                    <span class="title">Se connecter</span>
+                    <span class="sub-title">Gérer mes RV</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="welcome-page-body">
+        <div class="welcome-banniere">
+            <div class="banniere-container"></div>
+            <div class="form-container">
+                <div class="form-title">
+                    Retrouver un district
+                </div>
+                <form class="search-agency-form">
+                    <mat-form-field class="example-full-width" [appearance]="'outline'">
+                      <mat-label>Assureur</mat-label>
+                      <input matInput placeholder="Ex: Amsa">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" [appearance]="'outline'">
+                        <mat-label>Localisation</mat-label>
+                        <input matInput placeholder="Ex: Dakar">
+                        <mat-icon matSuffix>place</mat-icon>
+                      </mat-form-field>
+                    <div class="button-container">
+                        <button>Rechercher</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        <div class="appointment-process">
+            <div class="appointment-steps-block">
+                <div class="step">
+                    <mat-icon class="act-icon">login</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-1">1</span>
+                        <span class="action">Connectez-vous</span>
+                        <span class="desc">je me connecte</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <mat-icon class="act-icon">local_hospital</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-2">2</span>
+                        <span class="action">Choisissez la spécialité</span>
+                        <span class="desc">(médecin, hôpital)</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <mat-icon class="act-icon">calendar_today</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-3">3</span>
+                        <span class="action">Prenez rendez-vous</span>
+                        <span class="desc">en ligne 24h/24 - 7j/7</span>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </div>
+</div>

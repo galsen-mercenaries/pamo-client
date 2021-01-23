@@ -1,0 +1,53 @@
+<div class="home-page">
+    <div class="sidemenu">
+        <div class="user-profile">
+            <img src="assets/images/profil.jpg" alt="">
+            <div class="names">
+                <span class="firstname">Papa Abdoulaye</span>
+                <span class="lastname">KEBE</span>
+            </div>
+        </div>
+        <div class="side-menu-items">
+            <div class="side-menu-item">
+                <mat-icon [ngStyle]="{'color':'#f35361'}">account_circle</mat-icon>
+                <span>Modifier mes infos personnelles</span>
+            </div>
+            <div class="side-menu-item">
+                <mat-icon [ngStyle]="{'color':'#f35361'}">receipt</mat-icon>
+                <span>Historique de mes rendez-vous</span>
+            </div>
+            <div class="side-menu-item">
+                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                    keyboard_arrow_right</mat-icon>
+                <span>Conseils et actu santé</span>
+            </div>
+            <div class="side-menu-item">
+                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                    keyboard_arrow_right</mat-icon>
+                <span>Besoin de l'avis d'un expert</span>
+            </div>
+            <div class="side-menu-item">
+                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                    keyboard_arrow_right</mat-icon>
+                <span>Aidez à améliorer l'application</span>
+            </div>
+        </div>
+    </div>
+    <div class="home-page-body">
+        <div class="header-menu">
+            <div #trigger="matMenuTrigger" [ngClass]="{'menu-opened': trigger.menuOpen}" class="header-menu-item" *ngFor="let item of menuItems"
+                [matMenuTriggerFor]="afterMenu">
+                <span>{{item.menuTitle}}</span>
+                <mat-icon *ngIf="!trigger.menuOpen else arrow_down" [ngStyle]="{'color':'#f35361'}">
+                    keyboard_arrow_right</mat-icon>
+                <mat-icon #arrow_down *ngIf="trigger.menuOpen" [ngStyle]="{'color':'#ffffff'}">
+                    keyboard_arrow_down</mat-icon>
+                <mat-menu #afterMenu>
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </div>
+        </div>
+        <div class="home-page-body-content"></div>
+    </div>
+</div>
