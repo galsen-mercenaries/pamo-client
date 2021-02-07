@@ -1,0 +1,33 @@
+.card-item {
+  border-radius: 10px;
+  overflow: hidden;
+  .img-container {
+    width: 100%;
+    height: 200px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .article-body {
+    padding: 10px;
+    background-color: white;
+    .article-title {
+      font-size: 14px;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      /* autoprefixer: off */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+    }
+    .article-content {
+      font-family: "NotoSansKR-Light";
+      font-size: 12px;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      /* autoprefixer: off */
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+    }
+  }
+}

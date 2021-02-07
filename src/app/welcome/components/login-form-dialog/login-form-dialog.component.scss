@@ -1,0 +1,33 @@
+.login-dialog-page {
+  padding: 15px 7%;
+  width: 100%;
+  .img-container {
+    text-align: center;
+    img {
+      width: 80px;
+      height: 80px;
+      margin: 20px auto;
+    }
+  }
+  .login-form {
+    mat-form-field {
+      width: 100%;
+    }
+    .button-container {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0 20px;
+      button {
+        height: 40px;
+        text-align: center;
+        line-height: 1;
+        border-radius: 12px;
+        background-color: #33c1bf;
+        border: unset;
+        color: white;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}

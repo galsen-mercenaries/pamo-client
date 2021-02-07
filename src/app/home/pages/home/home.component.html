@@ -40,8 +40,10 @@
                 <span>{{item.menuTitle}}</span>
                 <mat-icon *ngIf="!trigger.menuOpen else arrow_down" [ngStyle]="{'color':'#f35361'}">
                     keyboard_arrow_right</mat-icon>
-                <mat-icon #arrow_down *ngIf="trigger.menuOpen" [ngStyle]="{'color':'#ffffff'}">
-                    keyboard_arrow_down</mat-icon>
+                <ng-template #arrow_down>
+                    <mat-icon *ngIf="trigger.menuOpen" [ngStyle]="{'color':'#ffffff'}">
+                        keyboard_arrow_down</mat-icon>
+                </ng-template>
                 <mat-menu #afterMenu>
                     <button mat-menu-item>Item 1</button>
                     <button mat-menu-item>Item 2</button>

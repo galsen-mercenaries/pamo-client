@@ -12,10 +12,17 @@ const routes: Routes = [
     loadChildren: () =>
       import("./welcome/welcome.module").then((m) => m.WelcomeModule),
   },
+  {
+    path: "register",
+    loadChildren: () =>
+      import("./registration/registration.module").then(
+        (m) => m.RegistrationModule
+      ),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
