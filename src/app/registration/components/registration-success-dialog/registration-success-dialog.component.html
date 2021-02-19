@@ -1,0 +1,19 @@
+<div class="registration-success-popup">
+    <div class="img-container">
+        <img src="/assets/images/green_checkbox.svg" alt="">
+    </div>
+    <div class="congratulations">
+        <span class="congrat">Félicitations{{'  '}}</span>
+        <span class="user">{{nom}},</span>
+    </div>
+    <div class="description">
+        Vous venez tout juste de créer votre compte. Vous pouvez vous connecter dès maintenant et commencer à utiliser la plateforme
+    </div>
+    <div class="btn-container">
+        <button [disabled]="signingIn">
+            Me connecter
+            <mat-spinner mode="indeterminate" [diameter]="18" *ngIf="signingIn"></mat-spinner>
+        </button>
+        <div class="accueil">Retour à l'accueil</div>
+    </div>
+</div>

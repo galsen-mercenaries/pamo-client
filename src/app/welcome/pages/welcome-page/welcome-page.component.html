@@ -3,7 +3,7 @@
         <div class="pamo-title">Pamo</div>
         <div class="right-block">
             <div class="profil">Vous êtes professionnel de santé ?</div>
-            <div class="sign-in-up sign-in-up-1">
+            <div class="sign-in-up sign-in-up-1" (click)="goPageRegister()">
                 <mat-icon class="icone">person_outline</mat-icon>
                 <div class="action">
                     <span class="title">Pas de compte</span>
@@ -22,7 +22,7 @@
     <div class="welcome-page-body">
         <div class="welcome-banniere">
             <div class="banniere-container"></div>
-            <div class="register-block">S'inscrire</div>
+            <div class="register-block" (click)="goPageRegister()">S'inscrire</div>
             <div class="form-container">
                 <div class="form-title">
                     Retrouver un district

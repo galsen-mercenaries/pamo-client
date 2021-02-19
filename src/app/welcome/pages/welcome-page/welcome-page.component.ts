@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material";
+import { Router } from "@angular/router";
 import { SwiperComponent, SwiperDirective } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIGURATION } from "src/app";
 import { LoginFormDialogComponent } from "../../components/login-form-dialog/login-form-dialog.component";
@@ -13,7 +14,7 @@ export class WelcomePageComponent implements OnInit {
   swiperConfig = SWIPER_CONFIGURATION;
   news = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   @ViewChild("swiper", { static: false }) swiper: SwiperComponent;
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public router: Router) {}
 
   ngOnInit() {}
 
@@ -25,6 +26,10 @@ export class WelcomePageComponent implements OnInit {
       let element = document.getElementById("header");
       element.classList.remove("header-sticky");
     }
+  }
+
+  goPageRegister() {
+    this.router.navigate(["/register"]);
   }
 
   nextSlide() {

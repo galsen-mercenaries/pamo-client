@@ -9,27 +9,27 @@
         </div>
         <div class="side-menu-items">
             <div class="side-menu-item">
-                <mat-icon [ngStyle]="{'color':'#f35361'}">account_circle</mat-icon>
-                <span>Modifier mes infos personnelles</span>
+                <mat-icon [ngStyle]="{'color':'#47afff'}">account_circle</mat-icon>
+                <span class="text-main-blue">Modifier mes infos personnelles</span>
             </div>
             <div class="side-menu-item">
-                <mat-icon [ngStyle]="{'color':'#f35361'}">receipt</mat-icon>
-                <span>Historique de mes rendez-vous</span>
+                <mat-icon [ngStyle]="{'color':'#47afff'}">receipt</mat-icon>
+                <span class="text-main-blue">Historique de mes rendez-vous</span>
             </div>
             <div class="side-menu-item">
-                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
                     keyboard_arrow_right</mat-icon>
-                <span>Conseils et actu santé</span>
+                <span class="text-main-blue">Conseils et actu santé</span>
             </div>
             <div class="side-menu-item">
-                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
                     keyboard_arrow_right</mat-icon>
-                <span>Besoin de l'avis d'un expert</span>
+                <span class="text-main-blue">Besoin de l'avis d'un expert</span>
             </div>
             <div class="side-menu-item">
-                <mat-icon [ngStyle]="{'color':'#f35361'}" aria-hidden="false" aria-label="Example home icon">
+                <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
                     keyboard_arrow_right</mat-icon>
-                <span>Aidez à améliorer l'application</span>
+                <span class="text-main-blue">Aidez à améliorer l'application</span>
             </div>
         </div>
     </div>
@@ -37,19 +37,21 @@
         <div class="header-menu">
             <div #trigger="matMenuTrigger" [ngClass]="{'menu-opened': trigger.menuOpen}" class="header-menu-item" *ngFor="let item of menuItems"
                 [matMenuTriggerFor]="afterMenu">
-                <span>{{item.menuTitle}}</span>
-                <mat-icon *ngIf="!trigger.menuOpen else arrow_down" [ngStyle]="{'color':'#f35361'}">
+                <span class="text-main-blue">{{item.menuTitle}}</span>
+                <mat-icon *ngIf="!trigger.menuOpen else arrow_down" [ngStyle]="{'color':'#47afff'}">
                     keyboard_arrow_right</mat-icon>
                 <ng-template #arrow_down>
                     <mat-icon *ngIf="trigger.menuOpen" [ngStyle]="{'color':'#ffffff'}">
                         keyboard_arrow_down</mat-icon>
                 </ng-template>
                 <mat-menu #afterMenu>
-                    <button mat-menu-item>Item 1</button>
-                    <button mat-menu-item>Item 2</button>
+                    <button mat-menu-item>Item 1111111111111111</button>
+                    <button mat-menu-item>Item 2111111111111111</button>
                 </mat-menu>
             </div>
         </div>
-        <div class="home-page-body-content"></div>
+        <div class="home-page-body-content">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

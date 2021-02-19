@@ -80,7 +80,8 @@ button[disabled] {
   cursor: unset !important;
 }
 
-.login-form-style {
+.login-form-style,
+.register-success-dialog-style {
   width: 80% !important;
   max-width: 350px !important;
   mat-dialog-container {
@@ -88,7 +89,18 @@ button[disabled] {
   }
 }
 
+.register-success-dialog-style {
+  mat-dialog-container {
+    border-radius: 10px;
+  }
+}
+
 .login-dialog-backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
+}
+
+.register-success-dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(1.25px);
 }

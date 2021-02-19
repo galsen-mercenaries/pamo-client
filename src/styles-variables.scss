@@ -1,6 +1,31 @@
-$main-blue: #33c1bf;
+$main-blue: #47afff;
 $white: #ffffff;
 $gray-background: #f5f4f6;
 $pink: #f35361;
 $light-pink: #ffadc7;
 $gray: #e6e6db;
+$light-gray: #eeeeee;
+
+.text {
+  &-main-blue {
+    color: $main-blue;
+  }
+  &-white {
+    color: $white;
+  }
+  &-gray-background {
+    color: $gray-background;
+  }
+  &-pink {
+    color: $pink;
+  }
+  &-light-pink {
+    color: $light-pink;
+  }
+  &-gray {
+    color: $gray;
+  }
+  &-light-gray {
+    color: $light-gray;
+  }
+}

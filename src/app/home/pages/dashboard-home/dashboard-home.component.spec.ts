@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistrationMobileComponent } from './registration-mobile.component';
+import { DashboardHomeComponent } from './dashboard-home.component';
 
-describe('RegistrationMobileComponent', () => {
-  let component: RegistrationMobileComponent;
-  let fixture: ComponentFixture<RegistrationMobileComponent>;
+describe('DashboardHomeComponent', () => {
+  let component: DashboardHomeComponent;
+  let fixture: ComponentFixture<DashboardHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistrationMobileComponent ]
+      declarations: [ DashboardHomeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationMobileComponent);
+    fixture = TestBed.createComponent(DashboardHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

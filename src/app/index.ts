@@ -37,3 +37,5 @@ export const SWIPER_CONFIGURATION: SwiperConfigInterface = {
   },
   effect: "slide",
 };
+
+export const REGEX_PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
