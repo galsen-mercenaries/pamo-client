@@ -50,9 +50,11 @@
     }
     .accueil {
       margin-top: 10px;
-      font-size: 12px;
-      color: #ffb41f;
-      cursor: pointer;
+      span {
+        font-size: 12px;
+        color: #ffb41f;
+        cursor: pointer;
+      }
     }
   }
 }

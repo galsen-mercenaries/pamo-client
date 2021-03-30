@@ -8,6 +8,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatProgressSpinnerModule,
 } from "@angular/material";
 import { NewsCardItemComponent } from "./components/news-card-item/news-card-item.component";
 import { SwiperModule } from "ngx-swiper-wrapper";
@@ -36,6 +37,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatFormFieldModule,
     SwiperModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 
 @Component({
   selector: "app-login-form-dialog",
@@ -9,7 +12,15 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class LoginFormDialogComponent implements OnInit {
   isPasswordVisible: boolean;
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {}
+  loading: boolean;
+  errorMessage: string;
+  loginHasError: boolean;
+  constructor(
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    public dialog: MatDialogRef<LoginFormDialogComponent>,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -20,5 +31,27 @@ export class LoginFormDialogComponent implements OnInit {
 
   swapInputType() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  login() {
+    this.loading = true;
+    this.loginHasError = false;
+    const loginPayload = {
+      login: this.form.value.login,
+      password: this.form.value.password,
+    };
+    this.authenticationService.login(loginPayload).subscribe(
+      () => {
+        this.loading = false;
+        this.dialog.close();
+      },
+      (err) => {
+        this.loading = false;
+        this.loginHasError = true;
+        this.errorMessage = err?.error?.error
+          ? err.error.error
+          : "Une erreur est survenue";
+      }
+    );
   }
 }

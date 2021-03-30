@@ -81,7 +81,7 @@
             </div>
             <swiper class="swiper-container" [config]="swiperConfig" #swiper>
                 <div class="swiper-slide" *ngFor="let newsItem of news">
-                    <app-news-card-item></app-news-card-item>
+                    <app-news-card-item [news]="newsItem"></app-news-card-item>
                 </div>
             </swiper>
         </div>

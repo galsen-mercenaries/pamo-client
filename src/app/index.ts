@@ -39,3 +39,8 @@ export const SWIPER_CONFIGURATION: SwiperConfigInterface = {
 };
 
 export const REGEX_PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+export enum LOCAL_STORAGE_KEYS {
+  ACCESS_TOKEN = "access-token",
+  USER = "user",
+}

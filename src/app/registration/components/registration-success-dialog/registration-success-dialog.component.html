@@ -10,10 +10,12 @@
         Vous venez tout juste de créer votre compte. Vous pouvez vous connecter dès maintenant et commencer à utiliser la plateforme
     </div>
     <div class="btn-container">
-        <button [disabled]="signingIn">
+        <button [disabled]="signingIn" (click)="login()">
             Me connecter
             <mat-spinner mode="indeterminate" [diameter]="18" *ngIf="signingIn"></mat-spinner>
         </button>
-        <div class="accueil">Retour à l'accueil</div>
+        <div class="accueil">
+            <span (click)="goHome()">Retour à l'accueil</span>
+        </div>
     </div>
 </div>

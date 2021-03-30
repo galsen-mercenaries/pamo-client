@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { SwiperComponent, SwiperDirective } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIGURATION } from "src/app";
+import { NewsService } from "src/app/services/news-service/news.service";
 import { LoginFormDialogComponent } from "../../components/login-form-dialog/login-form-dialog.component";
 
 @Component({
@@ -12,11 +13,17 @@ import { LoginFormDialogComponent } from "../../components/login-form-dialog/log
 })
 export class WelcomePageComponent implements OnInit {
   swiperConfig = SWIPER_CONFIGURATION;
-  news = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  news = [];
   @ViewChild("swiper", { static: false }) swiper: SwiperComponent;
-  constructor(public dialog: MatDialog, public router: Router) {}
+  constructor(
+    public dialog: MatDialog,
+    public router: Router,
+    private newsService: NewsService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getNews();
+  }
 
   onWindowScroll(e) {
     if (e.target.documentElement.scrollTop > 25) {
@@ -46,5 +53,11 @@ export class WelcomePageComponent implements OnInit {
       backdropClass: "login-dialog-backdrop",
     });
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  getNews() {
+    this.newsService.getNews().subscribe((news) => {
+      this.news = news;
+    });
   }
 }

@@ -131,6 +131,8 @@ export class RegistrationComponent implements OnInit {
       data: {
         nom: this.usernamesForm.value.lastName,
         prenom: this.usernamesForm.value.firstName,
+        email: this.usernamesForm.value.email,
+        password: this.passwordForm.value.password,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {});
