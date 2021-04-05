@@ -5,6 +5,7 @@ $pink: #f35361;
 $light-pink: #ffadc7;
 $gray: #e6e6db;
 $light-gray: #eeeeee;
+$black: #000000;
 
 .text {
   &-main-blue {
@@ -12,6 +13,9 @@ $light-gray: #eeeeee;
   }
   &-white {
     color: $white;
+  }
+  &-black {
+    color: $black;
   }
   &-gray-background {
     color: $gray-background;

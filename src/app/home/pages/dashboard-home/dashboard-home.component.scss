@@ -9,6 +9,7 @@
   .fast-actions-block {
     display: flex;
     flex-wrap: wrap;
+    height: 118px;
     .card-container {
       width: 25%;
       // max-width: 200px;
@@ -18,6 +19,7 @@
         padding: 20px 10px;
         border-radius: 12px;
         box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
         width: 88%;
         font-size: 24px;
         height: 100px;
@@ -55,6 +57,185 @@
           background: linear-gradient(#ffde0a, #fff8c2);
           &:hover {
             background: rgba(255, 222, 10, 0.6);
+          }
+        }
+        .ico {
+          font-size: 25px;
+          position: absolute;
+          top: 23px;
+        }
+        .textes {
+          margin-left: 35px;
+          .title {
+            font-size: 20px;
+            margin-bottom: 10px;
+          }
+          .sub-title {
+            font-family: "NotoSansKR-Light";
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .monthly-appointments {
+    width: 86%;
+    margin: 15px 2%;
+    position: relative;
+    .semester-title {
+    }
+    .markers-container {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      width: 100%;
+      .markers-block {
+        margin-top: 15px;
+        height: 5px;
+        position: relative;
+        .marker {
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+          position: absolute;
+          top: -5px;
+          // left: -7.5px;
+          border-radius: 50%;
+          background-color: $main-blue;
+          border: solid 1.5px $white;
+        }
+        .appointment-date {
+          width: 50px;
+          position: absolute;
+          top: 15px;
+          text-align: center;
+          // left: -25px;
+          font-family: "NotoSansKR-Light";
+          font-size: 10px;
+        }
+      }
+    }
+    .gauge {
+      width: 100%;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      .left {
+        height: 5px;
+        background-color: $main-blue;
+        border-radius: 2px;
+      }
+      .consumed {
+        height: 3px;
+        background-color: #cccccc;
+        border-radius: 1px;
+      }
+    }
+  }
+  .more-details-block {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 2% 10px;
+    .fiche-medical {
+      width: 60%;
+      .ma-fiche {
+        font-size: 22px;
+      }
+      .fiche {
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px 2.5%;
+        border: solid 1px $light-gray;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+        .header-block {
+          display: flex;
+          .avatar {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+          }
+          .names-block {
+            display: flex;
+            flex-direction: column;
+            .nom {
+              font-size: 12px;
+            }
+            .birthdate {
+              font-family: "NotoSansKR-Light";
+              font-size: 12px;
+            }
+          }
+        }
+        .utils {
+          display: flex;
+          margin-top: 15px;
+          .medical-info-block {
+            height: 100%;
+            width: 47%;
+            &:not(:last-child) {
+              border-right: solid 1px $light-gray;
+              padding-right: 40px;
+            }
+            &:not(:first-child) {
+              padding-left: 40px;
+            }
+            .item-info {
+              padding: 5px 0 7px;
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              align-items: flex-end;
+              &:not(:last-child) {
+                border-bottom: solid 1px $light-gray;
+              }
+              .intitule {
+                font-size: 12px;
+                font-family: "NotoSansKR-Light";
+              }
+              .info {
+                font-size: 14px;
+                &.red {
+                  color: red;
+                }
+                .link {
+                  font-family: "NotoSansKR-Light";
+                  font-size: 10px;
+                }
+                .call-number {
+                  text-decoration: underline;
+                  color: blue;
+                  font-family: "NotoSansKR-Light";
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .useful {
+      width: 36%;
+      height: 250px;
+      overflow: hidden;
+      margin-top: 42px;
+      .useful-content {
+        width: 100%;
+        height: 100%;
+        .swiper-container {
+          height: 100%;
+          .swiper-slide {
+            .slider {
+              width: 100%;
+              height: 100%;
+              border-radius: 10px;
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+              }
+            }
           }
         }
       }
