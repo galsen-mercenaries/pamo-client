@@ -20,8 +20,6 @@ export class DashboardHomeComponent implements OnInit {
     "/assets/images/mask.jpg",
   ];
   swiperConfig: SwiperConfigInterface = {
-    direction: "vertical",
-    slidesPerView: 1.6,
     keyboard: false,
     mousewheel: false,
     scrollbar: false,
@@ -31,6 +29,17 @@ export class DashboardHomeComponent implements OnInit {
     loop: true,
     speed: 1200,
     spaceBetween: 10,
+    breakpoints: {
+      200: {
+        direction: "horizontal",
+        slidesPerView: 1,
+        pagination: true,
+      },
+      690: {
+        direction: "vertical",
+        slidesPerView: 1.6,
+      },
+    },
   };
   constructor() {}
 
