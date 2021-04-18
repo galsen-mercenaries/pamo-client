@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIGURATION } from "src/app";
 
@@ -41,7 +42,11 @@ export class DashboardHomeComponent implements OnInit {
       },
     },
   };
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  goAppointment() {
+    this.router.navigate(["/dashboard/appointment-making"]);
+  }
 }

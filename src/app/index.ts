@@ -2,7 +2,7 @@ import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 
 export const SWIPER_CONFIGURATION: SwiperConfigInterface = {
   direction: "horizontal",
-  slidesPerView: 3,
+  // slidesPerView: 3,
   keyboard: false,
   mousewheel: false,
   scrollbar: false,

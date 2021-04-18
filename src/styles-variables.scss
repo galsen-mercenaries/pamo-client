@@ -6,8 +6,16 @@ $light-pink: #ffadc7;
 $gray: #e6e6db;
 $light-gray: #eeeeee;
 $black: #000000;
+$red: #ff0000;
+$green: #039203;
 
 .text {
+  &-red {
+    color: $red;
+  }
+  &-green {
+    color: $green;
+  }
   &-main-blue {
     color: $main-blue;
   }

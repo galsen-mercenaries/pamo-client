@@ -7,11 +7,11 @@ import { Component, OnInit } from "@angular/core";
 })
 export class HomeComponent implements OnInit {
   menuItems = [
-    { menuTitle: "Nos Pharmacies", subItems: [], router: "" },
-    { menuTitle: "Nos Hôpitaux", subItems: [], router: "" },
-    { menuTitle: "Nos assureurs", subItems: [], router: "" },
-    { menuTitle: "Nos Médecins", subItems: [], router: "" },
+    { menuTitle: "Accueil", subItems: [], router: "" },
+    { menuTitle: "Assurances", subItems: [], router: "" },
+    { menuTitle: "FAQ Santé", subItems: [], router: "" },
     { menuTitle: "Actualités", subItems: [], router: "" },
+    { menuTitle: "Mes notifcations", subItems: [], router: "" },
   ];
   constructor() {}
 

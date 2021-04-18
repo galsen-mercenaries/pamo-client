@@ -1,0 +1,78 @@
+@import "src/styles-variables.scss";
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.appointment-page {
+  .title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    .date-picker {
+      width: 220px;
+    }
+    .radio-group {
+      margin-bottom: 30px;
+      mat-radio-button {
+        margin-right: 20px;
+        ::ng-deep .mat-radio-outer-circle {
+          border-color: $main-blue;
+        }
+        ::ng-deep .mat-radio-inner-circle {
+          background-color: $main-blue;
+        }
+        ::ng-deep .mat-radio-label-content {
+          font-size: 14px;
+        }
+      }
+      .unchecked {
+        ::ng-deep .mat-radio-label-content {
+          font-family: "NotoSansKR-Light";
+        }
+      }
+    }
+    .specialite {
+      width: 25%;
+      min-width: 300px;
+    }
+    .search-status {
+      font-family: "NotoSansKR-Light";
+      font-size: 12px;
+      margin-bottom: 20px;
+      .name {
+        font-family: "NotoSansKR-Bold";
+        font-size: 13px;
+      }
+    }
+    .text-area {
+      width: 100%;
+      max-width: 350px;
+      .mat-input-element {
+        font-family: "NotoSansKR-Light";
+        font-size: 14px;
+      }
+    }
+    .btn-block {
+      .btn {
+        width: 170px;
+        height: 43px;
+        border-radius: 25px;
+        font-size: 14px;
+        margin-right: 15px;
+        &-confirm {
+          background-color: $main-blue;
+          border: none;
+        }
+        &-cancel {
+          background-color: $white;
+          border: solid 2px $black;
+        }
+      }
+    }
+  }
+}

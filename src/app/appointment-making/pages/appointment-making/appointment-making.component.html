@@ -1,0 +1,55 @@
+<div class="appointment-page">
+    <div class="title">Je prends un rendez-vous médical</div>
+    <form [formGroup]="appointmentForm">
+        <mat-form-field appearance="fill" class="date-picker">
+            <mat-label>Choisir une date</mat-label>
+            <input matInput [matDatepicker]="picker" readonly formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-radio-group class="radio-group" aria-label="Select an option">
+            <mat-radio-button value="1" #radioGroup1 [ngClass]="{'unchecked': !radioGroup1.checked}">Je connais mon
+                médecin</mat-radio-button>
+            <mat-radio-button value="2" #radioGroup2 [ngClass]="{'unchecked': !radioGroup2.checked}">Trouver un médecin
+            </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="specialite" appearance="outline" *ngIf="radioGroup2.checked">
+            <mat-label>Spécialité</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let speciality of specialities" [value]="speciality.name">
+                    {{speciality.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="specialite" appearance="outline" *ngIf="radioGroup1.checked">
+            <mat-label>Nom du médecin</mat-label>
+            <input matInput placeholder="Choisir mon spécialiste" list="specialist" formControlName="medecin">
+            <datalist id="specialist">
+                <option value="Matar Fall"></option>
+                <option value="Pape KEBE"></option>
+                <option value="Karim Diop"></option>
+                <option value="Matar Fall"></option>
+                <option value="Pape KEBE"></option>
+                <option value="Karim Diop"></option>
+                <option value="Matar Fall"></option>
+                <option value="Pape KEBE"></option>
+                <option value="Karim Diop"></option>
+            </datalist>
+        </mat-form-field>
+        <div class="medecin-check">
+            <div class="search-status text-main-blue">Voulez-vous dire le médecin</div>
+            <div class="search-status text-red">Désolé! Aucun médecin du nom de <span class="name">{{appointmentForm.value.medecin}}</span> n'a
+                été trouvé</div>
+            <div class="search-status text-green"> <span class="name">{{appointmentForm.value.medecin}}</span> est bien identifié par notre système
+            </div>
+        </div>
+        <mat-form-field class="text-area">
+            <mat-label>Quels symptômes ressentez-vous ?</mat-label>
+            <textarea matInput placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
+        </mat-form-field>
+        <div class="btn-block">
+            <button class="btn btn-confirm text-white">Confirmer</button>
+            <button class="btn btn-cancel">Annuler</button>
+        </div>
+    </form>
+</div>
