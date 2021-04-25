@@ -3,76 +3,209 @@
 :host {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .appointment-page {
-  .title {
-    font-size: 22px;
-    margin-bottom: 20px;
+  flex-grow: 1;
+  display: flex;
+  position: relative;
+  overflow-y: auto;
+  padding: 20px;
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/images/rv-picture.png");
+    opacity: 0.1;
+    background-size: cover;
   }
-  form {
-    display: flex;
-    flex-direction: column;
-    .date-picker {
-      width: 220px;
+  .appointment-page-body {
+    flex-grow: 1;
+    .title {
+      font-size: 22px;
+      margin-bottom: 20px;
     }
-    .radio-group {
-      margin-bottom: 30px;
-      mat-radio-button {
-        margin-right: 20px;
-        ::ng-deep .mat-radio-outer-circle {
-          border-color: $main-blue;
+    form {
+      display: flex;
+      flex-direction: column;
+      .date-picker {
+        width: 220px;
+      }
+      .radio-group {
+        mat-radio-button {
+          margin-right: 20px;
+          ::ng-deep .mat-radio-outer-circle {
+            border-color: $main-blue;
+          }
+          ::ng-deep .mat-radio-inner-circle {
+            background-color: $main-blue;
+          }
+          ::ng-deep .mat-radio-label-content {
+            font-size: 14px;
+          }
         }
-        ::ng-deep .mat-radio-inner-circle {
-          background-color: $main-blue;
+        .unchecked {
+          ::ng-deep .mat-radio-label-content {
+            font-family: "NotoSansKR-Light";
+          }
         }
-        ::ng-deep .mat-radio-label-content {
+      }
+      .patient-inf-form {
+        text-align: center;
+        background-color: rgba(71, 175, 255, 0.1);
+        padding: 10px 15px;
+        width: 260px;
+        margin-top: 15px;
+        border-radius: 15px;
+        .patient-title {
           font-size: 14px;
         }
+        .inputs-block {
+          margin-top: 10px;
+          input,
+          input:focus {
+            margin-bottom: 15px;
+            width: 100%;
+            border: solid 1px $main-blue !important;
+            border-radius: 25px;
+            padding: 0 15px;
+            height: 35px;
+            outline: none !important;
+            &::placeholder {
+              font-family: "NotoSansKR-Light";
+            }
+          }
+        }
       }
-      .unchecked {
-        ::ng-deep .mat-radio-label-content {
+      .select-medecin-block {
+        display: flex;
+        align-items: center;
+        margin: 20px 0 10px;
+        .select-med-btn {
+          width: 170px;
+          height: 43px;
+          border-radius: 10px;
+          font-size: 14px;
+          margin-right: 15px;
+          background-color: white;
+          border: solid 2px $main-blue;
+        }
+        .medecin-name {
+          margin-right: 10px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: 150px;
+        }
+        .see-med-infos {
           font-family: "NotoSansKR-Light";
+          font-style: italic;
+          color: blue;
+          cursor: pointer;
+          font-size: 14px;
+          &:hover {
+            font-family: "NotoSansKR-Bold";
+            font-size: 12px;
+          }
+        }
+      }
+      .text-area {
+        width: 100%;
+        max-width: 350px;
+        .mat-input-element {
+          font-family: "NotoSansKR-Light";
+          font-size: 14px;
+        }
+        textarea {
+          resize: none;
+        }
+      }
+      .btn-block {
+        .btn {
+          width: 170px;
+          height: 43px;
+          border-radius: 25px;
+          font-size: 14px;
+          margin-right: 15px;
+          &-confirm {
+            background-color: $main-blue;
+            border: none;
+          }
+          &-cancel {
+            background-color: $white;
+            border: solid 2px $black;
+          }
         }
       }
     }
-    .specialite {
-      width: 25%;
-      min-width: 300px;
-    }
-    .search-status {
-      font-family: "NotoSansKR-Light";
-      font-size: 12px;
-      margin-bottom: 20px;
-      .name {
-        font-family: "NotoSansKR-Bold";
-        font-size: 13px;
-      }
-    }
-    .text-area {
+  }
+  .img-doctor-container {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    img {
+      max-height: 500px;
+      height: 100%;
       width: 100%;
-      max-width: 350px;
-      .mat-input-element {
-        font-family: "NotoSansKR-Light";
-        font-size: 14px;
+    }
+  }
+
+  @media screen and (min-width: 640px) and (max-width: 700px) {
+    .img-doctor-container {
+      width: 175px;
+      img {
+        height: 300px;
       }
     }
-    .btn-block {
-      .btn {
-        width: 170px;
-        height: 43px;
-        border-radius: 25px;
-        font-size: 14px;
-        margin-right: 15px;
-        &-confirm {
-          background-color: $main-blue;
-          border: none;
+  }
+  @media screen and (min-width: 550px) and (max-width: 639px) {
+    .img-doctor-container {
+      width: 110px;
+      img {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .appointment-page {
+    background-color: transparent;
+    .overlay {
+      display: block;
+    }
+    &-body {
+      z-index: 100;
+      form {
+        .select-medecin-block {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start !important;
+          .medecin-name {
+            margin-top: 5px;
+          }
+          .see-med-infos {
+            margin-top: 5px;
+          }
         }
-        &-cancel {
-          background-color: $white;
-          border: solid 2px $black;
+        .btn-block {
+          display: flex;
+          flex-direction: column;
+          button {
+            margin: 0 0 10px 0 !important;
+            width: 100% !important;
+            flex-grow: 1;
+          }
         }
       }
+    }
+    .img-doctor-container {
+      display: none;
     }
   }
 }

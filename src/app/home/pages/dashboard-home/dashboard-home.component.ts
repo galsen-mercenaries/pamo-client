@@ -36,6 +36,10 @@ export class DashboardHomeComponent implements OnInit {
         slidesPerView: 1,
         pagination: true,
       },
+      470: {
+        direction: "horizontal",
+        slidesPerView: 1.45,
+      },
       690: {
         direction: "vertical",
         slidesPerView: 1.6,

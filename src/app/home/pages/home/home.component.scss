@@ -23,10 +23,14 @@ mat-sidenav-container {
   .sidemenu {
     width: 22%;
     height: 100%;
+    overflow-y: auto;
     padding: 30px 20px 10px;
     background-color: white;
     display: inline-block;
     border-radius: 5px 5px 0 0;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .user-profile {
       padding-bottom: 20px;
       border-bottom: solid 2px $gray;
@@ -125,8 +129,9 @@ mat-sidenav-container {
       overflow: hidden;
       margin-top: 10px;
       background-color: white;
-      padding: 25px;
+      padding: 10px;
       border-radius: 5px 5px 0 0;
+      display: flex;
     }
   }
   @media screen and (max-width: 1080px) {
@@ -160,9 +165,9 @@ mat-sidenav-container {
       }
     }
   }
-  @media screen and (max-width: 470px) {
+  @media screen and (max-width: 900px) {
     .home-page-body-content {
-      padding: 25px 0;
+      padding: 0;
     }
   }
 }

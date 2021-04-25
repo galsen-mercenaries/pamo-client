@@ -6,6 +6,7 @@ import { AppointmentMakingComponent } from "./pages/appointment-making/appointme
 import {
   MatAutocompleteModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
   MatNativeDateModule,
@@ -15,9 +16,12 @@ import {
   MAT_DATE_LOCALE,
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SearchMedecinDialogComponent } from "./components/search-medecin-dialog/search-medecin-dialog.component";
+import { SwiperModule } from "ngx-swiper-wrapper";
 
 @NgModule({
-  declarations: [AppointmentMakingComponent],
+  declarations: [AppointmentMakingComponent, SearchMedecinDialogComponent],
+  entryComponents: [SearchMedecinDialogComponent],
   imports: [
     CommonModule,
     AppointmentMakingRoutingModule,
@@ -30,6 +34,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatRadioModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    SwiperModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "fr-FR" }],
 })
