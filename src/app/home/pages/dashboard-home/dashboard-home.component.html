@@ -1,7 +1,46 @@
 <div class="dashboard-page">
+    <div class="mobile-actions-title">Que souhaitez-vous faire ?</div>
+    <div class="mobile-actions-block">
+        <div class="mobile-act-card rdv">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#47afff'}">
+                    book_online
+                </span>
+            </div>
+            <div class="mob-card-title">Prendre</div>
+            <div class="mob-card-desc">Rendez-vous</div>
+        </div>
+        <div class="mobile-act-card urg">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#d61f22'}">
+                    medical_services
+                </span>
+            </div>
+            <div class="mob-card-title">Signaler</div>
+            <div class="mob-card-desc">Urgence</div>
+        </div>
+        <div class="mobile-act-card phar">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#0ac247'}">
+                    local_pharmacy
+                </span>
+            </div>
+            <div class="mob-card-title">Trouver</div>
+            <div class="mob-card-desc">Pharmacie</div>
+        </div>
+        <div class="mobile-act-card taxi">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#ffde0a'}">
+                    taxi_alert
+                </span>
+            </div>
+            <div class="mob-card-title">Taxi</div>
+            <div class="mob-card-desc">Rakk takk</div>
+        </div>
+    </div>
     <div class="fast-actions-block">
         <div class="card-container">
-            <div class="fast-action-card blue text-white">
+            <div class="fast-action-card blue text-white" (click)="goAppointment()">
                 <span class="material-icons ico" [ngStyle]="{'color':'#ffffff'}">
                     book_online
                 </span>

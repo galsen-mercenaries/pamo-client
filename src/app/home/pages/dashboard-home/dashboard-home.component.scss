@@ -6,9 +6,19 @@
 }
 
 .dashboard-page {
+  height: 100%;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .mobile-actions-block,
+  .mobile-actions-title {
+    display: none;
+  }
   .fast-actions-block {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 10px;
     height: 118px;
     .card-container {
       width: 25%;
@@ -80,7 +90,7 @@
   }
   .monthly-appointments {
     width: 86%;
-    margin: 15px 2%;
+    margin: 15px 5%;
     position: relative;
     .semester-title {
     }
@@ -290,10 +300,16 @@
 
   @media screen and (max-width: 690px) and (min-width: 470px) {
     .fast-actions-block {
-      height: 218px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
       .card-container {
-        width: 50% !important;
+        width: 205px !important;
+        flex-shrink: 0;
         .fast-action-card {
+          box-shadow: unset;
           &:hover {
             width: 88%;
             height: 100px;
@@ -331,30 +347,60 @@
   }
 
   @media screen and (max-width: 470px) {
-    .fast-actions-block {
-      width: 100%;
-      overflow-x: auto;
-      flex-direction: column;
-      .card-container {
-        width: 70% !important;
-        .fast-action-card {
-          .ico {
-            font-size: 20px !important;
-            top: 23px;
-          }
-          .textes {
-            margin-left: 30px !important;
-            .title {
-              font-size: 16px !important;
-              margin-bottom: 10px;
-            }
-            .sub-title {
-              font-family: "NotoSansKR-Light";
-              font-size: 12px !important;
-            }
+    .mobile-actions-title {
+      display: block;
+      padding: 20px 10px;
+      font-size: 20px;
+    }
+    .mobile-actions-block {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 10px;
+      .mobile-act-card {
+        width: 30%;
+        padding: 15px 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
+        &:not(:nth-child(3)) {
+          margin-right: 5%;
+        }
+        &.rdv {
+          border: solid 1px #47afff;
+          background-color: rgba(71, 175, 255, 0.03);
+        }
+        &.urg {
+          border: solid 1px #d61f22;
+          background-color: rgba(214, 31, 34, 0.03);
+        }
+        &.phar {
+          border: solid 1px #0ac247;
+          background-color: rgba(10, 194, 71, 0.03);
+        }
+        &.taxi {
+          border: solid 1px #ffde0a;
+          background-color: rgba(255, 222, 10, 0.03);
+        }
+        .icon-container {
+          width: 100%;
+          text-align: center;
+          .ico-mobile {
+            font-size: 35px;
           }
         }
+        .mob-card-title {
+          text-align: center;
+          font-size: 12px;
+          font-family: "NotoSansKR-Light";
+        }
+        .mob-card-desc {
+          text-align: center;
+          font-size: 12px;
+        }
       }
+    }
+    .fast-actions-block {
+      display: none;
     }
     .monthly-appointments {
       display: none;

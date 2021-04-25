@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIGURATION } from "src/app";
 
@@ -35,13 +36,21 @@ export class DashboardHomeComponent implements OnInit {
         slidesPerView: 1,
         pagination: true,
       },
+      470: {
+        direction: "horizontal",
+        slidesPerView: 1.45,
+      },
       690: {
         direction: "vertical",
         slidesPerView: 1.6,
       },
     },
   };
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  goAppointment() {
+    this.router.navigate(["/dashboard/appointment-making"]);
+  }
 }

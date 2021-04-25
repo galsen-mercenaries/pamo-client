@@ -89,6 +89,16 @@ button[disabled] {
   }
 }
 
+.search-doctor-modal {
+  width: 80% !important;
+  max-width: 350px !important;
+  height: 400px;
+  mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 15px;
+  }
+}
+
 .register-success-dialog-style {
   mat-dialog-container {
     border-radius: 10px;
