@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
+  selector: "app-patient-dashboard",
+  templateUrl: "./patient-dashboard.component.html",
+  styleUrls: ["./patient-dashboard.component.scss"],
 })
-export class HomeComponent implements OnInit {
+export class PatientDashboardComponent implements OnInit {
   menuItems = [
     { menuTitle: "Accueil", subItems: [], router: "" },
     { menuTitle: "Assurances", subItems: [], router: "" },
@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
     { menuTitle: "Actualités", subItems: [], router: "" },
     { menuTitle: "Mes notifcations", subItems: [], router: "" },
   ];
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

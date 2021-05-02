@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+    <mat-sidenav></mat-sidenav>
+    <mat-sidenav-content>
+        <div class="medecin-dashboard">
+            <div class="medecin-menu-block">
+                <div class="profile-img-container">
+                    <img class="profile-pic" src="https://i.ibb.co/rM6XTtd/doc.jpg" alt="">
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">home</mat-icon>
+                    </div>
+                    <div class="menu-item">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">event</mat-icon>
+                    </div>
+                    <div class="menu-item">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">groups</mat-icon>
+                    </div>
+                    <div class="menu-item">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">manage_accounts</mat-icon>
+                    </div>
+                    <div class="menu-item">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">logout</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="medecin-dashboard-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

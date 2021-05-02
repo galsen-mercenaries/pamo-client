@@ -1,0 +1,53 @@
+@import "src/styles-variables.scss";
+
+mat-sidenav-container {
+  min-height: 100%;
+  position: relative;
+  mat-sidenav-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+}
+
+.medecin-dashboard {
+  background-color: #eeeeee;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .medecin-menu-block {
+    width: 80px;
+    height: 100%;
+    padding-top: 20px;
+    background-color: $main-blue;
+    .profile-img-container {
+      text-align: center;
+      .profile-pic {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      .menu-item {
+        flex-grow: 1;
+        text-align: center;
+        padding: 10px 0;
+        .mat-icon {
+          font-size: 40px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  .medecin-dashboard-content {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,60 @@
+@import "src/styles-variables.scss";
+
+.medecin-dashboard-home {
+  padding: 40px 30px;
+  .key-indicators {
+    display: flex;
+    .indicator-card {
+      width: 20%;
+      max-width: 250px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+      .card-title {
+        background-color: rgba(71, 175, 255, 0.2);
+        text-align: center;
+        font-size: 14px;
+        padding: 10px 0;
+      }
+      .card-content {
+        background-color: $white;
+        padding: 15px 0;
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .card-left {
+          .icon-container {
+            background-color: rgba(71, 175, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            .mat-icon {
+              font-size: 35px;
+              width: 35px;
+              height: 35px;
+            }
+          }
+        }
+        .card-right {
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          .cardinal {
+            font-size: 40px;
+          }
+          .description {
+            font-size: 10px;
+            font-family: "NotoSansKR-Light";
+          }
+        }
+      }
+    }
+  }
+}

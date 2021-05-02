@@ -1,14 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
-import { SWIPER_CONFIGURATION } from "src/app";
 
 @Component({
-  selector: "app-dashboard-home",
-  templateUrl: "./dashboard-home.component.html",
-  styleUrls: ["./dashboard-home.component.scss"],
+  selector: "app-patient-dashboard-home",
+  templateUrl: "./patient-dashboard-home.component.html",
+  styleUrls: ["./patient-dashboard-home.component.scss"],
 })
-export class DashboardHomeComponent implements OnInit {
+export class PatientDashboardHomeComponent implements OnInit {
   appointments = [
     { date: "Lun 1 Avr", percent: 0 },
     { date: "Mer 10 Avr", percent: 100 / 3 },
@@ -51,6 +50,6 @@ export class DashboardHomeComponent implements OnInit {
   ngOnInit(): void {}
 
   goAppointment() {
-    this.router.navigate(["/dashboard/appointment-making"]);
+    this.router.navigate(["/dashboard/patient/appointment-making"]);
   }
 }

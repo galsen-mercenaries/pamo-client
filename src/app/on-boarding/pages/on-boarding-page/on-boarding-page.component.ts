@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
-import { SwiperComponent, SwiperDirective } from "ngx-swiper-wrapper";
+import { SwiperComponent } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIGURATION } from "src/app";
 import { NewsService } from "src/app/services/news-service/news.service";
 import { LoginFormDialogComponent } from "../../components/login-form-dialog/login-form-dialog.component";
 
 @Component({
-  selector: "app-welcome-page",
-  templateUrl: "./welcome-page.component.html",
-  styleUrls: ["./welcome-page.component.scss"],
+  selector: "app-on-boarding-page",
+  templateUrl: "./on-boarding-page.component.html",
+  styleUrls: ["./on-boarding-page.component.scss"],
 })
-export class WelcomePageComponent implements OnInit {
+export class OnBoardingPageComponent implements OnInit {
   swiperConfig = SWIPER_CONFIGURATION;
   news = [];
   @ViewChild("swiper", { static: false }) swiper: SwiperComponent;
