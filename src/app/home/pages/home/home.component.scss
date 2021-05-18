@@ -2,18 +2,35 @@
 
 $sidemenuWidth: 300px;
 
+mat-sidenav-container {
+  min-height: 100%;
+  position: relative;
+  mat-sidenav-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+}
+
 .home-page {
   background-color: $light-gray;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   padding: 10px 10px 0;
   .sidemenu {
     width: 22%;
     height: 100%;
+    overflow-y: auto;
     padding: 30px 20px 10px;
     background-color: white;
     display: inline-block;
     border-radius: 5px 5px 0 0;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .user-profile {
       padding-bottom: 20px;
       border-bottom: solid 2px $gray;
@@ -112,11 +129,12 @@ $sidemenuWidth: 300px;
       overflow: hidden;
       margin-top: 10px;
       background-color: white;
-      padding: 25px;
+      padding: 10px;
       border-radius: 5px 5px 0 0;
+      display: flex;
     }
   }
-  @media screen and (max-width: 1140px) {
+  @media screen and (max-width: 1080px) {
     .sidemenu {
       display: none;
     }
@@ -147,9 +165,9 @@ $sidemenuWidth: 300px;
       }
     }
   }
-  @media screen and (max-width: 470px) {
+  @media screen and (max-width: 900px) {
     .home-page-body-content {
-      padding: 25px 0;
+      padding: 0;
     }
   }
 }

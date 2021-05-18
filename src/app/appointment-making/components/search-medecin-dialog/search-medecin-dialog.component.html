@@ -1,0 +1,26 @@
+<div class="search-medecin-dialog">
+    <div class="title">Trouver un médecin</div>
+    <div class="input-container">
+        <input type="text">
+    </div>
+    <div class="medecins-block">
+        <div class="tabs">
+            <div class="speciality-tab text-main-blue" [ngClass]="{'selected': currentTabIndex === i}"
+                (click)="goTab(i)" *ngFor="let speciality of specialities, let i = index">{{speciality.name}}</div>
+        </div>
+        <div class="list">
+            <swiper class="swiper-container" [config]="swiperConfig" #swiper (indexChange)="onIndexChanged($event)">
+                <div class="swiper-slide" *ngFor="let slide of specialities">
+                    <div class="medecin-item" *ngFor="let doctor of doctors" (click)="chooseMedecin(doctor)">
+                        <img [src]="doctor.img" alt="">
+                        <div class="inf-block">
+                            <div class="name">{{doctor.name}}</div>
+                            <div class="specialite">{{doctor.speciality}}</div>
+                            <div class="lieu">{{doctor.district}}</div>
+                        </div>
+                    </div>
+                </div>
+            </swiper>
+        </div>
+    </div>
+</div>

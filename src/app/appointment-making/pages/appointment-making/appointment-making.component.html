@@ -1,0 +1,45 @@
+<div class="appointment-page">
+    <div class="overlay"></div>
+    <div class="appointment-page-body">
+        <div class="title">Je prends un rendez-vous médical</div>
+        <form [formGroup]="appointmentForm">
+            <mat-form-field appearance="fill" class="date-picker">
+                <mat-label>Choisir une date</mat-label>
+                <input matInput [matDatepicker]="picker" readonly formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-radio-group class="radio-group" aria-label="Select an option">
+                <mat-radio-button [checked]="true" value="1" #radioGroup1 [ngClass]="{'unchecked': !radioGroup1.checked}">
+                    Pour moi-même
+                </mat-radio-button>
+                <mat-radio-button value="2" #radioGroup2 [ngClass]="{'unchecked': !radioGroup2.checked}">
+                    Pour un autre
+                </mat-radio-button>
+            </mat-radio-group>
+            <div class="patient-inf-form" *ngIf="radioGroup2.checked">
+                <span class="patient-title">Infos patient</span>
+                <div class="inputs-block">
+                    <input type="text" placeholder="nom du patient">
+                    <input type="text" placeholder="numéro de téléphone">
+                </div>
+            </div>
+            <div class="select-medecin-block">
+                <button class="select-med-btn text-main-blue" (click)="openModalSelectMedecin()">Choisir mon médecin</button>
+                <span class="medecin-name">{{medecin?.name}}</span>
+                <span class="see-med-infos" *ngIf="medecin">(Voir son profil)</span>
+            </div>
+            <mat-form-field class="text-area">
+                <mat-label>Quels symptômes ressentez-vous ?</mat-label>
+                <textarea matInput placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
+            </mat-form-field>
+            <div class="btn-block">
+                <button class="btn btn-confirm text-white">Confirmer</button>
+                <button class="btn btn-cancel">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <div class="img-doctor-container">
+        <img src="/assets/images/rv-picture.png" alt="">
+    </div>
+</div>

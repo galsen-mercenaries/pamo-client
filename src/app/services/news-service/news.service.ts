@@ -14,8 +14,7 @@ export class NewsService {
   getNews() {
     return this.http.get<NewsModel[]>(NEWS_URL).pipe(
       map((res: NewsModel[]) => {
-        const a = res[0];
-        return [a, a, a, a, a, a, a, a, a];
+        return res.concat(res).concat(res);
       })
     );
   }
