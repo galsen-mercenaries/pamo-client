@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 
 @Component({
   selector: "app-patient-dashboard",
@@ -14,7 +16,13 @@ export class PatientDashboardComponent implements OnInit {
     { menuTitle: "Mes notifcations", subItems: [], router: "" },
   ];
 
-  constructor() {}
+  constructor(private authServ: AuthenticationService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  logout() {
+    this.authServ.logout();
+    this.router.navigate(['/accueil']);
+  }
 }

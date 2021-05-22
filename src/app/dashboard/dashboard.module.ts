@@ -13,8 +13,7 @@ import { SwiperModule } from "ngx-swiper-wrapper";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
-import { CalendarModule, DateAdapter } from "angular-calendar";
-import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
+import { CalendarModule } from "angular-calendar";
 
 @NgModule({
   declarations: [

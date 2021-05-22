@@ -39,7 +39,7 @@
                             privacy_tip</mat-icon>
                         <span class="text-main-blue">Conseils et actu santé</span>
                     </div>
-                    <div class="side-menu-item">
+                    <div (click)="logout()" class="side-menu-item">
                         <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
                             logout</mat-icon>
                         <span class="text-main-blue">Je me déconnecte</span>

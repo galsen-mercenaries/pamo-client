@@ -44,12 +44,13 @@ export class LoginFormDialogComponent implements OnInit {
       () => {
         this.loading = false;
         this.dialog.close();
+        this.router.navigate(["/dashboard"]);
       },
       (err) => {
         this.loading = false;
         this.loginHasError = true;
-        this.errorMessage = err?.error?.error
-          ? err.error.error
+        this.errorMessage = err?.error?.message
+          ? err.error.message
           : "Une erreur est survenue";
       }
     );
