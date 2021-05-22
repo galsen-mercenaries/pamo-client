@@ -5,7 +5,8 @@ export interface UserModel {
   numero?: string;
   adresse?: string;
   password: string;
-  role?: ROLE_ENUM;
+  role?: any;
+  image?: string;
 }
 
 export enum ROLE_ENUM {

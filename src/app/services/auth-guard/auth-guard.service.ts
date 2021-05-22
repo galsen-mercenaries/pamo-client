@@ -7,6 +7,8 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { LOCAL_STORAGE_KEYS } from "src/app";
+import * as SecureLS from 'secure-ls';
+const ls = new SecureLS({ encodingType: 'aes' });
 
 @Injectable({
   providedIn: "root",
@@ -18,8 +20,10 @@ export class AuthGuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    const token = ls.get(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
     // const role = localStorage.getItem(LOCAL_STORAGE_KEYS.USER)?.role;
+    console.log('toekn', token);
+
     if (token) {
       if (
         state.url !== "/accueil" &&

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: "http://pamo-back-end-dev.us-east-1.elasticbeanstalk.com",
+  // SERVER_URL: "http://pamo-back-end-dev.us-east-1.elasticbeanstalk.com",
+  SERVER_URL: "http://ec2-15-188-193-194.eu-west-3.compute.amazonaws.com:8080",
 };
 
 /*
