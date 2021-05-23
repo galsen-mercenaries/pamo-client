@@ -18,11 +18,11 @@ export class DashboardTamponComponent implements OnInit {
   }
 
   async getUserinfos() {
-    const userInfos = await this.authServ.getUserInfos().toPromise();
+    const userInfos = await this.authServ.getUserInfosSaved().toPromise();
     if (!userInfos) {
       // handle error cases
     }
-    console.log(userInfos);
+    console.log("userinfos", userInfos);
     const role = userInfos?.role?.code;
     switch (role) {
       case "ROLE_USER":

@@ -28,7 +28,7 @@ export class PatientDashboardComponent implements OnInit {
   }
 
   async getUserinfos() {
-    this.currentUser = await this.authServ.getUserInfos().toPromise();
+    this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
   }
 
   logout() {

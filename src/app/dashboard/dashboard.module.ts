@@ -15,7 +15,7 @@ import { PatientDashboardHomeComponent } from "./components/patient-dashboard-ho
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { CalendarModule } from "angular-calendar";
-import { DashboardTamponComponent } from './pages/dashboard-tampon/dashboard-tampon.component';
+import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tampon.component";
 import { AgePipe } from "../pipes/age.pipe";
 
 @NgModule({
@@ -24,11 +24,8 @@ import { AgePipe } from "../pipes/age.pipe";
     PatientDashboardHomeComponent,
     MedecinDashboardComponent,
     MedecinDashboardHomeComponent,
-<<<<<<< HEAD
     DashboardTamponComponent,
-=======
-    AgePipe
->>>>>>> 42dd942aa55d0f74d0b61a07d9be05c9a84ae0db
+    AgePipe,
   ],
   imports: [
     CommonModule,
@@ -39,7 +36,7 @@ import { AgePipe } from "../pipes/age.pipe";
     MatSidenavModule,
     MatListModule,
     CalendarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class DashboardModule {}
