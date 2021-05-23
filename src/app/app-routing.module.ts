@@ -8,12 +8,15 @@ const routes: Routes = [
     path: "accueil",
     canActivate: [AuthGuardService],
     loadChildren: () =>
-      import("./welcome/welcome.module").then((m) => m.WelcomeModule),
+      import("./on-boarding/on-boarding.module").then(
+        (m) => m.OnBoardingModule
+      ),
   },
   {
     path: "dashboard",
     canActivate: [AuthGuardService],
-    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+    loadChildren: () =>
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
     path: "register",

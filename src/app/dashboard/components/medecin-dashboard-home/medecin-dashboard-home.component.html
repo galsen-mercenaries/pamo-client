@@ -1,0 +1,130 @@
+<div class="medecin-dashboard-home">
+    <div class="dashboard-left-block">
+        <div class="key-indicators">
+            <div class="indicator-card">
+                <div class="card-title text-main-blue">Rendez-vous aujourd'hui</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">event_available</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="cardinal text-main-blue">18</span>
+                        <span class="description">
+                            <span>56%</span> effectué
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-card">
+                <div class="card-title text-main-blue">En attente de validation</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">event_available</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="cardinal text-red">25</span>
+                        <span class="description">
+                            <span>10</span> validé
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-card">
+                <div class="card-title text-main-blue">Consultation en ligne</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">event_available</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="full-content">
+            <div class="notifications-block">
+                <div class="notif-title text-main-blue">
+                    Mes notifications <span class="number-notif text-main-blue">(15)</span>
+                </div>
+                <div class="notifications-list">
+                    <div class="notif-item" [title]="notif?.title" *ngFor="let notif of notifications, let read = odd"
+                        [ngClass]="{'notif-read': read}">
+                        <div class="notif-item-title">{{notif?.title}}</div>
+                        <div class="notif-item-content">{{notif?.content}}</div>
+                        <div class="notif-item-date">{{notif?.date}}</div>
+                        <img *ngIf="read" class="read" src="/assets/images/checkmark.svg" alt="">
+                        <div *ngIf="!read" class="new-marker"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="navigation-content">
+                    <div class="medecin-profile">
+                        <div class="medecin-profile-top-block">
+                            <img src="https://i.ibb.co/rM6XTtd/doc.jpg" alt="">
+                        </div>
+                        <div class="medecin-profile-bottom-block">
+                            <div class="el-tile">À propos</div>
+                            <div class="el-text">Après l'obtention de son baccalauréat scientifique, monsieur KANE a
+                                fait ses études à l'université San Diego en Espagne, une des meilleures en Europe dans
+                                le domaine de la médecine. Après l'obtention de son diplôme, il saisit une opportunité
+                                qui lui était donnée de travailler dans un des plus grands hôpittaux du pays. Animé par
+                                son patriotisme, Abdel KANE fait son retour après dix années à l'hôpital de Grenade.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-block">
+                    <ul>
+                        <li class="nav-item">Prochain rendez-vous</li>
+                        <li class="nav-item">Mes patients</li>
+                        <li class="nav-item">L'avis du patient</li>
+                        <li class="nav-item">Mes statistiques</li>
+                        <li class="nav-item">Prendre un congé</li>
+                        <li class="nav-item">Mes collègues</li>
+                        <li class="nav-item">Donner mon avis</li>
+                        <li class="nav-item">Monde de la santé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-right-block">
+        <div class="calendar-container">
+            <div class="month-navigation">
+                <div class="nav-arrow-container" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                    <mat-icon [ngStyle]="{'color':'#47afff'}">navigate_before</mat-icon>
+                </div>
+                <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+                <div class="nav-arrow-container" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                    <mat-icon [ngStyle]="{'color':'#47afff'}">navigate_next</mat-icon>
+                </div>
+            </div>
+            <div class="custom-calendar-header">
+                <div class="day-item" *ngFor="let day of daysDisplay">{{day}}</div>
+            </div>
+            <mwl-calendar-month-view [weekStartsOn]="weekStartsOn" [weekendDays]="weekEnds" [viewDate]="viewDate"
+                (dayClicked)="onDayClicked($event)" (eventClicked)="(0)" (eventTimesChanged)="0">
+            </mwl-calendar-month-view>
+        </div>
+        <div class="events-container">
+            <div class="appointment-list">
+                <div class="appointment-item" *ngFor="let appointment of appointments">
+                    <div class="patient-profile">
+                        <img [src]="appointment?.img" alt="">
+                        <div class="user-info">
+                            <span class="names">{{appointment?.firstName + ' ' + appointment?.lastName}}</span>
+                            <span class="age text-pink">25 ans</span>
+                            <span class="contact">{{appointment?.numero}}</span>
+                        </div>
+                    </div>
+                    <div class="time text-main-blue">{{appointment?.time}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

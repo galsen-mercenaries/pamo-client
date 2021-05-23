@@ -1,11 +1,13 @@
 export interface UserModel {
+  userId?: number;
   nom: string;
   prenom: string;
   email: string;
   numero?: string;
   adresse?: string;
   password: string;
-  role?: ROLE_ENUM;
+  role?: any;
+  image?: string;
 }
 
 export enum ROLE_ENUM {

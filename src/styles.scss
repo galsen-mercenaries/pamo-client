@@ -29,6 +29,9 @@ $Pamo-client-theme: mat-light-theme(
 // that you are using.
 @include angular-material-theme($Pamo-client-theme);
 
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "src/styles-variables.scss";
+
 @font-face {
   font-family: "Lobster";
   src: local("Lobster"),
@@ -113,4 +116,55 @@ button[disabled] {
 .register-success-dialog-backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(1.25px);
+}
+
+// customize calendar display
+.cal-month-view {
+  .cal-days {
+    border: none !important;
+  }
+  .cal-header {
+    display: none !important;
+  }
+  .cal-cell-row {
+    border: unset !important;
+    .cal-day-cell {
+      border: none !important;
+      height: 40px;
+      min-height: unset !important;
+      .cal-cell-top {
+        min-height: unset !important;
+        height: 100% !important;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .cal-day-number {
+          opacity: 0.5;
+          margin: unset !important;
+          float: unset !important;
+          color: $main-blue;
+          font-family: "NotoSansKR-Light";
+          font-size: 14px;
+        }
+      }
+      &.cal-today {
+        .cal-day-number {
+          font-family: "NotoSansKR-Bold";
+          font-size: 18px;
+        }
+      }
+      &.cal-past {
+      }
+      &.cal-out-month {
+        opacity: 0.5;
+        .cal-day-number {
+          color: #666666 !important;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

@@ -1,0 +1,170 @@
+<div class="dashboard-page">
+    <div class="mobile-actions-title">Que souhaitez-vous faire ?</div>
+    <div class="mobile-actions-block">
+        <div class="mobile-act-card rdv">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#47afff'}">
+                    book_online
+                </span>
+            </div>
+            <div class="mob-card-title">Prendre</div>
+            <div class="mob-card-desc">Rendez-vous</div>
+        </div>
+        <div class="mobile-act-card urg">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#d61f22'}">
+                    medical_services
+                </span>
+            </div>
+            <div class="mob-card-title">Signaler</div>
+            <div class="mob-card-desc">Urgence</div>
+        </div>
+        <div class="mobile-act-card phar">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#0ac247'}">
+                    local_pharmacy
+                </span>
+            </div>
+            <div class="mob-card-title">Trouver</div>
+            <div class="mob-card-desc">Pharmacie</div>
+        </div>
+        <div class="mobile-act-card taxi">
+            <div class="icon-container">
+                <span class="material-icons ico-mobile" [ngStyle]="{'color':'#ffde0a'}">
+                    taxi_alert
+                </span>
+            </div>
+            <div class="mob-card-title">Taxi</div>
+            <div class="mob-card-desc">Rakk takk</div>
+        </div>
+    </div>
+    <div class="fast-actions-block">
+        <div class="card-container">
+            <div class="fast-action-card blue text-white" (click)="goAppointment()">
+                <span class="material-icons ico" [ngStyle]="{'color':'#ffffff'}">
+                    book_online
+                </span>
+                <div class="textes">
+                    <div class="title">Rendez-vous</div>
+                    <div class="sub-title">Caler une date</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="fast-action-card danger text-white">
+                <span class="material-icons ico" [ngStyle]="{'color':'#ffffff'}">
+                    medical_services
+                </span>
+                <div class="textes">
+                    <div class="title">Urgence</div>
+                    <div class="sub-title">Signaler une urgence</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="fast-action-card green text-white">
+                <span class="material-icons ico" [ngStyle]="{'color':'#ffffff'}">
+                    local_pharmacy
+                </span>
+                <div class="textes">
+                    <div class="title">Pharmacies</div>
+                    <div class="sub-title">Pharmacies de garde</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="fast-action-card yellow text-black">
+                <span class="material-icons ico" [ngStyle]="{'color':'#000000'}">
+                    taxi_alert
+                </span>
+                <div class="textes">
+                    <div class="title">Alerte taxi</div>
+                    <div class="sub-title">Trouver taxi d'urgence</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="monthly-appointments">
+        <div class="semester-title">Mes rendez-vous du mois</div>
+        <div class="markers-container">
+            <div class="markers-block">
+                <div class="marker" *ngFor="let marker of appointments"
+                    [ngStyle]="{'left': 'calc(' + marker.percent + '% - 7.5px)'}"></div>
+                <div class="appointment-date" *ngFor="let app of appointments"
+                    [ngStyle]="{'left': 'calc(' + app.percent + '% - 25px)'}">{{app.date}}</div>
+            </div>
+        </div>
+        <div class="gauge">
+            <div class="left" [style.width.%]="30"></div>
+            <div class="consumed" [style.width.%]="100 - 30"></div>
+        </div>
+    </div>
+    <div class="more-details-block">
+        <div class="fiche-medical">
+            <span class="ma-fiche">Ma fiche médicale</span>
+            <div class="fiche">
+                <div class="header-block">
+                    <img src="assets/images/profil.jpg" alt="" class="avatar">
+                    <div class="names-block">
+                        <span class="nom">{{currentUser?.prenom}} {{currentUser?.nom}}</span>
+                        <span class="birthdate">{{userFicheMedical?.date_naissance | date: 'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
+                        <span class="birthdate">
+                            <span class="bold">Sexe : </span>{{userFicheMedical?.sexe}}
+                        </span>
+                    </div>
+                </div>
+                <div class="utils">
+                    <ng-container *ngIf="!loadingFiche">
+                        <div class="medical-info-block">
+                            <div class="item-info">
+                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}}</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Taille :</span><span class="info">{{ userFicheMedical?.taille}} cm</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Groupe Sanguin :</span><span class="info red">{{ userFicheMedical?.groupe_sanguin}} </span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Contact d'urgence :</span>
+                                <div class="info">
+                                    Fanta Sidibé
+                                    <span class="call-number">&nbsp;77 123 45 67</span>
+                                    <span class="link text-pink">&nbsp;&nbsp;&nbsp;(épouse)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="medical-info-block">
+                            <div class="item-info">
+                                <span class="intitule">Problèmes médicaux : </span><span class="info">{{userFicheMedical?.maladies}}</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Allergies et réactions : </span><span class="info">Aucun</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Traitements : </span><span class="info">Aucun</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Activité physique : </span><span class="info">normale</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="loadingFiche">
+                        <mat-spinner [diameter]="20" mode="indeterminate"></mat-spinner>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="useful">
+            <div class="useful-content">
+                <swiper class="swiper-container" [config]="swiperConfig" #swiper>
+                    <div class="swiper-slide" *ngFor="let img of images">
+                        <div class="slider">
+                            <img [src]="img" alt="">
+                        </div>
+                    </div>
+                </swiper>
+            </div>
+        </div>
+    </div>
+</div>

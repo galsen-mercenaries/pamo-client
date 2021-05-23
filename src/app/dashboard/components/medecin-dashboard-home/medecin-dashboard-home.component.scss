@@ -1,0 +1,319 @@
+@import "src/styles-variables.scss";
+
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.medecin-dashboard-home {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  overflow: hidden;
+  .dashboard-left-block {
+    width: 72%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    .key-indicators {
+      display: flex;
+      justify-content: space-between;
+      .indicator-card {
+        width: 31.5%;
+        // max-width: 250px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        // &:not(:last-child) {
+        //   margin-right: 25px;
+        // }
+        .card-title {
+          background-color: rgba(71, 175, 255, 0.2);
+          text-align: center;
+          font-size: 14px;
+          padding: 10px 0;
+        }
+        .card-content {
+          background-color: $white;
+          padding: 15px 0;
+          flex-grow: 1;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          .card-left {
+            .icon-container {
+              background-color: rgba(71, 175, 255, 0.2);
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 15px;
+              .mat-icon {
+                font-size: 35px;
+                width: 35px;
+                height: 35px;
+              }
+            }
+          }
+          .card-right {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            .cardinal {
+              font-size: 40px;
+            }
+            .description {
+              font-size: 10px;
+              font-family: "NotoSansKR-Light";
+            }
+          }
+        }
+      }
+    }
+    .full-content {
+      background-color: $white;
+      border-radius: 25px;
+      margin-top: 20px;
+      padding: 10px;
+      display: flex;
+      overflow: hidden;
+      .notifications-block {
+        padding-right: 10px;
+        border-right: solid 1px #eeeeee;
+        width: 30%;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        .notif-title {
+          font-family: "NotoSansKR-Light";
+          font-size: 12px;
+          .number-notif {
+            font-size: 14px;
+            font-style: italic;
+          }
+        }
+        .notifications-list {
+          display: flex;
+          flex-direction: column;
+          overflow: auto;
+          margin-top: 15px;
+          padding-right: 5px;
+          &::-webkit-scrollbar {
+            width: 3px;
+            background-color: #eeeeee;
+            &-thumb {
+              background-color: $main-blue;
+              border-radius: 2px;
+            }
+          }
+          .notif-item {
+            padding: 5px;
+            background-color: rgba(238, 238, 238, 0.3);
+            position: relative;
+            user-select: none;
+            &:hover {
+              background-color: rgba(71, 175, 255, 0.1) !important;
+              cursor: pointer;
+            }
+            &.notif-read {
+              background-color: $white;
+            }
+            &:not(:last-child) {
+              border-bottom: solid 1px #eeeeee;
+            }
+            .read {
+              position: absolute;
+              right: 5px;
+              top: 5px;
+              width: 20px;
+            }
+            .new-marker {
+              position: absolute;
+              border-radius: 50%;
+              height: 7px;
+              width: 7px;
+              top: 10px;
+              right: 10px;
+              background-color: $main-blue;
+            }
+            &-title {
+              font-family: "NotoSansKR-Bold";
+              font-size: 12px;
+              padding: 0 25px 0 2px;
+            }
+            &-content {
+              font-family: "NotoSansKR-Light";
+              font-size: 10px;
+              // limit lines numbers;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2; /* number of lines to show */
+              -webkit-box-orient: vertical;
+            }
+            &-date {
+              color: #bbbbbb;
+              font-size: 8px;
+              font-style: italic;
+              font-family: "NotoSansKR-Light";
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+      .main-content {
+        max-width: 68%;
+        padding: 33px 0 0 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        .navigation-content {
+          width: 80%;
+          margin-right: 15px;
+          .medecin-profile {
+            padding: 15px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            border: solid 1px #eeeeee;
+            &-top-block {
+              display: flex;
+              img {
+                width: 150px;
+                height: 150px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+              }
+            }
+            &-bottom-block {
+              .el-title {
+                font-size: 12px;
+              }
+              .el-text {
+                font-size: 10px;
+                font-family: "NotoSansKR-Light";
+              }
+            }
+          }
+        }
+        .navigation-block {
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+          .nav-item {
+            font-size: 12px;
+            font-family: "NotoSansKR-Light";
+            cursor: pointer;
+            &:hover {
+              color: $main-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+  .dashboard-right-block {
+    width: 26%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    overflow: hidden;
+    .calendar-container {
+      border-radius: 15px;
+      .month-navigation {
+        display: flex;
+        justify-content: space-between;
+        background-color: $white;
+        padding-top: 10px;
+        .nav-arrow-container {
+          display: flex;
+          align-items: center;
+          padding: 0 10px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .custom-calendar-header {
+        width: 100%;
+        height: 40px;
+        background-color: $white;
+        display: flex;
+        .day-item {
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          font-family: "NotoSansKR-Light";
+        }
+      }
+    }
+    .events-container {
+      flex-grow: 1;
+      background-color: $white;
+      border-radius: 0 0 15px 15px;
+      padding: 8px;
+      overflow: hidden;
+      .appointment-list {
+        width: 100%;
+        height: 100%;
+        border-top: solid 1px #eeeeee;
+        overflow: auto;
+        padding: 10px 7px 0;
+        &::-webkit-scrollbar {
+          width: 3px;
+          background-color: #eeeeee;
+          &-thumb {
+            background-color: $main-blue;
+            border-radius: 2px;
+          }
+        }
+        .appointment-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 10px;
+          margin-bottom: 10px;
+          background-color: $white;
+          padding: 10px;
+          border: solid 0.5px #eeeeee;
+          box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.15);
+          .patient-profile {
+            display: flex;
+            img {
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+            }
+            .user-info {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              margin-left: 10px;
+              .names {
+                font-size: 12px;
+              }
+              .age {
+                font-size: 10px;
+                font-family: "NotoSansKR-Light";
+              }
+              .contact {
+                font-size: 10px;
+                font-family: "NotoSansKR-Light";
+              }
+            }
+          }
+          .time {
+            font-family: "NotoSansKR-Light";
+          }
+        }
+      }
+    }
+  }
+}
