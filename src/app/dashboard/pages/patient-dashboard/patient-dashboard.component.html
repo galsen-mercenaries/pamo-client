@@ -7,7 +7,7 @@
             <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
             <a mat-list-item [routerLink]="'/activities'"> Activities </a>
             <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
-            <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+            <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -16,8 +16,8 @@
                 <div class="user-profile">
                     <img src="assets/images/profil.jpg" alt="">
                     <div class="names">
-                        <span class="firstname">Papa Abdoulaye</span>
-                        <span class="lastname">KEBE</span>
+                        <span class="firstname">{{currentUser.prenom}}</span>
+                        <span class="lastname">{{currentUser.nom}}</span>
                     </div>
                 </div>
                 <div class="side-menu-items">

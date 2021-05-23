@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
+import { of } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
+import { UserModel } from "src/app/models/user.model";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { PatientService } from "src/app/services/patient-service/patient.service";
 
 @Component({
   selector: "app-patient-dashboard-home",
@@ -45,11 +51,27 @@ export class PatientDashboardHomeComponent implements OnInit {
       },
     },
   };
-  constructor(private router: Router) {}
+  currentUser: UserModel;
+  userFicheMedical: FicheMedicalModel;
+  loadingFiche: boolean;
+  constructor(private router: Router, private patientServ: PatientService, private authServ: AuthenticationService) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.currentUser = this.authServ.getUserInfosSaved();
+    this.getUserficheMedicalInfos();
+  }
   goAppointment() {
     this.router.navigate(["/dashboard/patient/appointment-making"]);
+  }
+
+  getUserficheMedicalInfos() {
+    this.loadingFiche = true;
+    this.patientServ.getUserFicheMedical(this.currentUser).pipe(tap((res: FicheMedicalModel) => {
+      this.loadingFiche = false;
+      this.userFicheMedical = res;
+    }), catchError((err: any) => {
+      this.loadingFiche = false;
+      return of(err)
+    })).subscribe();
   }
 }

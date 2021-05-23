@@ -36,7 +36,7 @@ export class AuthenticationService {
     ls.removeAll();
   }
 
-  login(loginPayload: LoginModel): Observable<LoginResponseModel> {
+  login(loginPayload: LoginModel) {
     return this.http.post<LoginResponseModel>(LOGIN_URL, loginPayload).pipe(
       tap((loginRes) => {
         ls.set(
@@ -51,10 +51,14 @@ export class AuthenticationService {
   }
 
   getUserInfos() {
-    const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER)
-    if (userInfos) return of(userInfos)
     return this.http.get<UserModel>(CURRENT_USER_INFOS).pipe(tap((res: UserModel) => {
       ls.set(LOCAL_STORAGE_KEYS.USER, res);
     }));
+  }
+
+  getUserInfosSaved() {
+    const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER)
+    if (userInfos) return userInfos
+    return null
   }
 }

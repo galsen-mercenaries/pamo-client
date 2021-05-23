@@ -8,12 +8,14 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatListModule,
+  MatProgressSpinnerModule,
 } from "@angular/material";
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { CalendarModule } from "angular-calendar";
+import { AgePipe } from "../pipes/age.pipe";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { CalendarModule } from "angular-calendar";
     PatientDashboardHomeComponent,
     MedecinDashboardComponent,
     MedecinDashboardHomeComponent,
+    AgePipe
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { CalendarModule } from "angular-calendar";
     MatSidenavModule,
     MatListModule,
     CalendarModule,
+    MatProgressSpinnerModule
   ],
 })
 export class DashboardModule {}

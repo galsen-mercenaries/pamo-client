@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LOCAL_STORAGE_KEYS } from 'src/app';
 import { AuthenticationService } from '../authentication-service/authentication.service';
@@ -12,7 +12,8 @@ const ls = new SecureLS({ encodingType: 'aes' });
 })
 export class RoleGuard implements CanActivate {
   constructor(
-    private authServ: AuthenticationService
+    private authServ: AuthenticationService,
+    private router: Router
 ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -21,14 +22,14 @@ export class RoleGuard implements CanActivate {
     console.log(user,'roleguard', state.url);
 
     if (user.role.code === ROLE_ENUM.PATIENT) {
-      if(state.url === '/dashboard/patient/home')
-      return true
+      this.router.navigate(['/dashboard/patient/home'])
+      return false
     } else if (user.role.code === ROLE_ENUM.MEDECIN) {
-      if(state.url === '/dashboard/medecin/home') {
-        return true
-      }
+      this.router.navigate(['/dashboard/medecin/home'])
+      return false
+
     }
-    return false;
+    return true;
   }
 
 }
