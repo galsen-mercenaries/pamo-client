@@ -16,7 +16,8 @@ export class PatientDashboardComponent implements OnInit {
     { menuTitle: "Actualités", subItems: [], router: "" },
     { menuTitle: "Mes notifcations", subItems: [], router: "" },
   ];
-  userInfos: UserModel;
+  currentUser: UserModel;
+
   constructor(
     private authServ: AuthenticationService,
     private router: Router
@@ -27,7 +28,7 @@ export class PatientDashboardComponent implements OnInit {
   }
 
   async getUserinfos() {
-    this.userInfos = await this.authServ.getUserInfos().toPromise();
+    this.currentUser = await this.authServ.getUserInfos().toPromise();
   }
 
   logout() {

@@ -106,47 +106,52 @@
                 <div class="header-block">
                     <img src="assets/images/profil.jpg" alt="" class="avatar">
                     <div class="names-block">
-                        <span class="nom">Pape KEBE</span>
-                        <span class="birthdate">07 Août 1995 (25 ans)</span>
+                        <span class="nom">{{currentUser?.prenom}} {{currentUser?.nom}}</span>
+                        <span class="birthdate">{{userFicheMedical?.date_naissance | date: 'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
                         <span class="birthdate">
-                            <span class="bold">Sexe : </span>Masculin
+                            <span class="bold">Sexe : </span>{{userFicheMedical?.sexe}}
                         </span>
                     </div>
                 </div>
                 <div class="utils">
-                    <div class="medical-info-block">
-                        <div class="item-info">
-                            <span class="intitule">Poids :</span><span class="info">75.6 Kg</span>
-                        </div>
-                        <div class="item-info">
-                            <span class="intitule">Taille :</span><span class="info">185 cm</span>
-                        </div>
-                        <div class="item-info">
-                            <span class="intitule">Groupe Sanguin :</span><span class="info red">O<sup>+</sup> </span>
-                        </div>
-                        <div class="item-info">
-                            <span class="intitule">Contact d'urgence :</span>
-                            <div class="info">
-                                Fanta Sidibé
-                                <span class="call-number">&nbsp;77 123 45 67</span>
-                                <span class="link text-pink">&nbsp;&nbsp;&nbsp;(épouse)</span>
+                    <ng-container *ngIf="!loadingFiche">
+                        <div class="medical-info-block">
+                            <div class="item-info">
+                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}}</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Taille :</span><span class="info">{{ userFicheMedical?.taille}} cm</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Groupe Sanguin :</span><span class="info red">{{ userFicheMedical?.groupe_sanguin}} </span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Contact d'urgence :</span>
+                                <div class="info">
+                                    Fanta Sidibé
+                                    <span class="call-number">&nbsp;77 123 45 67</span>
+                                    <span class="link text-pink">&nbsp;&nbsp;&nbsp;(épouse)</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="medical-info-block">
-                        <div class="item-info">
-                            <span class="intitule">Problèmes médicaux : </span><span class="info">Aucun</span>
+                        <div class="medical-info-block">
+                            <div class="item-info">
+                                <span class="intitule">Problèmes médicaux : </span><span class="info">{{userFicheMedical?.maladies}}</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Allergies et réactions : </span><span class="info">Aucun</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Traitements : </span><span class="info">Aucun</span>
+                            </div>
+                            <div class="item-info">
+                                <span class="intitule">Activité physique : </span><span class="info">normale</span>
+                            </div>
                         </div>
-                        <div class="item-info">
-                            <span class="intitule">Allergies et réactions : </span><span class="info">Aucun</span>
-                        </div>
-                        <div class="item-info">
-                            <span class="intitule">Traitements : </span><span class="info">Aucun</span>
-                        </div>
-                        <div class="item-info">
-                            <span class="intitule">Activité physique : </span><span class="info">normale</span>
-                        </div>
-                    </div>
+                    </ng-container>
+                    <ng-container *ngIf="loadingFiche">
+                        <mat-spinner [diameter]="20" mode="indeterminate"></mat-spinner>
+                    </ng-container>
                 </div>
             </div>
         </div>
