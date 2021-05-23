@@ -189,8 +189,21 @@
                 height: 150px;
                 box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
               }
+              .main-infos {
+                margin-left: 15px;
+                .main-inf-item {
+                  .item-name {
+                    font-size: 12px;
+                  }
+                  .item-content {
+                    font-size: 11px;
+                    font-family: "NotoSansKR-Light";
+                  }
+                }
+              }
             }
             &-bottom-block {
+              margin-top: 10px;
               .el-title {
                 font-size: 12px;
               }

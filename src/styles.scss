@@ -40,12 +40,13 @@ $Pamo-client-theme: mat-light-theme(
 
 @font-face {
   font-family: "NotoSansKR-Bold";
-  src: url(./assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf) format("opentype");
+  src: url("./assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "NotoSansKR-Light";
-  src: url(./assets/fonts/Noto_Sans_KR/NotoSansKR-Light.otf) format("opentype");
+  src: url("./assets/fonts/Noto_Sans_KR/NotoSansKR-Light.otf")
+    format("opentype");
 }
 
 /* You can add global styles to this file, and also import other style files */

@@ -117,7 +117,7 @@
                     <ng-container *ngIf="!loadingFiche">
                         <div class="medical-info-block">
                             <div class="item-info">
-                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}}</span>
+                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}} Kg</span>
                             </div>
                             <div class="item-info">
                                 <span class="intitule">Taille :</span><span class="info">{{ userFicheMedical?.taille}} cm</span>
@@ -128,9 +128,7 @@
                             <div class="item-info">
                                 <span class="intitule">Contact d'urgence :</span>
                                 <div class="info">
-                                    Fanta Sidibé
-                                    <span class="call-number">&nbsp;77 123 45 67</span>
-                                    <span class="link text-pink">&nbsp;&nbsp;&nbsp;(épouse)</span>
+                                    {{userFicheMedical?.contact_urgence}}
                                 </div>
                             </div>
                         </div>
