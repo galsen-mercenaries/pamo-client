@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FicheMedicalModel } from '../models/fiche-medical.model';
-import { UserModel } from '../models/user.model';
 
 @Pipe({
   name: 'age'
