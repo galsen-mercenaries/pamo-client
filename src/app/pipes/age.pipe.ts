@@ -7,7 +7,7 @@ import { UserModel } from '../models/user.model';
 })
 export class AgePipe implements PipeTransform {
 
-  transform(value: string, ...args: unknown[]): unknown {
+  transform(value: any, ...args: unknown[]): unknown {
     const today = new Date().getFullYear();
     if(value) {
       const birth_year = +value;

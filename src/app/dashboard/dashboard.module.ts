@@ -15,15 +15,14 @@ import { PatientDashboardHomeComponent } from "./components/patient-dashboard-ho
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { CalendarModule } from "angular-calendar";
-import { AgePipe } from "../pipes/age.pipe";
+import { SharedModule } from "../shared/shared/shared.module";
 
 @NgModule({
   declarations: [
     PatientDashboardComponent,
     PatientDashboardHomeComponent,
     MedecinDashboardComponent,
-    MedecinDashboardHomeComponent,
-    AgePipe
+    MedecinDashboardHomeComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +33,8 @@ import { AgePipe } from "../pipes/age.pipe";
     MatSidenavModule,
     MatListModule,
     CalendarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SharedModule
   ],
 })
 export class DashboardModule {}
