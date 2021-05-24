@@ -16,13 +16,17 @@ import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-ho
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { CalendarModule } from "angular-calendar";
 import { SharedModule } from "../shared/shared/shared.module";
+import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tampon.component";
+import { AgePipe } from "../pipes/age.pipe";
 
 @NgModule({
   declarations: [
     PatientDashboardComponent,
     PatientDashboardHomeComponent,
     MedecinDashboardComponent,
-    MedecinDashboardHomeComponent
+    MedecinDashboardHomeComponent,
+    DashboardTamponComponent,
+    AgePipe,
   ],
   imports: [
     CommonModule,

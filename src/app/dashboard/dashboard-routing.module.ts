@@ -4,10 +4,12 @@ import { AuthGuardService } from "../services/auth-guard/auth-guard.service";
 import { RoleGuard } from "../services/role-guards/role.guard";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
+import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tampon.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { PatientDashboardComponent } from "./pages/patient-dashboard/patient-dashboard.component";
 
 const routes: Routes = [
+  { path: "", component: DashboardTamponComponent },
   {
     path: "patient",
     component: PatientDashboardComponent,

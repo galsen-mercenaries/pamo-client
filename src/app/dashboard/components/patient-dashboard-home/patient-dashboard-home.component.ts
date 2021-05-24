@@ -59,22 +59,35 @@ export class PatientDashboardHomeComponent implements OnInit {
   constructor(private router: Router, private patientServ: PatientService, private authServ: AuthenticationService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authServ.getUserInfosSaved();
+    this.getUserinfos();
+  }
+
+  async getUserinfos() {
+    this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
+    console.log(this.currentUser);
+
     this.getUserficheMedicalInfos();
   }
+
   goAppointment() {
     this.router.navigate(["/dashboard/patient/appointment-making"]);
   }
 
   getUserficheMedicalInfos() {
     this.loadingFiche = true;
-    this.patientServ.getUserFicheMedical(this.currentUser).pipe(tap((res: FicheMedicalModel) => {
-      this.loadingFiche = false;
-      this.userFicheMedical = res;
-    }), catchError((err: any) => {
-      this.loadingFiche = false;
-      return of(err)
-    })).subscribe();
+    this.patientServ
+      .getUserFicheMedical(this.currentUser)
+      .pipe(
+        tap((res: FicheMedicalModel) => {
+          this.loadingFiche = false;
+          this.userFicheMedical = res;
+        }),
+        catchError((err: any) => {
+          this.loadingFiche = false;
+          return of(err);
+        })
+      )
+      .subscribe();
   }
 
   editFicheMedical() {

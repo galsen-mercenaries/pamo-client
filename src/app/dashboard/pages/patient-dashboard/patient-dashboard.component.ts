@@ -17,14 +17,22 @@ export class PatientDashboardComponent implements OnInit {
     { menuTitle: "Mes notifcations", subItems: [], router: "" },
   ];
   currentUser: UserModel;
-  constructor(private authServ: AuthenticationService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.currentUser = this.authServ.getUserInfosSaved();
+  constructor(
+    private authServ: AuthenticationService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.getUserinfos();
+  }
+
+  async getUserinfos() {
+    this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
   }
 
   logout() {
     this.authServ.logout();
-    this.router.navigate(['/accueil']);
+    this.router.navigate(["/accueil"]);
   }
 }

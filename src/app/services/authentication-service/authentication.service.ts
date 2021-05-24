@@ -7,9 +7,8 @@ import { LOCAL_STORAGE_KEYS } from "src/app";
 import { LoginModel, LoginResponseModel } from "src/app/models/login.model";
 import { UserModel } from "src/app/models/user.model";
 import { environment } from "src/environments/environment";
-import * as SecureLS from 'secure-ls';
-const ls = new SecureLS({ encodingType: 'aes' });
-
+import * as SecureLS from "secure-ls";
+const ls = new SecureLS({ encodingType: "aes" });
 
 const { SERVER_URL } = environment;
 const REGISTER_USER_URL = `${SERVER_URL}/user/signup`;
@@ -39,10 +38,7 @@ export class AuthenticationService {
   login(loginPayload: LoginModel) {
     return this.http.post<LoginResponseModel>(LOGIN_URL, loginPayload).pipe(
       tap((loginRes) => {
-        ls.set(
-          LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
-          loginRes.token
-        );
+        ls.set(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, loginRes.token);
       }),
       switchMap((res: any) => {
         return this.getUserInfos();
@@ -51,14 +47,16 @@ export class AuthenticationService {
   }
 
   getUserInfos() {
-    return this.http.get<UserModel>(CURRENT_USER_INFOS).pipe(tap((res: UserModel) => {
-      ls.set(LOCAL_STORAGE_KEYS.USER, res);
-    }));
+    return this.http.get<UserModel>(CURRENT_USER_INFOS).pipe(
+      tap((res: UserModel) => {
+        ls.set(LOCAL_STORAGE_KEYS.USER, res);
+      })
+    );
   }
 
   getUserInfosSaved() {
-    const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER)
-    if (userInfos) return userInfos
-    return null
+    const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER);
+    if (userInfos) return of(userInfos);
+    return this.getUserInfos();
   }
 }
