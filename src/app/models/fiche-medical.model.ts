@@ -1,5 +1,5 @@
 export interface FicheMedicalModel {
-  date_naissance: any;
+  date_naissance: Date;
   groupe_sanguin: any;
   sexe: any;
   maladies: any;

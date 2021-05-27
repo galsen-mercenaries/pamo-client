@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>Editer la fiche médicale</h2>
+<mat-dialog-content>
+  <div>Vous pouvez éditer les champs actifs puis valider la sauvegarde.</div>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    novalidate
+    autocomplete="false"
+  >
+  <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Poids</mat-label>
+        <input
+          formControlName="poids"
+          matInput
+          placeholder="Votre poids"
+          readonly
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Groupe Sanguin</mat-label>
+        <input
+          formControlName="groupeSanguin"
+          matInput
+          placeholder="Votre groupe Sanguin"
+          disabled
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Taille</mat-label>
+        <input
+          formControlName="taille"
+          matInput
+          placeholder="Votre taille"
+          readonly
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Genre</mat-label>
+        <input
+          formControlName="sexe"
+          matInput
+          placeholder="Votre sexe"
+          readonly
+        />
+      </mat-form-field>
+  </div>
+  <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Date de naissance</mat-label>
+        <input
+          formControlName="dateNaissance"
+          type="date"
+          matInput
+          placeholder="Votre date de naissance"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Contacts urgents</mat-label>
+        <input
+          formControlName="contactUrgents"
+          matInput
+          placeholder="Vos contacts urgents"
+          disabled
+        />
+      </mat-form-field>
+  </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Maladies</mat-label>
+      <textarea
+        formControlName="maladies"
+        matInput
+        placeholder="Vos maladies"
+
+      ></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close="'CANCEL'">Fermer</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button type="submit" mat-button>Enregistrer les modifications</button>
+</mat-dialog-actions>

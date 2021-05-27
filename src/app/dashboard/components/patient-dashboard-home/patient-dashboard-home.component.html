@@ -103,18 +103,19 @@
         <div class="fiche-medical">
             <span class="ma-fiche">Ma fiche médicale</span>
             <div class="fiche">
+                <mat-icon *ngIf="userFicheMedical" (click)="editFicheMedical()" class="edit">edit</mat-icon>
                 <div class="header-block">
                     <img src="assets/images/profil.jpg" alt="" class="avatar">
                     <div class="names-block">
                         <span class="nom">{{currentUser?.prenom}} {{currentUser?.nom}}</span>
-                        <span class="birthdate">{{userFicheMedical?.date_naissance | date: 'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
-                        <span class="birthdate">
+                        <span *ngIf="userFicheMedical" class="birthdate">{{userFicheMedical?.date_naissance | date: 'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
+                        <span  *ngIf="userFicheMedical"  class="birthdate">
                             <span class="bold">Sexe : </span>{{userFicheMedical?.sexe}}
                         </span>
                     </div>
                 </div>
                 <div class="utils">
-                    <ng-container *ngIf="!loadingFiche">
+                    <ng-container *ngIf="!loadingFiche && userFicheMedical">
                         <div class="medical-info-block">
                             <div class="item-info">
                                 <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}} Kg</span>
@@ -146,6 +147,11 @@
                                 <span class="intitule">Activité physique : </span><span class="info">normale</span>
                             </div>
                         </div>
+                    </ng-container>
+                    <ng-container *ngIf="!loadingFiche && !userFicheMedical">
+                            <span>
+                                Aucune fiche médicale n'a été renseignée
+                            </span>
                     </ng-container>
                     <ng-container *ngIf="loadingFiche">
                         <mat-spinner [diameter]="20" mode="indeterminate"></mat-spinner>

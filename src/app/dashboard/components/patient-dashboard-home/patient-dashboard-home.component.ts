@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
@@ -7,6 +8,7 @@ import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
 import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { PatientService } from "src/app/services/patient-service/patient.service";
+import { EditFicheMedicalComponent } from "src/app/shared/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 
 @Component({
   selector: "app-patient-dashboard-home",
@@ -54,11 +56,7 @@ export class PatientDashboardHomeComponent implements OnInit {
   currentUser: UserModel;
   userFicheMedical: FicheMedicalModel;
   loadingFiche: boolean;
-  constructor(
-    private router: Router,
-    private patientServ: PatientService,
-    private authServ: AuthenticationService
-  ) {}
+  constructor(private router: Router, private patientServ: PatientService, private authServ: AuthenticationService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getUserinfos();
@@ -90,5 +88,16 @@ export class PatientDashboardHomeComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  editFicheMedical() {
+    this.matDialog.open(EditFicheMedicalComponent, {
+      data: this.userFicheMedical,
+      width: '350px'
+    }).afterClosed().subscribe((res: 'EDIT'| 'CANCEL') => {
+      if (res === 'EDIT') {
+        this.getUserficheMedicalInfos()
+      }
+    })
   }
 }
