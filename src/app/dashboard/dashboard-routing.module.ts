@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuardService } from "../services/auth-guard/auth-guard.service";
+import { AuthGuardService } from "../services/auth-guard-service/auth-guard.service";
 import { RoleGuard } from "../services/role-guards/role.guard";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";

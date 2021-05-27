@@ -5,21 +5,27 @@
     </div>
     <div class="medecins-block">
         <div class="tabs">
-            <div class="speciality-tab text-main-blue" [ngClass]="{'selected': currentTabIndex === i}"
-                (click)="goTab(i)" *ngFor="let speciality of specialities, let i = index">{{speciality.name}}</div>
+            <ng-container *ngIf="specialities?.length">
+                <div class="speciality-tab text-main-blue" [ngClass]="{'selected': currentTabIndex === i}"
+                (click)="goTab(i)" *ngFor="let speciality of specialities, let i = index">{{speciality.nom}}</div>
+            </ng-container>
         </div>
         <div class="list">
             <swiper class="swiper-container" [config]="swiperConfig" #swiper (indexChange)="onIndexChanged($event)">
-                <div class="swiper-slide" *ngFor="let slide of specialities">
-                    <div class="medecin-item" *ngFor="let doctor of doctors" (click)="chooseMedecin(doctor)">
-                        <img [src]="doctor.img" alt="">
-                        <div class="inf-block">
-                            <div class="name">{{doctor.name}}</div>
-                            <div class="specialite">{{doctor.speciality}}</div>
-                            <div class="lieu">{{doctor.district}}</div>
-                        </div>
+                <ng-container *ngIf="specialities?.length">
+                    <div class="swiper-slide" *ngFor="let slide of specialities">
+                        <ng-container *ngIf="doctors?.length">
+                            <div class="medecin-item" *ngFor="let doctor of doctors" (click)="chooseMedecin(doctor)">
+                                <img [src]="doctor.user.image" alt="">
+                                <div class="inf-block">
+                                    <div class="name">{{doctor.user.prenom + ' ' +doctor.user.nom}}</div>
+                                    <div class="specialite">{{doctor.user?.specialite?.nom}}</div>
+                                    <div class="lieu">{{doctor.structuresanitaire.nom}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
-                </div>
+                </ng-container>
             </swiper>
         </div>
     </div>

@@ -58,9 +58,9 @@ export class RegistrationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.initProfileForm();
+    this.initProfileForm();
     this.initUsernamesForm();
-    // this.initSpecialitiesForm();
+    this.initSpecialitiesForm();
     this.initPasswordForm();
     this.initAddressForm();
   }

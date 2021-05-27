@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material";
+import { throwError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { AppointmentModel } from "src/app/models/appointment.model";
+import { MedecinModel } from "src/app/models/medecin.model";
+import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
+import { AppointmentSuccessModalComponent } from "../../components/appointment-success-modal/appointment-success-modal.component";
 import { SearchMedecinDialogComponent } from "../../components/search-medecin-dialog/search-medecin-dialog.component";
 
 @Component({
@@ -9,16 +15,14 @@ import { SearchMedecinDialogComponent } from "../../components/search-medecin-di
   styleUrls: ["./appointment-making.component.scss"],
 })
 export class AppointmentMakingComponent implements OnInit {
-  specialities = [
-    { name: "Ophtalmologue" },
-    { name: "Dentiste" },
-    { name: "Neurologue" },
-    { name: "Gynécologue" },
-  ];
   appointmentForm: FormGroup;
-  medecin;
-
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {}
+  medecin: MedecinModel;
+  loading: boolean;
+  constructor(
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private appointService: AppointmentService
+  ) {}
 
   ngOnInit() {
     this.setAppointmentForm();
@@ -40,5 +44,42 @@ export class AppointmentMakingComponent implements OnInit {
         this.medecin = result.medecin;
       }
     });
+  }
+
+  makeAppointment() {
+    this.loading = false;
+    const appointmentPayload: AppointmentModel = {
+      nomPatient: "DOE",
+      prenomPatient: "John",
+      symptomes: this.appointmentForm.value.symptom,
+      datePatient: this.appointmentForm.value.date,
+      medecinId: this.medecin.medecinid,
+      dateMedecin: this.appointmentForm.value.date,
+      objet: "visite contre visite",
+      type: "visite contre visite",
+      notes: "visite contre visite",
+      status: "visite contre visite",
+    };
+    this.appointService
+      .fixAppointment(appointmentPayload)
+      .pipe(
+        tap(() => {
+          this.loading = false;
+        }),
+        catchError((err) => {
+          this.loading = false;
+          return throwError(err);
+        })
+      )
+      .subscribe();
+  }
+
+  openSuccessModal() {
+    const dialogRef = this.dialog.open(AppointmentSuccessModalComponent, {
+      panelClass: "register-success-dialog-style",
+      // backdropClass: "register-success-dialog-backdrop",
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

@@ -66,8 +66,6 @@ export class PatientDashboardHomeComponent implements OnInit {
 
   async getUserinfos() {
     this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
-    console.log(this.currentUser);
-
     this.getUserficheMedicalInfos();
   }
 
