@@ -158,6 +158,13 @@
         border: solid 1px $light-gray;
         border-radius: 5px;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+        position: relative;
+        .edit {
+          position: absolute;
+          top: 20px;
+          right: 15px;
+          cursor: pointer;
+        }
         .header-block {
           display: flex;
           .avatar {
