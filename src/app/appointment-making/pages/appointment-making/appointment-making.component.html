@@ -1,11 +1,11 @@
 <div class="appointment-page">
     <div class="overlay"></div>
     <div class="appointment-page-body">
-        <div class="title">Je prends un rendez-vous médical</div>
+        <div class="title" (click)="openSuccessModal()">Je prends un rendez-vous médical</div>
         <form [formGroup]="appointmentForm">
             <mat-form-field appearance="fill" class="date-picker">
                 <mat-label>Choisir une date</mat-label>
-                <input matInput [matDatepicker]="picker" readonly formControlName="date">
+                <input matInput [matDatepicker]="picker" readonly formControlName="date" [min]="todayDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -26,15 +26,15 @@
             </div>
             <div class="select-medecin-block">
                 <button class="select-med-btn text-main-blue" (click)="openModalSelectMedecin()">Choisir mon médecin</button>
-                <span class="medecin-name">{{medecin?.name}}</span>
+                <span class="medecin-name" *ngIf="medecin">{{medecin?.user?.prenom + ' ' + medecin?.user?.nom}}</span>
                 <span class="see-med-infos" *ngIf="medecin">(Voir son profil)</span>
             </div>
             <mat-form-field class="text-area">
                 <mat-label>Quels symptômes ressentez-vous ?</mat-label>
-                <textarea matInput placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
+                <textarea formControlName="symptom" matInput placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
             </mat-form-field>
             <div class="btn-block">
-                <button class="btn btn-confirm text-white">Confirmer</button>
+                <button class="btn btn-confirm text-white" (click)="makeAppointment()" [disabled]="loading">Confirmer</button>
                 <button class="btn btn-cancel">Annuler</button>
             </div>
         </form>

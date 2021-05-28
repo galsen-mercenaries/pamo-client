@@ -18,9 +18,10 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { SearchMedecinDialogComponent } from "./components/search-medecin-dialog/search-medecin-dialog.component";
 import { SwiperModule } from "ngx-swiper-wrapper";
+import { AppointmentSuccessModalComponent } from './components/appointment-success-modal/appointment-success-modal.component';
 
 @NgModule({
-  declarations: [AppointmentMakingComponent, SearchMedecinDialogComponent],
+  declarations: [AppointmentMakingComponent, SearchMedecinDialogComponent, AppointmentSuccessModalComponent],
   entryComponents: [SearchMedecinDialogComponent],
   imports: [
     CommonModule,

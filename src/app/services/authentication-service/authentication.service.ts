@@ -54,7 +54,7 @@ export class AuthenticationService {
     );
   }
 
-  getUserInfosSaved() {
+  getUserInfosSaved(): Observable<UserModel> {
     const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER);
     if (userInfos) return of(userInfos);
     return this.getUserInfos();

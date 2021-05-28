@@ -46,6 +46,7 @@ export class RegistrationSuccessDialogComponent implements OnInit {
   }
 
   goHome() {
+    this.dialog.close();
     this.router.navigate(["/"]);
   }
 }
