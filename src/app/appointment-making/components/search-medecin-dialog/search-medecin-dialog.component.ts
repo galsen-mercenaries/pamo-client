@@ -40,6 +40,7 @@ export class SearchMedecinDialogComponent implements OnInit {
     const medecinFilters = [
       MedecinFiltersEnum.USER,
       MedecinFiltersEnum.STRUCTURE,
+      MedecinFiltersEnum.SPECIALITES,
     ];
     this.medecinService
       .getAllSpecialities()

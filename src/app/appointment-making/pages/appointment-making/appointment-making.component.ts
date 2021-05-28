@@ -18,6 +18,7 @@ export class AppointmentMakingComponent implements OnInit {
   appointmentForm: FormGroup;
   medecin: MedecinModel;
   loading: boolean;
+  todayDate = new Date();
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -65,6 +66,7 @@ export class AppointmentMakingComponent implements OnInit {
       .pipe(
         tap(() => {
           this.loading = false;
+          this.openSuccessModal();
         }),
         catchError((err) => {
           this.loading = false;

@@ -28,4 +28,15 @@ export class AppointmentService {
       })
     );
   }
+
+  getUserAppointments() {
+    return this.authenticationService.getUserInfosSaved().pipe(
+      switchMap((userInfos) => {
+        const { userId } = userInfos;
+        return this.http.get<AppointmentModel[]>(
+          `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings`
+        );
+      })
+    );
+  }
 }

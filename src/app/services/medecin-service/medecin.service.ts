@@ -36,7 +36,11 @@ export class MedecinService {
   }
 
   generateRandomNumber() {
-    return Math.random() * 800 + Math.random() * 90 + Math.random() * 10;
+    return (
+      Math.round(Math.random() * 10) * 80 +
+      Math.round(Math.random() * 10) * 9 +
+      Math.round(Math.random() * 10)
+    );
   }
 
   getMedecinsBySpeciality() {

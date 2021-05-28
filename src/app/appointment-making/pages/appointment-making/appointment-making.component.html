@@ -5,7 +5,7 @@
         <form [formGroup]="appointmentForm">
             <mat-form-field appearance="fill" class="date-picker">
                 <mat-label>Choisir une date</mat-label>
-                <input matInput [matDatepicker]="picker" readonly formControlName="date">
+                <input matInput [matDatepicker]="picker" readonly formControlName="date" [min]="todayDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>

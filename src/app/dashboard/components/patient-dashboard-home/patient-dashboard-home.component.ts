@@ -4,9 +4,12 @@ import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { MAP_MONTHS_EN_TO_FR, MAP_DAYS_EN_TO_FR } from "src/app";
+import { AppointmentModel } from "src/app/models/appointment.model";
 import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
 import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { PatientService } from "src/app/services/patient-service/patient.service";
 import { EditFicheMedicalComponent } from "src/app/shared/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 
@@ -56,15 +59,53 @@ export class PatientDashboardHomeComponent implements OnInit {
   currentUser: UserModel;
   userFicheMedical: FicheMedicalModel;
   loadingFiche: boolean;
-  constructor(private router: Router, private patientServ: PatientService, private authServ: AuthenticationService, private matDialog: MatDialog) {}
+  userAppointments: AppointmentModel[] = [];
+  currentDayOfMonth: number;
+  endDayOfMonth: number;
+  constructor(
+    private router: Router,
+    private patientServ: PatientService,
+    private appointmentService: AppointmentService,
+    private authServ: AuthenticationService,
+    private matDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getUserinfos();
+    this.getDatesOfMonth();
+    this.getUserAppointments();
   }
 
   async getUserinfos() {
     this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
     this.getUserficheMedicalInfos();
+  }
+
+  getUserAppointments() {
+    this.appointmentService
+      .getUserAppointments()
+      .pipe(
+        tap((res: AppointmentModel[]) => {
+          this.userAppointments = res;
+          console.log(res);
+        })
+      )
+      .subscribe();
+  }
+
+  getDatesOfMonth() {
+    const date = new Date();
+    const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    this.currentDayOfMonth = +date.toLocaleDateString("fr-FR").split("/")[0];
+    this.endDayOfMonth = +endDate.toLocaleDateString("fr-FR").split("/")[0];
+  }
+
+  // this method returns the day in which the appointment is scheduled
+  // for input "2021-05-28T00:00:00.000Z" it returns 28
+  // then estimate the percent width on the gauge
+  getAppointmentDay(appt: AppointmentModel) {
+    const apptDay = +new Date(appt.datePatient).toString().split(" ")[2];
+    return (apptDay * 100) / this.endDayOfMonth;
   }
 
   goAppointment() {
@@ -89,13 +130,16 @@ export class PatientDashboardHomeComponent implements OnInit {
   }
 
   editFicheMedical() {
-    this.matDialog.open(EditFicheMedicalComponent, {
-      data: this.userFicheMedical,
-      width: '350px'
-    }).afterClosed().subscribe((res: 'EDIT'| 'CANCEL') => {
-      if (res === 'EDIT') {
-        this.getUserficheMedicalInfos()
-      }
-    })
+    this.matDialog
+      .open(EditFicheMedicalComponent, {
+        data: this.userFicheMedical,
+        width: "350px",
+      })
+      .afterClosed()
+      .subscribe((res: "EDIT" | "CANCEL") => {
+        if (res === "EDIT") {
+          this.getUserficheMedicalInfos();
+        }
+      });
   }
 }

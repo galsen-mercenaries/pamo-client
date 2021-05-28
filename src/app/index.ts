@@ -38,9 +38,35 @@ export const SWIPER_CONFIGURATION: SwiperConfigInterface = {
   effect: "slide",
 };
 
-export const REGEX_PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+export const REGEX_PASSWORD: RegExp =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
 export enum LOCAL_STORAGE_KEYS {
   ACCESS_TOKEN = "access-token",
   USER = "user",
 }
+
+export const MAP_MONTHS_EN_TO_FR: Map<string, string> = new Map([
+  ["Jan", "Jan"],
+  ["Feb", "Fev"],
+  ["Mar", "Mar"],
+  ["Apr", "Avr"],
+  ["May", "Mai"],
+  ["Jun", "Juin"],
+  ["Jul", "Juil"],
+  ["Aug", "Août"],
+  ["Sep", "Sep"],
+  ["Oct", "Oct"],
+  ["Nov", "Nov"],
+  ["Dec", "Dec"],
+]);
+
+export const MAP_DAYS_EN_TO_FR: Map<string, string> = new Map([
+  ["Mon", "Lun"],
+  ["Tue", "Mar"],
+  ["Wed", "Mer"],
+  ["Thu", "Jeu"],
+  ["Fri", "Ven"],
+  ["Sat", "Sam"],
+  ["Sat", "Dim"],
+]);

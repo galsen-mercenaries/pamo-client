@@ -88,15 +88,15 @@
         <div class="semester-title">Mes rendez-vous du mois</div>
         <div class="markers-container">
             <div class="markers-block">
-                <div class="marker" *ngFor="let marker of appointments"
-                    [ngStyle]="{'left': 'calc(' + marker.percent + '% - 7.5px)'}"></div>
-                <div class="appointment-date" *ngFor="let app of appointments"
-                    [ngStyle]="{'left': 'calc(' + app.percent + '% - 25px)'}">{{app.date}}</div>
+                <div class="marker" [title]="'rendez-vous'" *ngFor="let marker of userAppointments"
+                    [ngStyle]="{'left': 'calc(' + getAppointmentDay(marker) + '% - 7.5px)'}"></div>
+                <div class="appointment-date" *ngFor="let appt of userAppointments"
+                    [ngStyle]="{'left': 'calc(' + getAppointmentDay(appt) + '% - 25px)'}">{{appt.datePatient | displayDateGauge}}</div>
             </div>
         </div>
         <div class="gauge">
-            <div class="left" [style.width.%]="30"></div>
-            <div class="consumed" [style.width.%]="100 - 30"></div>
+            <div class="left" [style.width.%]="100*currentDayOfMonth/endDayOfMonth"></div>
+            <div class="consumed" [style.width.%]="100 - (100*currentDayOfMonth/endDayOfMonth)"></div>
         </div>
     </div>
     <div class="more-details-block">
