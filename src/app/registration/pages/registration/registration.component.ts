@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material";
 import { SwiperComponent, SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { REGEX_PASSWORD } from "src/app";
-import { UserModel } from "src/app/models/user.model";
+import { ROLE_ENUM, UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { RegistrationSuccessDialogComponent } from "../../components/registration-success-dialog/registration-success-dialog.component";
 
@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
   ];
   isPasswordVisible: boolean;
   isConfirmPasswordVisible: boolean;
-  steps = [1, 2, 3, 4];
+  steps = [1, 2, 3, 4, 5];
   currentSlideIndex = 0;
   registeringUser: boolean;
   registrationError: string;
@@ -83,6 +83,10 @@ export class RegistrationComponent implements OnInit {
       password,
       numero: this.usernamesForm.value.numero,
       adresse: this.addressForm.value.address,
+      roleCode:
+        this.profileForm.value.profile === "patient"
+          ? ROLE_ENUM.PATIENT
+          : ROLE_ENUM.MEDECIN,
     };
     this.authenticationService.registerUser(newUser).subscribe(
       (createdUser) => {

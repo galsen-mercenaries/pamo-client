@@ -63,9 +63,9 @@
                         </mat-menu>
                     </div>
                 </div>
-                <div class="medium-screen-header" (click)="sidenav.toggle()">
-                    <mat-icon [ngStyle]="{'color':'#000000'}" class="menu-toggle">menu</mat-icon>
-                    <div class="bienvenue">Bienvenue, &nbsp;&nbsp;<span class="noms">Papa Abdoulaye KEBE</span> </div>
+                <div class="medium-screen-header">
+                    <mat-icon (click)="sidenav.toggle()" [ngStyle]="{'color':'#000000'}" class="menu-toggle">menu</mat-icon>
+                    <div class="bienvenue">Bienvenue, &nbsp;&nbsp;<span class="noms">{{currentUser?.prenom + ' ' + currentUser?.nom}}</span> </div>
                 </div>
                 <div class="home-page-body-content">
                     <router-outlet></router-outlet>

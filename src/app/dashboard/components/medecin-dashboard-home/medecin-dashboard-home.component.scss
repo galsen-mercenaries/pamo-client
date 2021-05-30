@@ -14,6 +14,8 @@
   justify-content: space-between;
   flex-grow: 1;
   overflow: hidden;
+  width: 100%;
+  overflow-y: hidden;
   .dashboard-left-block {
     width: 72%;
     display: flex;
@@ -86,7 +88,7 @@
         padding-right: 10px;
         border-right: solid 1px #eeeeee;
         width: 30%;
-        min-width: 250px;
+        min-width: 210px;
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -326,6 +328,110 @@
             font-family: "NotoSansKR-Light";
           }
         }
+      }
+    }
+  }
+}
+
+// hide calendar if width < 1080px
+@media screen and (max-width: 1080px) {
+  .medecin-dashboard-home {
+    .dashboard-left-block {
+      width: 100%;
+    }
+    .dashboard-right-block {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .dashboard-left-block {
+    width: 100%;
+    .full-content {
+      .notifications-block {
+        display: none !important;
+      }
+      .main-content {
+        max-width: unset !important;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .medecin-dashboard-home {
+    padding: 0 !important;
+    .dashboard-left-block {
+      .key-indicators {
+        justify-content: unset !important;
+        overflow-x: auto;
+        padding: 15px 0;
+        margin-left: 3%;
+        &::-webkit-scrollbar {
+          height: 2px;
+          background-color: #eeeeee;
+          &-thumb {
+            background-color: $main-blue;
+            border-radius: 2px;
+          }
+        }
+        .indicator-card {
+          min-width: 200px !important;
+          margin-right: 15px;
+          .card-content {
+            padding: 10px 0;
+            .card-left {
+              .icon-container {
+                padding: 10px;
+                .mat-icon {
+                  font-size: 30px;
+                  width: 30px;
+                  height: 30px;
+                }
+              }
+            }
+            .card-right {
+              .cardinal {
+                font-size: 30px;
+              }
+            }
+          }
+        }
+      }
+      .full-content {
+        width: 94%;
+        margin: 10px auto 0;
+        .medecin-profile-top-block {
+          img {
+            width: 100px !important;
+            height: 100px !important;
+          }
+          .main-infos {
+            .main-inf-item {
+              .item-name {
+                font-size: 10px;
+              }
+              .item-content {
+                font-size: 9px;
+                font-family: "NotoSansKR-Light";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main-content {
+    flex-direction: column-reverse;
+    padding: unset !important;
+    .navigation-content {
+      .medecin-profile {
+        display: none;
       }
     }
   }

@@ -6,6 +6,7 @@ import { AuthenticationService } from "../authentication-service/authentication.
 import { switchMap } from "rxjs/operators";
 const { SERVER_URL } = environment;
 const APPOINTMENT_MAKING_BY_PATIENT_URL = `${SERVER_URL}/patients`;
+const GET_MEDECIN_APPOINTMENT_URL = `${SERVER_URL}/medecins`;
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +36,19 @@ export class AppointmentService {
         const { userId } = userInfos;
         return this.http.get<AppointmentModel[]>(
           `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings`
+        );
+      })
+    );
+  }
+
+  getMedecinAppointmentsByDate() {
+    return this.authenticationService.getUserInfosSaved().pipe(
+      switchMap((userInfos) => {
+        console.log(userInfos);
+
+        const { userId } = userInfos;
+        return this.http.get<AppointmentModel[]>(
+          `${GET_MEDECIN_APPOINTMENT_URL}/${userId}/meetings`
         );
       })
     );

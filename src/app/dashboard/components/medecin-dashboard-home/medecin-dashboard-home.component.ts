@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MatCalendarView } from "@angular/material";
 import { DAYS_OF_WEEK } from "calendar-utils";
+import { tap } from "rxjs/operators";
+import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 
 @Component({
   selector: "app-medecin-dashboard-home",
@@ -100,9 +102,22 @@ export class MedecinDashboardHomeComponent implements OnInit {
       img: "https://picsum.photos/id/420/200",
     },
   ];
-  constructor() {}
+  constructor(private apptService: AppointmentService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.getMedecinByAppointments();
+  }
+
+  getMedecinByAppointments() {
+    this.apptService
+      .getMedecinAppointmentsByDate()
+      .pipe(
+        tap((appointments) => {
+          console.log(appointments);
+        })
+      )
+      .subscribe();
+  }
 
   onDayClicked(event) {
     console.log(event);

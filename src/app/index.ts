@@ -68,5 +68,5 @@ export const MAP_DAYS_EN_TO_FR: Map<string, string> = new Map([
   ["Thu", "Jeu"],
   ["Fri", "Ven"],
   ["Sat", "Sam"],
-  ["Sat", "Dim"],
+  ["Sun", "Dim"],
 ]);
