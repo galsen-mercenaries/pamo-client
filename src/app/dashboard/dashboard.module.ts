@@ -1,4 +1,8 @@
-import { NgModule } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { DashboardRoutingModule } from "./dashboard-routing.module";
@@ -15,8 +19,12 @@ import { PatientDashboardHomeComponent } from "./components/patient-dashboard-ho
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
 import { CalendarModule } from "angular-calendar";
-import { SharedModule } from "../shared/shared/shared.module";
 import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tampon.component";
+import { SharedModule } from "../shared/shared.module";
+import {
+  DlDateTimeDateModule,
+  DlDateTimePickerModule,
+} from "angular-bootstrap-datetimepicker";
 
 @NgModule({
   declarations: [
@@ -36,7 +44,10 @@ import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tam
     MatListModule,
     CalendarModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class DashboardModule {}

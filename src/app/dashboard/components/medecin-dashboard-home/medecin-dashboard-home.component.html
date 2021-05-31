@@ -2,7 +2,7 @@
     <div class="dashboard-left-block">
         <div class="key-indicators">
             <div class="indicator-card">
-                <div class="card-title text-main-blue">Rendez-vous aujourd'hui</div>
+                <div class="my-card-title text-main-blue">Rendez-vous aujourd'hui</div>
                 <div class="card-content">
                     <div class="card-left">
                         <div class="icon-container">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="indicator-card">
-                <div class="card-title text-main-blue">En attente de validation</div>
+                <div class="my-card-title text-main-blue">En attente de validation</div>
                 <div class="card-content">
                     <div class="card-left">
                         <div class="icon-container">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="indicator-card">
-                <div class="card-title text-main-blue">Mes patients</div>
+                <div class="my-card-title text-main-blue">Mes patients</div>
                 <div class="card-content">
                     <div class="card-left">
                         <div class="icon-container">
@@ -114,7 +114,7 @@
     </div>
     <div class="dashboard-right-block">
         <div class="calendar-container">
-            <div class="month-navigation">
+            <!-- <div class="month-navigation">
                 <div class="nav-arrow-container" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
                     <mat-icon [ngStyle]="{'color':'#47afff'}">navigate_before</mat-icon>
                 </div>
@@ -128,7 +128,9 @@
             </div>
             <mwl-calendar-month-view [weekStartsOn]="weekStartsOn" [weekendDays]="weekEnds" [viewDate]="viewDate"
                 (dayClicked)="onDayClicked($event)" (eventClicked)="(0)" (eventTimesChanged)="0">
-            </mwl-calendar-month-view>
+            </mwl-calendar-month-view> -->
+            <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30" (change)="onDateSelected($event)">
+            </dl-date-time-picker>
         </div>
         <div class="events-container">
             <div class="appointment-list">

@@ -10,7 +10,8 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-radio-group class="radio-group" aria-label="Select an option">
-                <mat-radio-button [checked]="true" value="1" #radioGroup1 [ngClass]="{'unchecked': !radioGroup1.checked}">
+                <mat-radio-button [checked]="true" value="1" #radioGroup1
+                    [ngClass]="{'unchecked': !radioGroup1.checked}">
                     Pour moi-même
                 </mat-radio-button>
                 <mat-radio-button value="2" #radioGroup2 [ngClass]="{'unchecked': !radioGroup2.checked}">
@@ -25,16 +26,19 @@
                 </div>
             </div>
             <div class="select-medecin-block">
-                <button class="select-med-btn text-main-blue" (click)="openModalSelectMedecin()">Choisir mon médecin</button>
+                <button class="select-med-btn text-main-blue" (click)="openModalSelectMedecin()">Choisir mon
+                    médecin</button>
                 <span class="medecin-name" *ngIf="medecin">{{medecin?.user?.prenom + ' ' + medecin?.user?.nom}}</span>
                 <span class="see-med-infos" *ngIf="medecin">(Voir son profil)</span>
             </div>
             <mat-form-field class="text-area">
                 <mat-label>Quels symptômes ressentez-vous ?</mat-label>
-                <textarea formControlName="symptom" matInput placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
+                <textarea formControlName="symptom" matInput
+                    placeholder="J'ai des maux de tête depuis plusieurs jours"></textarea>
             </mat-form-field>
             <div class="btn-block">
-                <button class="btn btn-confirm text-white" (click)="makeAppointment()" [disabled]="loading">Confirmer</button>
+                <button class="btn btn-confirm text-white" (click)="makeAppointment()"
+                    [disabled]="loading">Confirmer</button>
                 <button class="btn btn-cancel">Annuler</button>
             </div>
         </form>

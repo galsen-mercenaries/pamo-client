@@ -44,11 +44,9 @@ export class AppointmentService {
   getMedecinAppointmentsByDate() {
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
-        console.log(userInfos);
-
-        const { userId } = userInfos;
+        const { medecinId } = userInfos;
         return this.http.get<AppointmentModel[]>(
-          `${GET_MEDECIN_APPOINTMENT_URL}/${userId}/meetings`
+          `${GET_MEDECIN_APPOINTMENT_URL}/${medecinId}/meetings`
         );
       })
     );

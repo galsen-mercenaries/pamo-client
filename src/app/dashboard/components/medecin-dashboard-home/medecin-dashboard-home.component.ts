@@ -3,7 +3,7 @@ import { MatCalendarView } from "@angular/material";
 import { DAYS_OF_WEEK } from "calendar-utils";
 import { tap } from "rxjs/operators";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
-
+import * as moment from "moment";
 @Component({
   selector: "app-medecin-dashboard-home",
   templateUrl: "./medecin-dashboard-home.component.html",
@@ -105,6 +105,15 @@ export class MedecinDashboardHomeComponent implements OnInit {
   constructor(private apptService: AppointmentService) {}
 
   ngOnInit() {
+    // moment.locale("fr");
+    moment.locale("fr", {
+      week: { dow: 1 },
+      monthsShort:
+        "Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre".split(
+          "_"
+        ),
+      weekdaysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+    });
     this.getMedecinByAppointments();
   }
 
@@ -119,7 +128,7 @@ export class MedecinDashboardHomeComponent implements OnInit {
       .subscribe();
   }
 
-  onDayClicked(event) {
+  onDateSelected(event) {
     console.log(event);
   }
 }

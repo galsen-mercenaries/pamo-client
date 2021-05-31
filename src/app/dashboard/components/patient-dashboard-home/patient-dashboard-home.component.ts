@@ -11,7 +11,7 @@ import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { PatientService } from "src/app/services/patient-service/patient.service";
-import { EditFicheMedicalComponent } from "src/app/shared/shared/components/edit-fiche-medical/edit-fiche-medical.component";
+import { EditFicheMedicalComponent } from "src/app/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 
 @Component({
   selector: "app-patient-dashboard-home",
