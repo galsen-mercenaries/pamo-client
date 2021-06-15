@@ -1,20 +1,23 @@
 import { Component, OnInit } from "@angular/core";
 import { MatCalendarView } from "@angular/material";
 import { DAYS_OF_WEEK } from "calendar-utils";
-import { tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import * as moment from "moment";
+import { AppointmentModel } from "src/app/models/appointment.model";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { UserModel } from "src/app/models/user.model";
+import { MedecinService } from "src/app/services/medecin-service/medecin.service";
+import { SpecializationModel } from "src/app/models/specialization.model";
+import { StructureSanitaireModel } from "src/app/models/structure-sanitaire.model";
+import { isEqualDate } from "src/app";
+import { throwError } from "rxjs";
 @Component({
   selector: "app-medecin-dashboard-home",
   templateUrl: "./medecin-dashboard-home.component.html",
   styleUrls: ["./medecin-dashboard-home.component.scss"],
 })
 export class MedecinDashboardHomeComponent implements OnInit {
-  view: MatCalendarView = "month";
-  viewDate: Date = new Date();
-  weekStartsOn = DAYS_OF_WEEK.MONDAY;
-  weekEnds = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
-  daysDisplay = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
   notifications = [
     {
       title: "Rendez-vous",
@@ -65,47 +68,28 @@ export class MedecinDashboardHomeComponent implements OnInit {
       date: "il y a 5 min",
     },
   ];
-  appointments = [
-    {
-      firstName: "Papa Abdoulaye",
-      lastName: "KEBE",
-      time: "08:00",
-      numero: "775896287",
-      img: "https://picsum.photos/id/78/200",
-    },
-    {
-      firstName: "Abdoul Karim",
-      lastName: "DIOP",
-      time: "09:00",
-      numero: "781210942",
-      img: "https://picsum.photos/id/133/200",
-    },
-    {
-      firstName: "Matar",
-      lastName: "FALL",
-      time: "10:00",
-      numero: "771234567",
-      img: "https://picsum.photos/id/115/200",
-    },
-    {
-      firstName: "Daouda",
-      lastName: "DJIBA",
-      time: "11:00",
-      numero: "779876543",
-      img: "https://picsum.photos/id/410/200",
-    },
-    {
-      firstName: "Ibrahima",
-      lastName: "GAKOU",
-      time: "12:00",
-      numero: "771298346",
-      img: "https://picsum.photos/id/420/200",
-    },
-  ];
-  constructor(private apptService: AppointmentService) {}
+  appointments: AppointmentModel[] = [];
+  loadingRv: boolean;
+  getRvHasError: boolean;
+  currentMedecin: {
+    specialisations?: SpecializationModel[];
+    user?: UserModel;
+    structuresanitaire?: StructureSanitaireModel;
+  };
+  selectedDate = new Date();
+  constructor(
+    private apptService: AppointmentService,
+    private authServ: AuthenticationService,
+    private medecinService: MedecinService
+  ) {}
 
   ngOnInit() {
-    // moment.locale("fr");
+    this.setMomentLocale();
+    this.getMedecinAppointments();
+    this.getMedecinInfos();
+  }
+
+  setMomentLocale() {
     moment.locale("fr", {
       week: { dow: 1 },
       monthsShort:
@@ -114,21 +98,51 @@ export class MedecinDashboardHomeComponent implements OnInit {
         ),
       weekdaysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
     });
-    this.getMedecinByAppointments();
   }
 
-  getMedecinByAppointments() {
-    this.apptService
-      .getMedecinAppointmentsByDate()
+  getMedecinInfos() {
+    this.medecinService
+      .getLoggedInMedecin()
       .pipe(
-        tap((appointments) => {
-          console.log(appointments);
+        map((res: any) => {
+          res.specialisations = res.specialisations.map((spec) => spec.nom);
+          return res;
+        }),
+        tap((medecin) => {
+          this.currentMedecin = medecin;
         })
       )
       .subscribe();
   }
 
-  onDateSelected(event) {
-    console.log(event);
+  getMedecinAppointments() {
+    this.loadingRv = true;
+    this.getRvHasError = false;
+    this.appointments = [];
+    this.apptService
+      .getMedecinAppointmentsByDate()
+      .pipe(
+        tap((appointments) => {
+          this.appointments = appointments.filter((x) =>
+            this.isEqualDate(this.selectedDate, new Date(x.datePatient))
+          );
+          this.loadingRv = false;
+        }),
+        catchError((err) => {
+          this.loadingRv = false;
+          this.getRvHasError = true;
+          return throwError(err);
+        })
+      )
+      .subscribe();
+  }
+
+  onDateSelected(value) {
+    this.selectedDate = value;
+    this.getMedecinAppointments();
+  }
+
+  isEqualDate(date1, date2) {
+    return isEqualDate(date1, date2);
   }
 }

@@ -22,7 +22,6 @@ export class DashboardTamponComponent implements OnInit {
     if (!userInfos) {
       // handle error cases
     }
-    console.log("userinfos", userInfos);
     const role = userInfos?.role?.code;
     switch (role) {
       case "ROLE_USER":

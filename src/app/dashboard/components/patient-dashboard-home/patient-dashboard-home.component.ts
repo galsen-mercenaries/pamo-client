@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { MAP_MONTHS_EN_TO_FR, MAP_DAYS_EN_TO_FR } from "src/app";
 import { AppointmentModel } from "src/app/models/appointment.model";
 import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
@@ -85,12 +85,25 @@ export class PatientDashboardHomeComponent implements OnInit {
     this.appointmentService
       .getUserAppointments()
       .pipe(
+        map((res: AppointmentModel[]) => {
+          const response = res.filter((appointment) =>
+            this.isAppointmentInCurrentMonth(appointment)
+          );
+          return response;
+        }),
         tap((res: AppointmentModel[]) => {
           this.userAppointments = res;
-          console.log(res);
         })
       )
       .subscribe();
+  }
+
+  isAppointmentInCurrentMonth(appointment?: AppointmentModel) {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1),
+      lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const appointDate = new Date(appointment.datePatient);
+    return appointDate <= lastDay && appointDate >= firstDay;
   }
 
   getDatesOfMonth() {

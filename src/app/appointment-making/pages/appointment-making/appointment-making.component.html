@@ -1,15 +1,18 @@
 <div class="appointment-page">
     <div class="overlay"></div>
+    <dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="30">
+    </dl-date-time-picker>
     <div class="appointment-page-body">
         <div class="title" (click)="openSuccessModal()">Je prends un rendez-vous médical</div>
         <form [formGroup]="appointmentForm">
             <mat-form-field appearance="fill" class="date-picker">
                 <mat-label>Choisir une date</mat-label>
-                <input matInput [matDatepicker]="picker" readonly formControlName="date" [min]="todayDate">
+                <input matInput [ngxMatDatetimePicker]="picker" readonly formControlName="date" [min]="todayDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <ngx-mat-datetime-picker [defaultTime]="[00, 00, 00]" [stepMinute]="30" #picker>
+                </ngx-mat-datetime-picker>
             </mat-form-field>
-            <mat-radio-group class="radio-group" aria-label="Select an option">
+            <mat-radio-group class="radio-group" aria-label="Select an option" formControlName="options" >
                 <mat-radio-button [checked]="true" value="1" #radioGroup1
                     [ngClass]="{'unchecked': !radioGroup1.checked}">
                     Pour moi-même
@@ -21,8 +24,8 @@
             <div class="patient-inf-form" *ngIf="radioGroup2.checked">
                 <span class="patient-title">Infos patient</span>
                 <div class="inputs-block">
-                    <input type="text" placeholder="nom du patient">
-                    <input type="text" placeholder="numéro de téléphone">
+                    <input type="text" placeholder="nom du patient" formControlName="patientName">
+                    <input type="text" placeholder="numéro de téléphone" formControlName="patientFirstname">
                 </div>
             </div>
             <div class="select-medecin-block">

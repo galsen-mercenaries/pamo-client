@@ -70,3 +70,9 @@ export const MAP_DAYS_EN_TO_FR: Map<string, string> = new Map([
   ["Sat", "Sam"],
   ["Sun", "Dim"],
 ]);
+
+export function isEqualDate(date1, date2) {
+  date1.setHours(0, 0, 0, 0);
+  date2.setHours(0, 0, 0, 0);
+  return date1.getTime() === date2.getTime();
+}

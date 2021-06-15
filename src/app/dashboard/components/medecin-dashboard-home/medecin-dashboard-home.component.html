@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="card-right">
-                        <span class="cardinal text-green">120</span>
+                        <span class="cardinal text-valid-green">120</span>
                         <span class="description">
                             <span>20%</span> actifs
                         </span>
@@ -74,15 +74,15 @@
                             <div class="main-infos">
                                 <div class="main-inf-item">
                                     <span class="item-name">Nom : </span>
-                                    <span class="item-content">KANE</span>
+                                    <span class="item-content">{{currentMedecin?.user?.nom}}</span>
                                 </div>
                                 <div class="main-inf-item">
                                     <span class="item-name">Prénom : </span>
-                                    <span class="item-content">Abdel Karim</span>
+                                    <span class="item-content">{{currentMedecin?.user?.prenom}}</span>
                                 </div>
                                 <div class="main-inf-item">
                                     <span class="item-name">Spécialité(s) : </span>
-                                    <span class="item-content">Dentiste, Pédiatre</span>
+                                    <span class="item-content">{{currentMedecin?.specialisations.join(', ')}}</span>
                                 </div>
                             </div>
                         </div>
@@ -114,38 +114,48 @@
     </div>
     <div class="dashboard-right-block">
         <div class="calendar-container">
-            <!-- <div class="month-navigation">
-                <div class="nav-arrow-container" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
-                    <mat-icon [ngStyle]="{'color':'#47afff'}">navigate_before</mat-icon>
-                </div>
-                <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
-                <div class="nav-arrow-container" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-                    <mat-icon [ngStyle]="{'color':'#47afff'}">navigate_next</mat-icon>
-                </div>
-            </div>
-            <div class="custom-calendar-header">
-                <div class="day-item" *ngFor="let day of daysDisplay">{{day}}</div>
-            </div>
-            <mwl-calendar-month-view [weekStartsOn]="weekStartsOn" [weekendDays]="weekEnds" [viewDate]="viewDate"
-                (dayClicked)="onDayClicked($event)" (eventClicked)="(0)" (eventTimesChanged)="0">
-            </mwl-calendar-month-view> -->
-            <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30" (change)="onDateSelected($event)">
+            <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30"
+                (change)="onDateSelected($event.value)">
             </dl-date-time-picker>
         </div>
         <div class="events-container">
-            <div class="appointment-list">
-                <div class="appointment-item" *ngFor="let appointment of appointments">
-                    <div class="patient-profile">
-                        <img [src]="appointment?.img" alt="">
-                        <div class="user-info">
-                            <span class="names">{{appointment?.firstName + ' ' + appointment?.lastName}}</span>
-                            <span class="age text-pink">25 ans</span>
-                            <span class="contact">{{appointment?.numero}}</span>
+            <div class="appointment-list" *ngIf="appointments?.length">
+                <div [ngClass]="{'confirmed': appointment?.status === 'CONFIRMED', 'canceled': appointment?.status === 'CANCELED', 'pending': appointment?.status === 'PENDING'}"
+                    class="appointment-item canceled" *ngFor="let appointment of appointments">
+                    <div class="app-object">
+                        <div class="app-type"><span>{{appointment?.objet}}</span> à <span>{{appointment?.datePatient |
+                                date:'hh:mm'}}</span></div>
+                        <div class="app-status text-white" [ngSwitch]="appointment.status">
+                            <span *ngSwitchCase="'CONFIRMED'">confirmé</span>
+                            <span *ngSwitchCase="'CANCELED'">annulé</span>
+                            <span *ngSwitchCase="'PENDING'">à valider</span>
+                            <span *ngSwitchDefault>?</span>
                         </div>
                     </div>
-                    <div class="time text-main-blue">{{appointment?.time}}</div>
+                    <div class="app-patient">
+                        {{appointment?.prenomPatient + ' ' + appointment?.nomPatient}}
+                    </div>
+                    <div class="app-symptoms">{{appointment?.symptomes}}</div>
+                    <!-- <div class="patient-profile">
+                        <img [src]="appointment?.img" alt="">
+                        <div class="user-info">
+                            <span class="names">{{appointment?.prenomPatient + ' ' + appointment?.nomPatient}}</span>
+                            <span class="age text-pink">{{appointment?.status}}</span>
+                            <span
+                                [ngClass]="{'text-valid-green': appointment?.dateMedecin, 'text-red': !appointment?.dateMedecin}"
+                                class="contact">{{appointment?.dateMedecin ? 'confirmé' : 'Valider'}}</span>
+                        </div>
+                    </div>
+                    <div class="time text-main-blue">{{appointment?.datePatient | date:'hh:mm'}}</div> -->
                 </div>
             </div>
+            <div class="spinner-container" *ngIf="loadingRv">
+                <mat-spinner [diameter]="30" mode="indeterminate"></mat-spinner>
+            </div>
+            <div class="empty-appointment" *ngIf="!getRvHasError && !loadingRv && !appointments?.length">Aucun
+                rendez-vous prévu à cette
+                date</div>
+            <div class="error-appointment text-red" *ngIf="getRvHasError">Une erreur est survenue</div>
         </div>
     </div>
 </div>

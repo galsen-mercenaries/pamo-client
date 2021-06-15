@@ -88,10 +88,13 @@
         <div class="semester-title">Mes rendez-vous du mois</div>
         <div class="markers-container">
             <div class="markers-block">
-                <div class="marker" [title]="'rendez-vous'" *ngFor="let marker of userAppointments"
-                    [ngStyle]="{'left': 'calc(' + getAppointmentDay(marker) + '% - 7.5px)'}"></div>
-                <div class="appointment-date" *ngFor="let appt of userAppointments"
-                    [ngStyle]="{'left': 'calc(' + getAppointmentDay(appt) + '% - 25px)'}">{{appt.datePatient | displayDateGauge}}</div>
+                <ng-container *ngFor="let appt of userAppointments">
+                    <div class="marker" [title]="appt?.datePatient"
+                        [ngStyle]="{'left': 'calc(' + getAppointmentDay(appt) + '% - 7.5px)'}"></div>
+                    <div class="appointment-date"
+                        [ngStyle]="{'left': 'calc(' + getAppointmentDay(appt) + '% - 25px)'}">{{appt.datePatient |
+                        displayDateGauge}}</div>
+                </ng-container>
             </div>
         </div>
         <div class="gauge">
@@ -108,8 +111,9 @@
                     <img src="assets/images/profil.jpg" alt="" class="avatar">
                     <div class="names-block">
                         <span class="nom">{{currentUser?.prenom}} {{currentUser?.nom}}</span>
-                        <span *ngIf="userFicheMedical" class="birthdate">{{userFicheMedical?.date_naissance | date: 'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
-                        <span  *ngIf="userFicheMedical"  class="birthdate">
+                        <span *ngIf="userFicheMedical" class="birthdate">{{userFicheMedical?.date_naissance | date:
+                            'dd/MM/yyyy' }} ( {{ userFicheMedical?.date_naissance | date: 'yyyy' | age }} ans)</span>
+                        <span *ngIf="userFicheMedical" class="birthdate">
                             <span class="bold">Sexe : </span>{{userFicheMedical?.sexe}}
                         </span>
                     </div>
@@ -118,13 +122,16 @@
                     <ng-container *ngIf="!loadingFiche && userFicheMedical">
                         <div class="medical-info-block">
                             <div class="item-info">
-                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}} Kg</span>
+                                <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}}
+                                    Kg</span>
                             </div>
                             <div class="item-info">
-                                <span class="intitule">Taille :</span><span class="info">{{ userFicheMedical?.taille}} cm</span>
+                                <span class="intitule">Taille :</span><span class="info">{{ userFicheMedical?.taille}}
+                                    cm</span>
                             </div>
                             <div class="item-info">
-                                <span class="intitule">Groupe Sanguin :</span><span class="info red">{{ userFicheMedical?.groupe_sanguin}} </span>
+                                <span class="intitule">Groupe Sanguin :</span><span class="info red">{{
+                                    userFicheMedical?.groupe_sanguin}} </span>
                             </div>
                             <div class="item-info">
                                 <span class="intitule">Contact d'urgence :</span>
@@ -135,7 +142,8 @@
                         </div>
                         <div class="medical-info-block">
                             <div class="item-info">
-                                <span class="intitule">Problèmes médicaux : </span><span class="info">{{userFicheMedical?.maladies}}</span>
+                                <span class="intitule">Problèmes médicaux : </span><span
+                                    class="info">{{userFicheMedical?.maladies}}</span>
                             </div>
                             <div class="item-info">
                                 <span class="intitule">Allergies et réactions : </span><span class="info">Aucun</span>
@@ -149,9 +157,9 @@
                         </div>
                     </ng-container>
                     <ng-container *ngIf="!loadingFiche && !userFicheMedical">
-                            <span>
-                                Aucune fiche médicale n'a été renseignée
-                            </span>
+                        <span>
+                            Aucune fiche médicale n'a été renseignée
+                        </span>
                     </ng-container>
                     <ng-container *ngIf="loadingFiche">
                         <mat-spinner [diameter]="20" mode="indeterminate"></mat-spinner>

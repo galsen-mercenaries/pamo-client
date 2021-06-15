@@ -47,13 +47,11 @@ export class SearchMedecinDialogComponent implements OnInit {
       .pipe(
         tap((specialities) => {
           this.specialities = specialities;
-          console.log(specialities);
         }),
         switchMap(() => {
           return this.medecinService.getAllMedecins(medecinFilters).pipe(
             tap((medecins) => {
               this.doctors = medecins;
-              console.log(medecins);
             })
           );
         })
@@ -66,7 +64,6 @@ export class SearchMedecinDialogComponent implements OnInit {
   }
 
   onIndexChanged(event) {
-    console.log(event);
     this.currentTabIndex = event;
   }
 

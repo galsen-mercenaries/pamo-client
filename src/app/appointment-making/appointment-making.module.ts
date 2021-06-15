@@ -1,4 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { AppointmentMakingRoutingModule } from "./appointment-making-routing.module";
@@ -20,10 +24,10 @@ import { SearchMedecinDialogComponent } from "./components/search-medecin-dialog
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { AppointmentSuccessModalComponent } from "./components/appointment-success-modal/appointment-success-modal.component";
 import {
-  DlDateTimeDateModule,
-  DlDateTimePickerModule,
-} from "angular-bootstrap-datetimepicker";
-
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+} from "@angular-material-components/datetime-picker";
 @NgModule({
   declarations: [
     AppointmentMakingComponent,
@@ -45,10 +49,11 @@ import {
     ReactiveFormsModule,
     MatDialogModule,
     SwiperModule,
-    DlDateTimeDateModule,
-    DlDateTimePickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "fr-FR" }],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppointmentMakingModule {}
