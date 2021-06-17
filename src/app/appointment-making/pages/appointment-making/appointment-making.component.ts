@@ -33,6 +33,9 @@ export class AppointmentMakingComponent implements OnInit {
     this.appointmentForm = this.formBuilder.group({
       date: [null, Validators.required],
       symptom: ["", Validators.required],
+      options: ["1"],
+      patientName: [""],
+      patientFirstname: [""],
     });
   }
 
@@ -50,16 +53,22 @@ export class AppointmentMakingComponent implements OnInit {
   makeAppointment() {
     this.loading = false;
     const appointmentPayload: AppointmentModel = {
-      nomPatient: "DOE",
-      prenomPatient: "John",
+      nomPatient:
+        this.appointmentForm.value.options === "1"
+          ? null
+          : this.appointmentForm.value.patientName,
+      prenomPatient:
+        this.appointmentForm.value.options === "1"
+          ? null
+          : this.appointmentForm.value.patientFirstname,
       symptomes: this.appointmentForm.value.symptom,
       datePatient: this.appointmentForm.value.date,
       medecinId: this.medecin.medecinid,
-      dateMedecin: this.appointmentForm.value.date,
-      objet: "visite contre visite",
+      // dateMedecin: this.appointmentForm.value.date,
+      objet: "Electrocardiogramme",
       type: "visite contre visite",
       notes: "visite contre visite",
-      status: "visite contre visite",
+      status: "CONFIRMED",
     };
     this.appointService
       .fixAppointment(appointmentPayload)

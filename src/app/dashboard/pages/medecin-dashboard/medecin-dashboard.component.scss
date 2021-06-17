@@ -18,6 +18,26 @@ mat-sidenav-container {
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
+  .medium-screen-menu {
+    display: none;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0 10px;
+    .menu-toggle {
+      margin-right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    .bienvenue {
+      font-family: "NotoSansKR-Light";
+      .noms {
+      }
+    }
+  }
   .medecin-menu-block {
     width: 80px;
     height: 100%;
@@ -51,5 +71,28 @@ mat-sidenav-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    width: calc(100% - 80px);
+  }
+}
+
+@media screen and (max-width: 855px) {
+  .medecin-dashboard {
+    padding-top: 50px;
+    position: relative;
+    .medium-screen-menu {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: $white;
+    }
+    .medecin-menu-block {
+      display: none;
+    }
+    .medecin-dashboard-content {
+      width: 100%;
+    }
   }
 }

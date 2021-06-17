@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { MAP_MONTHS_EN_TO_FR, MAP_DAYS_EN_TO_FR } from "src/app";
 import { AppointmentModel } from "src/app/models/appointment.model";
 import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
@@ -11,7 +11,7 @@ import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { PatientService } from "src/app/services/patient-service/patient.service";
-import { EditFicheMedicalComponent } from "src/app/shared/shared/components/edit-fiche-medical/edit-fiche-medical.component";
+import { EditFicheMedicalComponent } from "src/app/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 
 @Component({
   selector: "app-patient-dashboard-home",
@@ -85,12 +85,25 @@ export class PatientDashboardHomeComponent implements OnInit {
     this.appointmentService
       .getUserAppointments()
       .pipe(
+        map((res: AppointmentModel[]) => {
+          const response = res.filter((appointment) =>
+            this.isAppointmentInCurrentMonth(appointment)
+          );
+          return response;
+        }),
         tap((res: AppointmentModel[]) => {
           this.userAppointments = res;
-          console.log(res);
         })
       )
       .subscribe();
+  }
+
+  isAppointmentInCurrentMonth(appointment?: AppointmentModel) {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1),
+      lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const appointDate = new Date(appointment.datePatient);
+    return appointDate <= lastDay && appointDate >= firstDay;
   }
 
   getDatesOfMonth() {

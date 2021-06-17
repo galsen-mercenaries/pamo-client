@@ -12,8 +12,8 @@
         <div class="steps-status">
             <div class="step-nums">
                 <div [class]="'step-num step-num-'+index"
-                    [ngClass]="{'step-num-disabled': index > currentSlideIndex - 1, 'step-num-success': (index === 3 && currentSlideIndex === 3)}"
-                    *ngFor="let step of steps; let index = index">{{index === 3 && currentSlideIndex === 3 ? '' : step}}</div>
+                    [ngClass]="{'step-num-disabled': index > currentSlideIndex - 1, 'step-num-success': (index === 4 && currentSlideIndex === 4)}"
+                    *ngFor="let step of steps; let index = index">{{index === 4 && currentSlideIndex === 4 ? '' : step}}</div>
             </div>
             <div class="step-lines">
                 <div class="step-line" [ngClass]="{'step-line-disabled': j >= currentSlideIndex}"
@@ -26,7 +26,7 @@
         <swiper (indexChange)="onIndexChanged($event)" class="swiper-container" [config]="swiperConfig" #swiper>
 
             <!-- step choose profile -->
-            <!-- <div class="swiper-slide">
+            <div class="swiper-slide">
                 <div class="slide">
                     <form [formGroup]="profileForm">
                         <div class="form-title">
@@ -52,7 +52,7 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div>
 
             <!-- step names -->
             <div class="swiper-slide">

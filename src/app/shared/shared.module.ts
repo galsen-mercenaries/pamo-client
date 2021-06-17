@@ -11,10 +11,16 @@ import {
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AgePipe } from "src/app/pipes/age.pipe";
 import { DisplayDateGaugePipe } from "src/app/pipes/display-date-gauge.pipe";
+import { SetDatetimeDialogComponent } from "./components/set-datetime-dialog/set-datetime-dialog.component";
 
 @NgModule({
-  declarations: [EditFicheMedicalComponent, AgePipe, DisplayDateGaugePipe],
-  entryComponents: [EditFicheMedicalComponent],
+  declarations: [
+    EditFicheMedicalComponent,
+    AgePipe,
+    DisplayDateGaugePipe,
+    SetDatetimeDialogComponent,
+  ],
+  entryComponents: [EditFicheMedicalComponent, SetDatetimeDialogComponent],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -25,6 +31,11 @@ import { DisplayDateGaugePipe } from "src/app/pipes/display-date-gauge.pipe";
     ReactiveFormsModule,
   ],
   providers: [DatePipe, { provide: MAT_DIALOG_DATA, useValue: {} }],
-  exports: [EditFicheMedicalComponent, AgePipe, DisplayDateGaugePipe],
+  exports: [
+    EditFicheMedicalComponent,
+    AgePipe,
+    DisplayDateGaugePipe,
+    SetDatetimeDialogComponent,
+  ],
 })
 export class SharedModule {}

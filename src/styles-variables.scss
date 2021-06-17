@@ -8,6 +8,7 @@ $light-gray: #eeeeee;
 $black: #000000;
 $red: #ff0000;
 $green: #039203;
+$valid-green: #34d57f;
 
 .text {
   &-red {
@@ -39,5 +40,8 @@ $green: #039203;
   }
   &-light-gray {
     color: $light-gray;
+  }
+  &-valid-green {
+    color: $valid-green;
   }
 }
