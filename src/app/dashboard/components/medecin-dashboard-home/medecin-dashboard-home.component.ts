@@ -10,6 +10,7 @@ import { StructureSanitaireModel } from "src/app/models/structure-sanitaire.mode
 import { isEqualDate } from "src/app";
 import { throwError } from "rxjs";
 import { CalendarOptions } from "@fullcalendar/angular";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-medecin-dashboard-home",
@@ -85,6 +86,13 @@ export class MedecinDashboardHomeComponent implements OnInit {
       right: 'dayGridMonth,listMonth'
     },
     locale: 'fr',
+    buttonText: {
+      today:    "Aujourdh'hui",
+      month:    "Mois",
+      week:     "Semaine",
+      day:      "Jour",
+      list:     "Liste"
+    },
     dayMaxEvents: true, // allow "more" link when too many events
     // dateClick: this.appointementsInfos.bind(this), // bind is important!
     eventClick: this.appointementsInfos.bind(this),
@@ -103,7 +111,8 @@ export class MedecinDashboardHomeComponent implements OnInit {
 
   constructor(
     private apptService: AppointmentService,
-    private medecinService: MedecinService
+    private medecinService: MedecinService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -189,5 +198,9 @@ export class MedecinDashboardHomeComponent implements OnInit {
 
   isEqualDate(date1, date2) {
     return isEqualDate(date1, date2);
+  }
+
+  goToMyCalender() {
+    this.router.navigate(['/dashboard/personnel/calendar'])
   }
 }

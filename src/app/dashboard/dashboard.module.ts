@@ -25,6 +25,7 @@ import {
   DlDateTimeDateModule,
   DlDateTimePickerModule,
 } from "angular-bootstrap-datetimepicker";
+import { MedecinsCalendarComponent } from './components/medecins-calendar/medecins-calendar.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {
     MedecinDashboardComponent,
     MedecinDashboardHomeComponent,
     DashboardTamponComponent,
+    MedecinsCalendarComponent,
   ],
   imports: [
     CommonModule,
