@@ -114,18 +114,19 @@
     </div>
     <div class="dashboard-right-block">
         <div class="calendar-container">
-            <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30"
+            <!-- <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30"
                 (change)="onDateSelected($event.value)">
-            </dl-date-time-picker>
+            </dl-date-time-picker> -->
+            <full-calendar [options]="calendarOptions"></full-calendar>
         </div>
         <div class="events-container">
-            <div class="appointment-list" *ngIf="appointments?.length">
-                <div [ngClass]="{'confirmed': appointment?.status === 'CONFIRMED', 'canceled': appointment?.status === 'CANCELED', 'pending': appointment?.status === 'PENDING'}"
-                    class="appointment-item canceled" *ngFor="let appointment of appointments">
+            <div class="appointment-list" *ngIf="infosAppointments">
+                <div [ngClass]="{'confirmed': infosAppointments?.status === 'CONFIRMED', 'canceled': infosAppointments?.status === 'CANCELED', 'pending': infosAppointments?.status === 'PENDING'}"
+                    class="appointment-item canceled">
                     <div class="app-object">
-                        <div class="app-type"><span>{{appointment?.objet}}</span> à <span>{{appointment?.datePatient |
+                        <div class="app-type"><span>{{infosAppointments?.objet}}</span> à <span>{{infosAppointments?.datePatient |
                                 date:'hh:mm'}}</span></div>
-                        <div class="app-status text-white" [ngSwitch]="appointment.status">
+                        <div class="app-status text-white" [ngSwitch]="infosAppointments.status">
                             <span *ngSwitchCase="'CONFIRMED'">confirmé</span>
                             <span *ngSwitchCase="'CANCELED'">annulé</span>
                             <span *ngSwitchCase="'PENDING'">à valider</span>
@@ -133,9 +134,9 @@
                         </div>
                     </div>
                     <div class="app-patient">
-                        {{appointment?.prenomPatient + ' ' + appointment?.nomPatient}}
+                        {{infosAppointments?.prenomPatient + ' ' + infosAppointments?.nomPatient}}
                     </div>
-                    <div class="app-symptoms">{{appointment?.symptomes}}</div>
+                    <div class="app-symptoms">{{infosAppointments?.symptomes}}</div>
                     <!-- <div class="patient-profile">
                         <img [src]="appointment?.img" alt="">
                         <div class="user-info">

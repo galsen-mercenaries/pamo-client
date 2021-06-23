@@ -12,4 +12,5 @@ export interface AppointmentModel {
   isApprovedByMedecin?: boolean;
   patientId?: number;
   medecinId?: number;
+  meetingId?: number;
 }
