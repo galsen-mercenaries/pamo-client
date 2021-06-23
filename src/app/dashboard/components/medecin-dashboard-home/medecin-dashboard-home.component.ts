@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { MatCalendarView } from "@angular/material";
-import { DAYS_OF_WEEK } from "calendar-utils";
 import { catchError, map, tap } from "rxjs/operators";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import * as moment from "moment";
 import { AppointmentModel } from "src/app/models/appointment.model";
-import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { UserModel } from "src/app/models/user.model";
 import { MedecinService } from "src/app/services/medecin-service/medecin.service";
 import { SpecializationModel } from "src/app/models/specialization.model";
 import { StructureSanitaireModel } from "src/app/models/structure-sanitaire.model";
 import { isEqualDate } from "src/app";
 import { throwError } from "rxjs";
+import { CalendarOptions } from "@fullcalendar/angular";
+import { Router } from "@angular/router";
+
 @Component({
   selector: "app-medecin-dashboard-home",
   templateUrl: "./medecin-dashboard-home.component.html",
@@ -77,16 +77,54 @@ export class MedecinDashboardHomeComponent implements OnInit {
     structuresanitaire?: StructureSanitaireModel;
   };
   selectedDate = new Date();
+  calendarOptions: CalendarOptions = {
+    timeZone: 'UTC',
+    themeSystem: 'bootstrap',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,listMonth'
+    },
+    locale: 'fr',
+    buttonText: {
+      today:    "Aujourdh'hui",
+      month:    "Mois",
+      week:     "Semaine",
+      day:      "Jour",
+      list:     "Liste"
+    },
+    dayMaxEvents: true, // allow "more" link when too many events
+    // dateClick: this.appointementsInfos.bind(this), // bind is important!
+    eventClick: this.appointementsInfos.bind(this),
+    events: [
+      {
+        title: "Meeting",
+        start: "2019-08-12T14:30:00",
+      },
+      {
+        title: "Birthday Party",
+        start: "2019-08-13T07:00:00",
+      },
+    ],
+  };
+  infosAppointments: AppointmentModel;
+
   constructor(
     private apptService: AppointmentService,
-    private authServ: AuthenticationService,
-    private medecinService: MedecinService
+    private medecinService: MedecinService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.setMomentLocale();
     this.getMedecinAppointments();
     this.getMedecinInfos();
+  }
+
+  handleDateClick(arg) {
+    console.log(arg);
+
+    // alert('date click! ' + arg.dateStr)
   }
 
   setMomentLocale() {
@@ -123,9 +161,19 @@ export class MedecinDashboardHomeComponent implements OnInit {
       .getMedecinAppointmentsByDate()
       .pipe(
         tap((appointments) => {
-          this.appointments = appointments.filter((x) =>
-            this.isEqualDate(this.selectedDate, new Date(x.datePatient))
+          const events: any[] = appointments.map((x) => {
+            return {
+              id: x.meetingId,
+              start: x.datePatient,
+              title: x.type
+            }
+          }
           );
+          this.appointments = appointments;
+          this.calendarOptions.events = events;
+          // this.appointments = appointments.filter((x) =>
+          //   this.isEqualDate(this.selectedDate, new Date(x.datePatient))
+          // );
           this.loadingRv = false;
         }),
         catchError((err) => {
@@ -137,6 +185,12 @@ export class MedecinDashboardHomeComponent implements OnInit {
       .subscribe();
   }
 
+  appointementsInfos(eventClick: any) {
+    this.infosAppointments = this.appointments.find((x) => {
+      return +x.meetingId === +eventClick.event.id
+    })
+  }
+
   onDateSelected(value) {
     this.selectedDate = value;
     this.getMedecinAppointments();
@@ -144,5 +198,9 @@ export class MedecinDashboardHomeComponent implements OnInit {
 
   isEqualDate(date1, date2) {
     return isEqualDate(date1, date2);
+  }
+
+  goToMyCalender() {
+    this.router.navigate(['/dashboard/personnel/calendar'])
   }
 }
