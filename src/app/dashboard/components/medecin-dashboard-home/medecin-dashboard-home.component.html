@@ -124,7 +124,8 @@
                 <div [ngClass]="{'confirmed': infosAppointments?.status === 'CONFIRMED', 'canceled': infosAppointments?.status === 'CANCELED', 'pending': infosAppointments?.status === 'PENDING'}"
                     class="appointment-item canceled">
                     <div class="app-object">
-                        <div class="app-type"><span>{{infosAppointments?.objet}}</span> à <span>{{infosAppointments?.datePatient |
+                        <div class="app-type"><span>{{infosAppointments?.objet}}</span> à
+                            <span>{{infosAppointments?.datePatient |
                                 date:'hh:mm'}}</span></div>
                         <div class="app-status text-white" [ngSwitch]="infosAppointments.status">
                             <span *ngSwitchCase="'CONFIRMED'">confirmé</span>

@@ -22,6 +22,7 @@ export class AppointmentService {
       switchMap((userInfos) => {
         const { userId, prenom, nom } = userInfos;
         payload.patientId = userId;
+        payload.numeroPatient = "775896287";
         payload.nomPatient = payload.nomPatient ? payload.nomPatient : nom;
         payload.prenomPatient = payload.prenomPatient
           ? payload.prenomPatient

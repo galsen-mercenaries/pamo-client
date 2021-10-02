@@ -45,3 +45,59 @@ $valid-green: #34d57f;
     color: $valid-green;
   }
 }
+
+.dashboard-right-block {
+  table {
+    width: 100% !important;
+  }
+  .calendar-container {
+    .fc-col-header {
+      .fc-col-header-cell {
+        .fc-col-header-cell-cushion {
+          text-decoration: unset;
+        }
+      }
+    }
+    .fc-daygrid-body {
+      width: 100% !important;
+      .fc-daygrid-day {
+        width: 15px !important;
+        .fc-daygrid-day-frame {
+          .fc-daygrid-day-top {
+            justify-content: center !important;
+            .fc-daygrid-day-number {
+              font-size: 14px;
+              text-decoration: unset;
+            }
+          }
+        }
+      }
+    }
+    // events
+    .fc-daygrid-event,
+    .fc-timegrid-event {
+      white-space: normal;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 3px 2px;
+
+      // hide dot in event display
+      .fc-daygrid-event-dot {
+        display: none;
+      }
+
+      .fc-event-time {
+        font-family: "HelveticaLTStd-Light";
+        font-size: 9px;
+        color: $white;
+      }
+      .fc-event-title {
+        font-family: "HelveticaLTStd-Light";
+        font-size: 8px;
+        color: $white;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

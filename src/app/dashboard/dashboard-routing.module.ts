@@ -37,7 +37,6 @@ const routes: Routes = [
   {
     path: "personnel",
     component: MedecinDashboardComponent,
-    // canActivate: [RoleGuard],
     children: [
       {
         path: "",
@@ -51,6 +50,14 @@ const routes: Routes = [
       {
         path: "calendar",
         component: MedecinsCalendarComponent,
+      },
+      {
+        path: "rdv-confirmation",
+        canActivate: [AuthGuardService],
+        loadChildren: () =>
+          import(
+            "./../appointment-validation/appointment-validation.module"
+          ).then((m) => m.AppointmentValidationModule),
       },
     ],
   },

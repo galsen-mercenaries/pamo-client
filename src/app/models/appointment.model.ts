@@ -3,6 +3,7 @@ export interface AppointmentModel {
   type?: string;
   nomPatient?: string;
   prenomPatient?: string;
+  numeroPatient?: string;
   symptomes?: string;
   notes?: string;
   status?: string;
