@@ -78,22 +78,26 @@ export class MedecinDashboardHomeComponent implements OnInit {
   };
   selectedDate = new Date();
   calendarOptions: CalendarOptions = {
-    timeZone: 'UTC',
-    themeSystem: 'bootstrap',
+    timeZone: "UTC",
+    // themeSystem: "bootstrap",
     headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,listMonth'
+      // left: "title",
+      // center: "",
+      // right: "dayGridMonth,listMonth next",
+      right: "dayGridMonth,dayGridWeek",
+      center: "prev,next",
     },
-    locale: 'fr',
+    locale: "fr",
     buttonText: {
-      today:    "Aujourdh'hui",
-      month:    "Mois",
-      week:     "Semaine",
-      day:      "Jour",
-      list:     "Liste"
+      today: "Aujourdh'hui",
+      month: "Mois",
+      week: "Semaine",
+      day: "Jour",
+      list: "Liste",
     },
-    dayMaxEvents: true, // allow "more" link when too many events
+    dayMaxEvents: 2, // allow "more" link when too many events
+    moreLinkContent: "voir plus",
+    moreLinkClassNames: "more-link",
     // dateClick: this.appointementsInfos.bind(this), // bind is important!
     eventClick: this.appointementsInfos.bind(this),
     events: [
@@ -165,10 +169,10 @@ export class MedecinDashboardHomeComponent implements OnInit {
             return {
               id: x.meetingId,
               start: x.datePatient,
-              title: x.type
-            }
-          }
-          );
+              title: x.type,
+              className: "event-meeting",
+            };
+          });
           this.appointments = appointments;
           this.calendarOptions.events = events;
           // this.appointments = appointments.filter((x) =>
@@ -187,8 +191,8 @@ export class MedecinDashboardHomeComponent implements OnInit {
 
   appointementsInfos(eventClick: any) {
     this.infosAppointments = this.appointments.find((x) => {
-      return +x.meetingId === +eventClick.event.id
-    })
+      return +x.meetingId === +eventClick.event.id;
+    });
   }
 
   onDateSelected(value) {
@@ -201,6 +205,6 @@ export class MedecinDashboardHomeComponent implements OnInit {
   }
 
   goToMyCalender() {
-    this.router.navigate(['/dashboard/personnel/calendar'])
+    this.router.navigate(["/dashboard/personnel/calendar"]);
   }
 }

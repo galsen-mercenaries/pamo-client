@@ -15,17 +15,15 @@ import { SetDatetimeDialogComponent } from "./components/set-datetime-dialog/set
 import { FullCalendarModule } from "@fullcalendar/angular";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // a plugin!
-import bootstrapPlugin from '@fullcalendar/bootstrap';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
-  bootstrapPlugin,
   timeGridPlugin,
-  listPlugin
+  listPlugin,
 ]);
 @NgModule({
   declarations: [
