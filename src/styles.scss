@@ -92,6 +92,16 @@ button[disabled] {
   max-width: 350px !important;
   mat-dialog-container {
     padding: 0 !important;
+    border-radius: 10px;
+  }
+}
+
+.confirm-appointment-dialog {
+  width: 80% !important;
+  max-width: 500px !important;
+  mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 10px;
   }
 }
 
@@ -102,12 +112,6 @@ button[disabled] {
   mat-dialog-container {
     padding: 0 !important;
     border-radius: 15px;
-  }
-}
-
-.register-success-dialog-style {
-  mat-dialog-container {
-    border-radius: 10px;
   }
 }
 
@@ -213,3 +217,12 @@ button[disabled] {
     }
   }
 }
+
+// calendar display in appointment validation (just for calendar header)
+// .appointment-confirmation-page {
+//   .fc-toolbar-chunk {
+//     &:last-child {
+//       text-align: end !important;
+//     }
+//   }
+// }

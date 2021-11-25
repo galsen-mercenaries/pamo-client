@@ -2,8 +2,7 @@
     <div class="img-container">
         <img src="/assets/images/rv-succes.jpg" alt="">
     </div>
-    <div class="description">
-        Votre rendez-vous a bien été enregistré. Vous recevrez bientôt une confirmation de la part de votre médecin.<br>Merci de votre fiélité!
+    <div class="description" [innerHTML]="data?.text">
     </div>
     <div class="btn-container">
         <div class="button text-black" (click)="goHome()">

@@ -1,29 +1,13 @@
-<div class="appointment-page">
-    <div class="title">Confirmer mes rendez-vous</div>
+<div class="appointment-confirmation-page">
+    <div class="title">Calendrier des rendez-vous</div>
     <div class="body-block">
         <div class="calendar-container">
             <full-calendar [options]="calendarOptions"></full-calendar>
         </div>
-        <div class="meetings-block" *ngIf="filteredAppointments?.length">
-            <div *ngFor="let appointment of filteredAppointments"
-                [ngClass]="{'confirmed': appointment?.status === 'CONFIRMED', 'canceled': appointment?.status === 'CANCELED', 'pending': appointment?.status === 'PENDING'}"
-                class="appointment-item canceled">
-                <div class="app-object">
-                    <div class="app-type"><span>{{appointment?.objet}}</span> à
-                        <span>{{appointment?.datePatient |
-                            date:'hh:mm'}}</span>
-                    </div>
-                    <div class="app-status text-white" [ngSwitch]="appointment.status">
-                        <span *ngSwitchCase="'CONFIRMED'">confirmé</span>
-                        <span *ngSwitchCase="'CANCELED'">annulé</span>
-                        <span *ngSwitchCase="'PENDING'">à valider</span>
-                        <span *ngSwitchDefault>?</span>
-                    </div>
-                </div>
-                <div class="app-patient">
-                    {{appointment?.prenomPatient + ' ' + appointment?.nomPatient}}
-                </div>
-                <div class="app-symptoms">{{appointment?.symptomes}}</div>
+        <div class="legends-block">
+            <div class="legend" *ngFor="let legend of legends">
+                <div class="color" [ngStyle]="{'background-color': legend.color}"></div>
+                <span class="legend-name">{{legend.name}}</span>
             </div>
         </div>
     </div>

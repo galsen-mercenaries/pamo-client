@@ -100,16 +100,7 @@ export class MedecinDashboardHomeComponent implements OnInit {
     moreLinkClassNames: "more-link",
     // dateClick: this.appointementsInfos.bind(this), // bind is important!
     eventClick: this.appointementsInfos.bind(this),
-    events: [
-      {
-        title: "Meeting",
-        start: "2019-08-12T14:30:00",
-      },
-      {
-        title: "Birthday Party",
-        start: "2019-08-13T07:00:00",
-      },
-    ],
+    events: [],
   };
   infosAppointments: AppointmentModel;
 

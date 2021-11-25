@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialogRef } from "@angular/material";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Router } from "@angular/router";
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 export class AppointmentSuccessModalComponent implements OnInit {
   constructor(
     public router: Router,
+    @Inject(MAT_DIALOG_DATA) public data,
     public dialog: MatDialogRef<AppointmentSuccessModalComponent>
   ) {}
 

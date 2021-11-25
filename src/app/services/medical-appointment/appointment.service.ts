@@ -7,6 +7,7 @@ import { switchMap } from "rxjs/operators";
 const { SERVER_URL } = environment;
 const APPOINTMENT_MAKING_BY_PATIENT_URL = `${SERVER_URL}/patients`;
 const GET_MEDECIN_APPOINTMENT_URL = `${SERVER_URL}/medecins`;
+const APPOINTMENT_BASE_URL = `${SERVER_URL}/meetings`;
 
 @Injectable({
   providedIn: "root",
@@ -16,6 +17,14 @@ export class AppointmentService {
     private http: HttpClient,
     private authenticationService: AuthenticationService
   ) {}
+
+  updateAppointment(appointment: AppointmentModel) {
+    appointment.numeroPatient = "msisdn";
+    return this.http.put(
+      `${APPOINTMENT_BASE_URL}/${appointment.meetingId}`,
+      appointment
+    );
+  }
 
   fixAppointment(payload: AppointmentModel) {
     return this.authenticationService.getUserInfosSaved().pipe(

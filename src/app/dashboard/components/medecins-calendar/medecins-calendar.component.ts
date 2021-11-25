@@ -25,25 +25,16 @@ export class MedecinsCalendarComponent implements OnInit {
     },
     locale: "fr",
     buttonText: {
-      today:    "Aujourdh'hui",
-      month:    "Mois",
-      week:     "Semaine",
-      day:      "Jour",
-      list:     "Liste"
+      today: "Aujourdh'hui",
+      month: "Mois",
+      week: "Semaine",
+      day: "Jour",
+      list: "Liste",
     },
     dayMaxEvents: true, // allow "more" link when too many events
     // dateClick: this.appointementsInfos.bind(this), // bind is important!
     eventClick: this.appointementsInfos.bind(this),
-    events: [
-      {
-        title: "Meeting",
-        start: "2019-08-12T14:30:00",
-      },
-      {
-        title: "Birthday Party",
-        start: "2019-08-13T07:00:00",
-      },
-    ],
+    events: [],
   };
   infosAppointments: AppointmentModel;
   appointments: AppointmentModel[] = [];
@@ -92,6 +83,7 @@ export class MedecinsCalendarComponent implements OnInit {
               id: x.meetingId,
               start: x.datePatient,
               title: x.type,
+              className: "event-meeting",
             };
           });
           this.appointments = appointments;

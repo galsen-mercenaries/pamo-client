@@ -15,3 +15,14 @@ export interface AppointmentModel {
   medecinId?: number;
   meetingId?: number;
 }
+
+export enum APPOINTMENT_STATUS {
+  CANCELED = "CANCELED",
+  CONFIRMED = "CONFIRMED",
+  PENDING = "PENDING",
+}
+
+export enum APPOINTMENT_UPDATE_STATUS {
+  SUCCESS = "SUCCESS",
+  FAILED = "FAILED",
+}

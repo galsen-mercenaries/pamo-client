@@ -4,6 +4,7 @@ $gray-background: #f5f4f6;
 $pink: #f35361;
 $light-pink: #ffadc7;
 $gray: #e6e6db;
+$darkGray: #cccccc;
 $light-gray: #eeeeee;
 $black: #000000;
 $red: #ff0000;
@@ -46,7 +47,14 @@ $valid-green: #34d57f;
   }
 }
 
-.dashboard-right-block {
+.body-block {
+  .fc-header-toolbar {
+    flex-wrap: nowrap !important;
+  }
+}
+
+.dashboard-right-block,
+.body-block {
   table {
     width: 100% !important;
   }
@@ -83,6 +91,7 @@ $valid-green: #34d57f;
           .fc-daygrid-day-frame {
             .fc-daygrid-day-top {
               justify-content: center !important;
+              cursor: pointer;
               .fc-daygrid-day-number {
                 font-size: 14px;
                 text-decoration: unset;
@@ -119,8 +128,17 @@ $valid-green: #34d57f;
       }
     }
     .event-meeting {
-      background-color: orange;
       cursor: pointer;
+      background-color: $darkGray;
+      &.event-canceled {
+        background-color: $darkGray;
+      }
+      &.event-confirmed {
+        background-color: $valid-green;
+      }
+      &.event-pending {
+        background-color: $main-blue;
+      }
     }
     .more-link {
       font-size: 10px;

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material";
 import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { APPOINTMENTS_TEXTS } from "src/app";
 import { AppointmentModel } from "src/app/models/appointment.model";
 import { MedecinModel } from "src/app/models/medecin.model";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
@@ -19,6 +20,13 @@ export class AppointmentMakingComponent implements OnInit {
   medecin: MedecinModel;
   loading: boolean;
   todayDate = new Date();
+  objects = [
+    { name: "Alpha" },
+    { name: "Beta" },
+    { name: "Gamma" },
+    { name: "Omega" },
+  ];
+  selectedObject;
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -68,7 +76,7 @@ export class AppointmentMakingComponent implements OnInit {
       objet: "Electrocardiogramme",
       type: "visite contre visite",
       notes: "visite contre visite",
-      status: "CONFIRMED",
+      status: "PENDING",
     };
     this.appointService
       .fixAppointment(appointmentPayload)
@@ -90,6 +98,9 @@ export class AppointmentMakingComponent implements OnInit {
       panelClass: "register-success-dialog-style",
       // backdropClass: "register-success-dialog-backdrop",
       disableClose: true,
+      data: {
+        text: APPOINTMENTS_TEXTS.PATIENT,
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }

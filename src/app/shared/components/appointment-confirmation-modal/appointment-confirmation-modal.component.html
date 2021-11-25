@@ -1,0 +1,22 @@
+<div class="confirm-rdv-modal">
+    <div class="title">{{'Rendez-vous le '}} {{data?.appointment?.datePatient | date : 'EEEE dd MMMM yyyy à HH:mm'}}
+    </div>
+    <div class="card-container">
+        <app-appointment-infos-card [appointment]="data?.appointment"></app-appointment-infos-card>
+    </div>
+    <div class="btn-container">
+        <button class="btn btn-confirm text-white" (click)="confirm()"
+            [disabled]="data?.appointment?.status === APPOITMENT_STATUS.CONFIRMED || confirming || rejecting">
+            Confirmer
+            <mat-spinner *ngIf="confirming" [diameter]="20" mode="indeterminate"></mat-spinner>
+        </button>
+        <button class="btn btn-postpone text-white" (click)="postponeAppointment()"
+            [disabled]="data?.appointment?.status === APPOITMENT_STATUS.CONFIRMED || confirming || rejecting">Caler
+            autre date</button>
+        <button class="btn btn-cancel text-white" (click)="reject()"
+            [disabled]="data?.appointment?.status === APPOITMENT_STATUS.CONFIRMED || confirming || rejecting">
+            Rejeter
+            <mat-spinner *ngIf="rejecting" [diameter]="20" mode="indeterminate"></mat-spinner>
+        </button>
+    </div>
+</div>

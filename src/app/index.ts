@@ -1,4 +1,8 @@
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
+import {
+  AppointmentModel,
+  APPOINTMENT_STATUS,
+} from "./models/appointment.model";
 
 export const SWIPER_CONFIGURATION: SwiperConfigInterface = {
   direction: "horizontal",
@@ -75,4 +79,23 @@ export function isEqualDate(date1, date2) {
   date1.setHours(0, 0, 0, 0);
   date2.setHours(0, 0, 0, 0);
   return date1.getTime() === date2.getTime();
+}
+
+export function getAppointmentClass(appointment: AppointmentModel) {
+  switch (appointment.status) {
+    case APPOINTMENT_STATUS.CANCELED:
+      return "event-canceled";
+    case APPOINTMENT_STATUS.CONFIRMED:
+      return "event-confirmed";
+    case APPOINTMENT_STATUS.PENDING:
+    default:
+      return "event-pending";
+  }
+}
+
+export enum APPOINTMENTS_TEXTS {
+  PATIENT = "Votre rendez-vous a bien été enregistré. Vous recevrez bientôt une confirmation de la part de votre médecin.<br>Merci de votre fiélité!",
+  MEDECIN_CONFIRM_SUCCESS = "Le rendez-vous a été bien confirmé. Le patient sera notifié de la confirmation.<br>Merci et à bientôt",
+  MEDECIN_UPDATE_SUCCESS = "Merci d'avoir mis à jour la date. Votre patient en sera informé et pourra vous confirmer sa disponibilité..<br>Merci et à bientôt",
+  MEDECIN_FAILED = "L'opération a échoué. Merci de réessayer!<br>Si cela persiste, merci de contacter l'admin",
 }
