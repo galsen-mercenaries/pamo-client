@@ -4,7 +4,11 @@ import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
-import { MAP_MONTHS_EN_TO_FR, MAP_DAYS_EN_TO_FR } from "src/app";
+import {
+  MAP_MONTHS_EN_TO_FR,
+  MAP_DAYS_EN_TO_FR,
+  getAppointmentClass,
+} from "src/app";
 import { AppointmentModel } from "src/app/models/appointment.model";
 import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
 import { UserModel } from "src/app/models/user.model";
@@ -12,6 +16,7 @@ import { AuthenticationService } from "src/app/services/authentication-service/a
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { PatientService } from "src/app/services/patient-service/patient.service";
 import { EditFicheMedicalComponent } from "src/app/shared/components/edit-fiche-medical/edit-fiche-medical.component";
+import { CalendarOptions } from "@fullcalendar/angular";
 
 @Component({
   selector: "app-patient-dashboard-home",
@@ -51,8 +56,8 @@ export class PatientDashboardHomeComponent implements OnInit {
         slidesPerView: 1.45,
       },
       690: {
-        direction: "vertical",
-        slidesPerView: 1.6,
+        direction: "horizontal",
+        slidesPerView: 1.3,
       },
     },
   };
@@ -62,6 +67,26 @@ export class PatientDashboardHomeComponent implements OnInit {
   userAppointments: AppointmentModel[] = [];
   currentDayOfMonth: number;
   endDayOfMonth: number;
+  calendarOptions: CalendarOptions = {
+    timeZone: "UTC",
+    headerToolbar: {
+      right: "prev,next",
+    },
+    locale: "fr",
+    buttonText: {
+      today: "Aujourdh'hui",
+      month: "Mois",
+      week: "Semaine",
+      day: "Jour",
+      list: "Liste",
+    },
+    dayMaxEvents: 2, // allow "more" link when too many events
+    moreLinkContent: "voir plus",
+    moreLinkClassNames: "more-link",
+    // dateClick: this.appointementsInfos.bind(this), // bind is important!
+    // eventClick: this.appointementsInfos.bind(this),
+    events: [],
+  };
   constructor(
     private router: Router,
     private patientServ: PatientService,
@@ -86,6 +111,16 @@ export class PatientDashboardHomeComponent implements OnInit {
       .getUserAppointments()
       .pipe(
         map((res: AppointmentModel[]) => {
+          const events: any[] = res.map((x) => {
+            return {
+              id: x.meetingId,
+              start: x.datePatient,
+              title: x.type,
+              className: ["event-meeting", getAppointmentClass(x)],
+              eventObject: x,
+            };
+          });
+          this.calendarOptions.events = events;
           const response = res.filter((appointment) =>
             this.isAppointmentInCurrentMonth(appointment)
           );

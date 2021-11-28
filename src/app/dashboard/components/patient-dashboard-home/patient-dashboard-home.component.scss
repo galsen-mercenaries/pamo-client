@@ -142,89 +142,120 @@
       }
     }
   }
-  .more-details-block {
+  .patient-dashboard-body-block {
     display: flex;
     justify-content: space-between;
-    padding: 30px 2% 10px;
-    .fiche-medical {
+    .more-details-block {
+      display: flex;
+      flex-direction: column;
+      // justify-content: space-between;
       width: 60%;
-      .ma-fiche {
-        font-size: 22px;
-      }
-      .fiche {
+      padding: 10px 2% 10px;
+      .fiche-medical {
         width: 100%;
-        margin-top: 10px;
-        padding: 12px 2.5%;
-        border: solid 1px $light-gray;
-        border-radius: 5px;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
-        position: relative;
-        .edit {
-          position: absolute;
-          top: 20px;
-          right: 15px;
-          cursor: pointer;
+        .ma-fiche {
+          font-size: 22px;
         }
-        .header-block {
-          display: flex;
-          .avatar {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            border-radius: 50%;
+        .fiche {
+          width: 100%;
+          margin-top: 10px;
+          padding: 12px 2.5%;
+          border: solid 1px $light-gray;
+          border-radius: 5px;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+          position: relative;
+          .edit {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            cursor: pointer;
           }
-          .names-block {
+          .header-block {
             display: flex;
-            flex-direction: column;
-            .nom {
-              font-size: 12px;
+            .avatar {
+              width: 50px;
+              height: 50px;
+              margin-right: 15px;
+              border-radius: 50%;
             }
-            .birthdate {
-              font-family: "NotoSansKR-Light";
-              font-size: 12px;
+            .names-block {
+              display: flex;
+              flex-direction: column;
+              .nom {
+                font-size: 12px;
+              }
+              .birthdate {
+                font-family: "NotoSansKR-Light";
+                font-size: 12px;
+              }
+            }
+          }
+          .utils {
+            display: flex;
+            margin-top: 15px;
+            .medical-info-block {
+              height: 100%;
+              width: 47%;
+              &:not(:last-child) {
+                border-right: solid 1px $light-gray;
+                padding-right: 40px;
+              }
+              &:not(:first-child) {
+                padding-left: 40px;
+              }
+              .item-info {
+                padding: 5px 0 7px;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                align-items: flex-end;
+                &:not(:last-child) {
+                  border-bottom: solid 1px $light-gray;
+                }
+                .intitule {
+                  font-size: 12px;
+                  font-family: "NotoSansKR-Light";
+                }
+                .info {
+                  font-size: 14px;
+                  &.red {
+                    color: red;
+                  }
+                  .link {
+                    font-family: "NotoSansKR-Light";
+                    font-size: 10px;
+                  }
+                  .call-number {
+                    text-decoration: underline;
+                    color: blue;
+                    font-family: "NotoSansKR-Light";
+                    font-size: 12px;
+                  }
+                }
+              }
             }
           }
         }
-        .utils {
-          display: flex;
-          margin-top: 15px;
-          .medical-info-block {
+      }
+      .useful {
+        width: 100%;
+        height: 140px;
+        overflow: hidden;
+        margin-top: 20px;
+        .useful-content {
+          width: 100%;
+          height: 100%;
+          .swiper-container {
             height: 100%;
-            width: 47%;
-            &:not(:last-child) {
-              border-right: solid 1px $light-gray;
-              padding-right: 40px;
-            }
-            &:not(:first-child) {
-              padding-left: 40px;
-            }
-            .item-info {
-              padding: 5px 0 7px;
-              display: flex;
-              justify-content: space-between;
-              flex-wrap: wrap;
-              align-items: flex-end;
-              &:not(:last-child) {
-                border-bottom: solid 1px $light-gray;
-              }
-              .intitule {
-                font-size: 12px;
-                font-family: "NotoSansKR-Light";
-              }
-              .info {
-                font-size: 14px;
-                &.red {
-                  color: red;
-                }
-                .link {
-                  font-family: "NotoSansKR-Light";
-                  font-size: 10px;
-                }
-                .call-number {
-                  text-decoration: underline;
-                  color: blue;
-                  font-family: "NotoSansKR-Light";
-                  font-size: 12px;
+            .swiper-slide {
+              .slider {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 10px;
                 }
               }
             }
@@ -232,30 +263,9 @@
         }
       }
     }
-    .useful {
-      width: 36%;
-      height: 250px;
-      overflow: hidden;
-      margin-top: 42px;
-      .useful-content {
-        width: 100%;
-        height: 100%;
-        .swiper-container {
-          height: 100%;
-          .swiper-slide {
-            .slider {
-              width: 100%;
-              height: 100%;
-              border-radius: 10px;
-              img {
-                width: 100%;
-                height: 100%;
-                border-radius: 10px;
-              }
-            }
-          }
-        }
-      }
+    .calendar-container {
+      width: 39%;
+      padding-top: 40px;
     }
   }
   @media screen and (max-width: 1200px) and (min-width: 980px) {
@@ -303,6 +313,17 @@
         }
       }
     }
+    .more-details-block {
+      min-width: 480px;
+    }
+    @media screen and (max-width: 800px) {
+      .more-details-block {
+        width: 100% !important;
+      }
+      .calendar-container {
+        display: none;
+      }
+    }
   }
 
   @media screen and (max-width: 690px) and (min-width: 470px) {
@@ -343,6 +364,7 @@
     }
     .more-details-block {
       flex-wrap: wrap;
+      width: 100% !important;
       .fiche-medical {
         width: 100%;
       }
@@ -350,6 +372,9 @@
         width: 100%;
         height: 150px;
       }
+    }
+    .calendar-container {
+      display: none;
     }
   }
 
@@ -414,6 +439,7 @@
     }
     .more-details-block {
       flex-wrap: wrap;
+      width: 100% !important;
       .fiche-medical {
         width: 100%;
       }
@@ -421,6 +447,9 @@
         width: 100%;
         height: 150px;
       }
+    }
+    .calendar-container {
+      display: none;
     }
   }
 }

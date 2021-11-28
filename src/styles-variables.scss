@@ -47,13 +47,21 @@ $valid-green: #34d57f;
   }
 }
 
-.body-block {
+.body-block,
+.patient-dashboard-body-block {
   .fc-header-toolbar {
     flex-wrap: nowrap !important;
   }
 }
 
+.patient-dashboard-body-block {
+  .fc-toolbar-title {
+    font-size: 18px !important;
+  }
+}
+
 .dashboard-right-block,
+.patient-dashboard-body-block,
 .body-block {
   table {
     width: 100% !important;
@@ -138,6 +146,9 @@ $valid-green: #34d57f;
       }
       &.event-pending {
         background-color: $main-blue;
+      }
+      &.event-scheduled {
+        background-color: orange;
       }
     }
     .more-link {

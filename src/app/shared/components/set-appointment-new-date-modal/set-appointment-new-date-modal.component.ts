@@ -1,6 +1,12 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { tap } from "rxjs/operators";
+import {
+  AppointmentModel,
+  APPOINTMENT_STATUS,
+} from "src/app/models/appointment.model";
+import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 
 @Component({
   selector: "app-set-appointment-new-date-modal",
@@ -10,10 +16,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 export class SetAppointmentNewDateModalComponent implements OnInit {
   todayDate = new Date();
   form: FormGroup;
+  loading: boolean;
   constructor(
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data,
-    private dialogRef: MatDialogRef<SetAppointmentNewDateModalComponent>
+    private dialogRef: MatDialogRef<SetAppointmentNewDateModalComponent>,
+    private appointmentService: AppointmentService
   ) {}
 
   ngOnInit() {
@@ -24,5 +32,22 @@ export class SetAppointmentNewDateModalComponent implements OnInit {
       ],
       reason: [null],
     });
+  }
+
+  postpone() {
+    this.loading = true;
+    this.dialogRef.disableClose = true;
+    const appointment: AppointmentModel = this.data.appointment;
+    appointment.dateMedecin = this.form.value.date;
+    appointment.status = APPOINTMENT_STATUS.PENDING;
+    this.appointmentService
+      .updateAppointment(appointment)
+      .pipe(
+        tap((res) => {
+          this.loading = false;
+          this.dialogRef.close("res");
+        })
+      )
+      .subscribe();
   }
 }

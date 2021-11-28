@@ -1,4 +1,4 @@
-<div [ngClass]="{'confirmed': appointment?.status === APPOINTMENT_STATUS.CONFIRMED, 'canceled': appointment?.status === APPOINTMENT_STATUS.CANCELED, 'pending': (appointment?.status === APPOINTMENT_STATUS.PENDING) || !appointment?.status}"
+<div [ngClass]="{'confirmed': appointment?.status === APPOINTMENT_STATUS.CONFIRMED, 'canceled': appointment?.status === APPOINTMENT_STATUS.CANCELED, 'pending': (appointment?.status === APPOINTMENT_STATUS.PENDING) || !appointment?.status, 'postponed': appointment?.status === APPOINTMENT_STATUS.PENDING && appointment?.datePatient && appointment?.dateMedecin}"
     class="appointment-item canceled" (click)="validate()">
     <div class="app-object">
         <div class="app-type"><span>{{appointment?.objet}}</span> à
@@ -8,7 +8,7 @@
         <div class="app-status text-white" [ngSwitch]="appointment.status">
             <span *ngSwitchCase="APPOINTMENT_STATUS.CONFIRMED">confirmé</span>
             <span *ngSwitchCase="APPOINTMENT_STATUS.CANCELED">annulé</span>
-            <span *ngSwitchCase="APPOINTMENT_STATUS.PENDING">en attente de validation ?</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.PENDING">{{appointment?.dateMedecin ? 'rendez-vous décalé' :'en attente de validation ?'}}</span>
             <span *ngSwitchDefault>en attente de validation ?</span>
         </div>
     </div>

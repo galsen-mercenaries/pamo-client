@@ -88,6 +88,9 @@ export function getAppointmentClass(appointment: AppointmentModel) {
     case APPOINTMENT_STATUS.CONFIRMED:
       return "event-confirmed";
     case APPOINTMENT_STATUS.PENDING:
+      return appointment.dateMedecin && appointment.datePatient
+        ? "event-scheduled"
+        : "event-pending";
     default:
       return "event-pending";
   }

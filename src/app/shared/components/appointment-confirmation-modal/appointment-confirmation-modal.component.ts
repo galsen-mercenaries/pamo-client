@@ -65,7 +65,12 @@ export class AppointmentConfirmationModalComponent implements OnInit {
       },
       disableClose: false,
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dialogRef.close(APPOINTMENT_UPDATE_STATUS.SUCCESS);
+        this.openSuccessModal(APPOINTMENTS_TEXTS.MEDECIN_UPDATE_SUCCESS);
+      }
+    });
   }
 
   openSuccessModal(text) {

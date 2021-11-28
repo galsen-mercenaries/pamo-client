@@ -47,6 +47,7 @@ export class AppointmentValidationComponent implements OnInit {
     { color: "#47afff", name: "Rendez-vous en attente de validation" },
     { color: "#eeeeee", name: "Rendez-vous déjà effectué" },
     { color: "#ff0000", name: "Rendez-vous annulé" },
+    { color: "orange", name: "Rendez-vous décalé" },
   ];
   constructor(
     private apptService: AppointmentService,

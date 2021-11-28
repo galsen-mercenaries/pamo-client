@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-medecin-dashboard',
-  templateUrl: './medecin-dashboard.component.html',
-  styleUrls: ['./medecin-dashboard.component.scss']
+  selector: "app-medecin-dashboard",
+  templateUrl: "./medecin-dashboard.component.html",
+  styleUrls: ["./medecin-dashboard.component.scss"],
 })
 export class MedecinDashboardComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   goToMyCalender() {
-    this.router.navigate(['/dashboard/personnel/calendar'])
+    this.router.navigate(["/dashboard/personnel/rdv-confirmation"]);
   }
-
 }
