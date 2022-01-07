@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { APPOINTMENTS_TEXTS } from "src/app";

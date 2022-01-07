@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { APPOINTMENTS_TEXTS } from "src/app";
