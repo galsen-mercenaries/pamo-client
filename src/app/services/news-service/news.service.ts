@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { NewsModel } from "src/app/models/news.model";
 import { environment } from "src/environments/environment";
 const { SERVER_URL } = environment;
-const NEWS_URL = `${SERVER_URL}/api/news`;
+const NEWS_URL = `${SERVER_URL}/news`;
 @Injectable({
   providedIn: "root",
 })

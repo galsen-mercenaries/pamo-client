@@ -4,7 +4,10 @@ import { MatDialog } from "@angular/material";
 import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { APPOINTMENTS_TEXTS } from "src/app";
-import { AppointmentModel } from "src/app/models/appointment.model";
+import {
+  AppointmentModel,
+  APPOINTMENT_STATUS,
+} from "src/app/models/appointment.model";
 import { MedecinModel } from "src/app/models/medecin.model";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { AppointmentSuccessModalComponent } from "../../components/appointment-success-modal/appointment-success-modal.component";
@@ -43,7 +46,7 @@ export class AppointmentMakingComponent implements OnInit {
       symptom: ["", Validators.required],
       options: ["1"],
       patientName: [""],
-      patientFirstname: [""],
+      numeroPatient: [""],
     });
   }
 
@@ -65,18 +68,17 @@ export class AppointmentMakingComponent implements OnInit {
         this.appointmentForm.value.options === "1"
           ? null
           : this.appointmentForm.value.patientName,
-      prenomPatient:
+      numeroPatient:
         this.appointmentForm.value.options === "1"
           ? null
-          : this.appointmentForm.value.patientFirstname,
+          : this.appointmentForm.value.numeroPatient,
       symptomes: this.appointmentForm.value.symptom,
       datePatient: this.appointmentForm.value.date,
       medecinId: this.medecin.medecinid,
-      // dateMedecin: this.appointmentForm.value.date,
-      objet: "Electrocardiogramme",
-      type: "visite contre visite",
-      notes: "visite contre visite",
-      status: "PENDING",
+      objet: "Consultation",
+      type: "Consultation",
+      notes: "Consultation",
+      status: APPOINTMENT_STATUS.PENDING,
     };
     this.appointService
       .fixAppointment(appointmentPayload)

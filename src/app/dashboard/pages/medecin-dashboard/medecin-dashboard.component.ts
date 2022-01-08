@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 
 @Component({
   selector: "app-medecin-dashboard",
@@ -7,11 +7,11 @@ import { Router } from "@angular/router";
   styleUrls: ["./medecin-dashboard.component.scss"],
 })
 export class MedecinDashboardComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthenticationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
-  goToMyCalender() {
-    this.router.navigate(["/dashboard/personnel/rdv-confirmation"]);
+  logout() {
+    this.authService.logout();
   }
 }

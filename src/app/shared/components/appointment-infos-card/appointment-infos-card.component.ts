@@ -14,6 +14,7 @@ import { AppointmentConfirmationModalComponent } from "../appointment-confirmati
 export class AppointmentInfosCardComponent implements OnInit {
   @Input() appointment: AppointmentModel;
   @Input() clickable: boolean;
+  @Input() isPatient: boolean;
   APPOINTMENT_STATUS = APPOINTMENT_STATUS;
   constructor(private dialog: MatDialog) {}
 

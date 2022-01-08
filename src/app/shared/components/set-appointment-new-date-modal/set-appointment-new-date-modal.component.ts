@@ -38,7 +38,13 @@ export class SetAppointmentNewDateModalComponent implements OnInit {
     this.loading = true;
     this.dialogRef.disableClose = true;
     const appointment: AppointmentModel = this.data.appointment;
-    appointment.dateMedecin = this.form.value.date;
+    delete appointment.medecin;
+    if (this.data.isPatient) {
+      delete appointment.dateMedecin;
+      appointment.datePatient = this.form.value.date;
+    } else {
+      appointment.dateMedecin = this.form.value.date;
+    }
     appointment.status = APPOINTMENT_STATUS.PENDING;
     this.appointmentService
       .updateAppointment(appointment)

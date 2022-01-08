@@ -159,7 +159,7 @@ export class MedecinDashboardHomeComponent implements OnInit {
             return {
               id: x.meetingId,
               start: x.datePatient,
-              title: x.type,
+              title: x.prenomPatient + " " + x.nomPatient,
               className: ["event-meeting", getAppointmentClass(x)],
             };
           });

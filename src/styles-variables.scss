@@ -10,6 +10,8 @@ $black: #000000;
 $red: #ff0000;
 $green: #039203;
 $valid-green: #34d57f;
+$dark-blue: #415a77;
+$platinum: #e5e9ec;
 
 .text {
   &-red {
@@ -122,12 +124,12 @@ $valid-green: #34d57f;
         }
 
         .fc-event-time {
-          font-family: "HelveticaLTStd-Light";
+          font-family: "NotoSansKR-Bold";
           font-size: 9px;
           color: $white;
         }
         .fc-event-title {
-          font-family: "HelveticaLTStd-Light";
+          font-family: "NotoSansKR-Light";
           font-size: 8px;
           color: $white;
           width: 100%;
@@ -142,7 +144,16 @@ $valid-green: #34d57f;
         background-color: $darkGray;
       }
       &.event-confirmed {
+        background-color: $light-pink;
+      }
+      &.event-performed {
         background-color: $valid-green;
+      }
+      &.event-ignored {
+        background-color: $platinum;
+      }
+      &.event-expired {
+        background-color: $gray;
       }
       &.event-pending {
         background-color: $main-blue;

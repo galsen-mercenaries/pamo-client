@@ -33,6 +33,7 @@ export class AuthenticationService {
   logout() {
     ls.remove(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
     ls.removeAll();
+    this.router.navigate(["/accueil"]);
   }
 
   login(loginPayload: LoginModel) {

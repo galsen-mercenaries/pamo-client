@@ -13,8 +13,9 @@ import { MedecinService } from "src/app/services/medecin-service/medecin.service
   styleUrls: ["./search-medecin-dialog.component.scss"],
 })
 export class SearchMedecinDialogComponent implements OnInit {
-  doctors: MedecinModel[];
-  specialities: SpecializationModel[];
+  doctors: MedecinModel[] = [];
+  filteredDoctors: MedecinModel[] = [];
+  specialities: SpecializationModel[] = [];
   swiperConfig: SwiperConfigInterface = {
     keyboard: false,
     mousewheel: false,
@@ -52,6 +53,7 @@ export class SearchMedecinDialogComponent implements OnInit {
           return this.medecinService.getAllMedecins(medecinFilters).pipe(
             tap((medecins) => {
               this.doctors = medecins;
+              this.filterDoctorsByCurrentSpecialization();
             })
           );
         })
@@ -59,12 +61,24 @@ export class SearchMedecinDialogComponent implements OnInit {
       .subscribe();
   }
 
+  filterDoctorsByCurrentSpecialization() {
+    const currentSpecialization = this.specialities[this.currentTabIndex];
+    this.filteredDoctors = this.doctors.filter((doctor) => {
+      return doctor?.specialisations
+        ?.map((spec) => spec.specialisationId)
+        ?.includes(currentSpecialization.specialisationId);
+    });
+  }
+
   goTab(index: number) {
+    this.currentTabIndex = index;
     this.swiper.directiveRef.setIndex(index);
+    this.filterDoctorsByCurrentSpecialization();
   }
 
   onIndexChanged(event) {
     this.currentTabIndex = event;
+    this.filterDoctorsByCurrentSpecialization();
   }
 
   chooseMedecin(medecin) {

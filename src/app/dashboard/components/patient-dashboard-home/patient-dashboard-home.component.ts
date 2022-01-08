@@ -4,11 +4,7 @@ import { Router } from "@angular/router";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
-import {
-  MAP_MONTHS_EN_TO_FR,
-  MAP_DAYS_EN_TO_FR,
-  getAppointmentClass,
-} from "src/app";
+import { getAppointmentClass } from "src/app";
 import { AppointmentModel } from "src/app/models/appointment.model";
 import { FicheMedicalModel } from "src/app/models/fiche-medical.model";
 import { UserModel } from "src/app/models/user.model";
@@ -17,6 +13,7 @@ import { AppointmentService } from "src/app/services/medical-appointment/appoint
 import { PatientService } from "src/app/services/patient-service/patient.service";
 import { EditFicheMedicalComponent } from "src/app/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 import { CalendarOptions } from "@fullcalendar/angular";
+import { AppointmentConfirmationModalComponent } from "src/app/shared/components/appointment-confirmation-modal/appointment-confirmation-modal.component";
 
 @Component({
   selector: "app-patient-dashboard-home",
@@ -84,7 +81,7 @@ export class PatientDashboardHomeComponent implements OnInit {
     moreLinkContent: "voir plus",
     moreLinkClassNames: "more-link",
     // dateClick: this.appointementsInfos.bind(this), // bind is important!
-    // eventClick: this.appointementsInfos.bind(this),
+    eventClick: this.openAppointmentModal.bind(this),
     events: [],
   };
   constructor(
@@ -106,6 +103,22 @@ export class PatientDashboardHomeComponent implements OnInit {
     this.getUserficheMedicalInfos();
   }
 
+  openAppointmentModal(eventClick) {
+    const dialogRef = this.matDialog.open(
+      AppointmentConfirmationModalComponent,
+      {
+        panelClass: "confirm-appointment-dialog",
+        // backdropClass: "register-success-dialog-backdrop",
+        data: {
+          appointment: eventClick?.event?.extendedProps?.eventObject,
+          isPatient: true,
+        },
+        disableClose: false,
+      }
+    );
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
   getUserAppointments() {
     this.appointmentService
       .getUserAppointments()
@@ -115,16 +128,21 @@ export class PatientDashboardHomeComponent implements OnInit {
             return {
               id: x.meetingId,
               start: x.datePatient,
-              title: x.type,
+              title:
+                "Docteur " +
+                x?.medecin?.user?.prenom +
+                " " +
+                x?.medecin?.user?.nom,
               className: ["event-meeting", getAppointmentClass(x)],
               eventObject: x,
             };
           });
           this.calendarOptions.events = events;
-          const response = res.filter((appointment) =>
-            this.isAppointmentInCurrentMonth(appointment)
-          );
-          return response;
+          // const response = res.filter((appointment) =>
+          //   this.isAppointmentInCurrentMonth(appointment)
+          // );
+          // return response;
+          return res;
         }),
         tap((res: AppointmentModel[]) => {
           this.userAppointments = res;
