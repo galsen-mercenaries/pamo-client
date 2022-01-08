@@ -87,7 +87,7 @@
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 10000;
     background-color: white;
     .pamo-title {
       color: #47afff;
@@ -146,18 +146,29 @@
           font-family: NotoSansKR-Bold;
         }
         .search-agency-form {
-          mat-form-field {
-            width: 80%;
+          .prestataire-item {
+            padding: 2.5px 0;
+            .prest-name {
+              font-family: "NotoSansKR-Light";
+            }
+            &:not(:last-child) {
+              border-bottom: solid 1px $main-blue;
+            }
           }
           .button-container {
+            margin-top: 30px;
             width: 100%;
+            position: relative;
+            height: 40px;
             button {
+              position: absolute;
               height: 40px;
               border-radius: 10px;
               background-color: #ffb41f;
               padding: 0 25px;
               font-weight: bold;
-              font-size: 14px;
+              cursor: pointer;
+              font-size: 16px;
               color: white;
               border: none;
             }

@@ -25,20 +25,19 @@
             <div class="register-block" (click)="goPageRegister()">S'inscrire</div>
             <div class="form-container">
                 <div class="form-title">
-                    Retrouver un district
+                    Rechercher un prestataire
                 </div>
                 <form class="search-agency-form">
-                    <mat-form-field class="example-full-width" [appearance]="'outline'">
-                        <mat-label>Assureur</mat-label>
-                        <input matInput placeholder="Ex: Amsa">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width" [appearance]="'outline'">
-                        <mat-label>Localisation</mat-label>
-                        <input matInput placeholder="Ex: Dakar">
-                        <mat-icon matSuffix>place</mat-icon>
-                    </mat-form-field>
+                    <p-autoComplete name="nom" field="nom" [(ngModel)]="prestataire" [suggestions]="prestatairesSuggestions" [emptyMessage]="'Aucun résultat'"
+                        (completeMethod)="onCompleted($event)" [dropdown]="true" [forceSelection]="true" [showEmptyMessage]="true">
+                        <ng-template let-prest pTemplate="item">
+                            <div class="prestataire-item">
+                                <span class="prest-name">{{prest.nom}}</span>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
                     <div class="button-container">
-                        <button>Rechercher</button>
+                        <button [disabled]="!prestataire" (click)="seePrestataireDetails()">Rechercher</button>
                     </div>
                 </form>
             </div>
