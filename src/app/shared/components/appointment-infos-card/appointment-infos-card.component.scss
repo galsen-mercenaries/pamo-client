@@ -1,7 +1,7 @@
 @import "src/styles-variables.scss";
 
 .appointment-item {
-  padding: 5px;
+  padding: 6px 8px;
   border-radius: 7px;
   border-left: solid 5px;
   border-bottom: 1px solid;
@@ -9,10 +9,10 @@
   border-top: solid 1px;
   margin-bottom: 15px;
   &.confirmed {
-    border-color: $valid-green;
-    background-color: rgba(52, 213, 127, 0.05);
+    border-color: $light-pink;
+    background-color: rgba(255, 173, 192, 0.05);
     .app-status {
-      background-color: $valid-green;
+      background-color: $light-pink;
     }
   }
   &.pending {
@@ -28,6 +28,34 @@
     .app-status {
       background-color: $darkGray;
       // font-family: "NotoSansKR-Light";
+    }
+  }
+  &.postponed {
+    border-color: orange !important;
+    background-color: rgba(255, 165, 0, 0.05) !important;
+    .app-status {
+      background-color: orange !important;
+    }
+  }
+  &.performed {
+    border-color: $valid-green !important;
+    background-color: rgba(52, 213, 127, 0.05) !important;
+    .app-status {
+      background-color: $valid-green !important;
+    }
+  }
+  &.expired {
+    border-color: $gray !important;
+    background-color: rgba(230, 230, 219, 0.05) !important;
+    .app-status {
+      background-color: $gray !important;
+    }
+  }
+  &.ignored {
+    border-color: $platinum !important;
+    background-color: rgba(229, 233, 236, 0.05) !important;
+    .app-status {
+      background-color: $platinum !important;
     }
   }
   .app-object {
@@ -51,14 +79,27 @@
     margin-top: 5px;
   }
   .app-symptoms {
+    margin-top: 5px;
     font-size: 10px;
     font-family: "NotoSansKR-Light";
-    min-height: 30px;
+    padding-bottom: 7px;
     // limit lines numbers;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    -webkit-box-orient: vertical;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2; /* number of lines to show */
+    // -webkit-box-orient: vertical;
+    font-style: italic;
+    .motif {
+      font-size: 10px;
+    }
+  }
+  .more-inf {
+    padding-top: 5px;
+    font-size: 10px;
+    // font-family: "NotoSansKR-Light";
+    border-top: solid 1px black;
+    border-top-style: dotted;
+    margin-bottom: 5px;
   }
 }

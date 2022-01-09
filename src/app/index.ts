@@ -87,7 +87,16 @@ export function getAppointmentClass(appointment: AppointmentModel) {
       return "event-canceled";
     case APPOINTMENT_STATUS.CONFIRMED:
       return "event-confirmed";
+    case APPOINTMENT_STATUS.PERFORMED:
+      return "event-performed";
+    case APPOINTMENT_STATUS.EXPIRED:
+      return "event-expired";
+    case APPOINTMENT_STATUS.NOT_ANSWERED:
+      return "event-ignored";
+    case APPOINTMENT_STATUS.POSTPONED:
+      return "event-scheduled";
     case APPOINTMENT_STATUS.PENDING:
+      return "event-pending";
     default:
       return "event-pending";
   }
@@ -95,6 +104,8 @@ export function getAppointmentClass(appointment: AppointmentModel) {
 
 export enum APPOINTMENTS_TEXTS {
   PATIENT = "Votre rendez-vous a bien été enregistré. Vous recevrez bientôt une confirmation de la part de votre médecin.<br>Merci de votre fiélité!",
+  PATIENT_CONFIRM_SUCCESS = "Le rendez-vous a été bien confirmé. Le médecin sera notifié de la confirmation.<br>Merci et à bientôt",
+  PATIENT_UPDATE_SUCCESS = "Report bien effectué. Vous serez notifié en cas de confirmation du médecin.<br>Merci et à bientôt",
   MEDECIN_CONFIRM_SUCCESS = "Le rendez-vous a été bien confirmé. Le patient sera notifié de la confirmation.<br>Merci et à bientôt",
   MEDECIN_UPDATE_SUCCESS = "Merci d'avoir mis à jour la date. Votre patient en sera informé et pourra vous confirmer sa disponibilité..<br>Merci et à bientôt",
   MEDECIN_FAILED = "L'opération a échoué. Merci de réessayer!<br>Si cela persiste, merci de contacter l'admin",

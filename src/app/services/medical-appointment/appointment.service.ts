@@ -1,9 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { AppointmentModel } from "src/app/models/appointment.model";
+import {
+  AppointmentModel,
+  APPOINTMENT_STATUS,
+} from "src/app/models/appointment.model";
 import { AuthenticationService } from "../authentication-service/authentication.service";
-import { switchMap } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 const { SERVER_URL } = environment;
 const APPOINTMENT_MAKING_BY_PATIENT_URL = `${SERVER_URL}/patients`;
 const GET_MEDECIN_APPOINTMENT_URL = `${SERVER_URL}/medecins`;
@@ -29,13 +32,16 @@ export class AppointmentService {
   fixAppointment(payload: AppointmentModel) {
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
-        const { userId, prenom, nom } = userInfos;
+        const { userId, prenom, nom, email, numero } = userInfos;
         payload.patientId = userId;
-        payload.numeroPatient = "775896287";
+        payload.numeroPatient = payload?.numeroPatient
+          ? payload?.numeroPatient
+          : numero;
         payload.nomPatient = payload.nomPatient ? payload.nomPatient : nom;
         payload.prenomPatient = payload.prenomPatient
           ? payload.prenomPatient
           : prenom;
+        payload.mailContact = email;
         return this.http.post<any>(
           `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings`,
           payload
@@ -44,13 +50,46 @@ export class AppointmentService {
     );
   }
 
+  checkAppointmentExpired(appointment: AppointmentModel) {
+    const today = new Date();
+    const appointmentDate = new Date(appointment.datePatient);
+    if (
+      appointment.status === APPOINTMENT_STATUS.PENDING &&
+      today > appointmentDate
+    ) {
+      appointment.dateMedecin
+        ? (appointment.status = APPOINTMENT_STATUS.EXPIRED)
+        : (appointment.status = APPOINTMENT_STATUS.NOT_ANSWERED);
+    } else if (
+      appointment.status === APPOINTMENT_STATUS.CONFIRMED &&
+      today > appointmentDate
+    ) {
+      appointment.status = APPOINTMENT_STATUS.PERFORMED;
+    } else if (
+      appointment.status === APPOINTMENT_STATUS.PENDING &&
+      appointment.dateMedecin &&
+      appointment.datePatient
+    ) {
+      appointment.status = APPOINTMENT_STATUS.POSTPONED;
+    }
+  }
+
   getUserAppointments() {
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
         const { userId } = userInfos;
-        return this.http.get<AppointmentModel[]>(
-          `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings`
-        );
+        return this.http
+          .get<AppointmentModel[]>(
+            `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings?filter={"include":[{"relation":"medecin","scope": {"include": [{"relation": "user"}] } }]}`
+          )
+          .pipe(
+            map((res) => {
+              res.forEach((appointment) => {
+                this.checkAppointmentExpired(appointment);
+              });
+              return res;
+            })
+          );
       })
     );
   }
@@ -65,9 +104,18 @@ export class AppointmentService {
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
         const { medecinId } = userInfos;
-        return this.http.get<AppointmentModel[]>(
-          `${GET_MEDECIN_APPOINTMENT_URL}/${medecinId}/meetings${queryParams}`
-        );
+        return this.http
+          .get<AppointmentModel[]>(
+            `${GET_MEDECIN_APPOINTMENT_URL}/${medecinId}/meetings${queryParams}`
+          )
+          .pipe(
+            map((res) => {
+              res.forEach((appointment) => {
+                this.checkAppointmentExpired(appointment);
+              });
+              return res;
+            })
+          );
       })
     );
   }

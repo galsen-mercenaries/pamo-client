@@ -1,5 +1,8 @@
 <div class="appointment-confirmation-page">
-    <div class="title">Calendrier des rendez-vous</div>
+    <div class="title">
+        <mat-icon class="back-ico" (click)="goBack()">arrow_back</mat-icon>
+        <span class="text">Calendrier des rendez-vous</span>
+    </div>
     <div class="body-block">
         <div class="calendar-container">
             <full-calendar [options]="calendarOptions"></full-calendar>

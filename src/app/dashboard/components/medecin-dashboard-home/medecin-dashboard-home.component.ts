@@ -7,7 +7,7 @@ import { UserModel } from "src/app/models/user.model";
 import { MedecinService } from "src/app/services/medecin-service/medecin.service";
 import { SpecializationModel } from "src/app/models/specialization.model";
 import { StructureSanitaireModel } from "src/app/models/structure-sanitaire.model";
-import { isEqualDate } from "src/app";
+import { getAppointmentClass, isEqualDate } from "src/app";
 import { throwError } from "rxjs";
 import { CalendarOptions } from "@fullcalendar/angular";
 import { Router } from "@angular/router";
@@ -118,7 +118,6 @@ export class MedecinDashboardHomeComponent implements OnInit {
 
   handleDateClick(arg) {
     console.log(arg);
-
     // alert('date click! ' + arg.dateStr)
   }
 
@@ -160,8 +159,8 @@ export class MedecinDashboardHomeComponent implements OnInit {
             return {
               id: x.meetingId,
               start: x.datePatient,
-              title: x.type,
-              className: "event-meeting",
+              title: x.prenomPatient + " " + x.nomPatient,
+              className: ["event-meeting", getAppointmentClass(x)],
             };
           });
           this.appointments = appointments;

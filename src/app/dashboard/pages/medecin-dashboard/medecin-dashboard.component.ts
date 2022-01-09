@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 
 @Component({
-  selector: 'app-medecin-dashboard',
-  templateUrl: './medecin-dashboard.component.html',
-  styleUrls: ['./medecin-dashboard.component.scss']
+  selector: "app-medecin-dashboard",
+  templateUrl: "./medecin-dashboard.component.html",
+  styleUrls: ["./medecin-dashboard.component.scss"],
 })
 export class MedecinDashboardComponent implements OnInit {
+  constructor(private authService: AuthenticationService) {}
 
-  constructor(private router: Router) { }
+  ngOnInit() {}
 
-  ngOnInit(): void {
+  logout() {
+    this.authService.logout();
   }
-
-  goToMyCalender() {
-    this.router.navigate(['/dashboard/personnel/calendar'])
-  }
-
 }

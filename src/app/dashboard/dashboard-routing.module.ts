@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AppointmentValidationComponent } from "../appointment-validation/appointment-validation/appointment-validation.component";
 import { AuthGuardService } from "../services/auth-guard-service/auth-guard.service";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
 import { MedecinsCalendarComponent } from "./components/medecins-calendar/medecins-calendar.component";
@@ -23,6 +24,18 @@ const routes: Routes = [
       {
         path: "home",
         component: PatientDashboardHomeComponent,
+      },
+      {
+        path: "calendrier-medical",
+        component: AppointmentValidationComponent,
+      },
+      {
+        path: "prestataire",
+        // canActivate: [AuthGuardService],
+        loadChildren: () =>
+          import(
+            "../prestataires-structures-map/prestataires-structures-map.module"
+          ).then((m) => m.PrestatairesStructuresMapModule),
       },
       {
         path: "appointment-making",

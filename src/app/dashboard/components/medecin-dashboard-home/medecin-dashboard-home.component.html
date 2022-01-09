@@ -121,35 +121,7 @@
         </div>
         <div class="events-container">
             <div class="appointment-list" *ngIf="infosAppointments">
-                <div [ngClass]="{'confirmed': infosAppointments?.status === 'CONFIRMED', 'canceled': infosAppointments?.status === 'CANCELED', 'pending': infosAppointments?.status === 'PENDING'}"
-                    class="appointment-item canceled">
-                    <div class="app-object">
-                        <div class="app-type"><span>{{infosAppointments?.objet}}</span> à
-                            <span>{{infosAppointments?.datePatient |
-                                date:'hh:mm'}}</span></div>
-                        <div class="app-status text-white" [ngSwitch]="infosAppointments.status">
-                            <span *ngSwitchCase="'CONFIRMED'">confirmé</span>
-                            <span *ngSwitchCase="'CANCELED'">annulé</span>
-                            <span *ngSwitchCase="'PENDING'">à valider</span>
-                            <span *ngSwitchDefault>?</span>
-                        </div>
-                    </div>
-                    <div class="app-patient">
-                        {{infosAppointments?.prenomPatient + ' ' + infosAppointments?.nomPatient}}
-                    </div>
-                    <div class="app-symptoms">{{infosAppointments?.symptomes}}</div>
-                    <!-- <div class="patient-profile">
-                        <img [src]="appointment?.img" alt="">
-                        <div class="user-info">
-                            <span class="names">{{appointment?.prenomPatient + ' ' + appointment?.nomPatient}}</span>
-                            <span class="age text-pink">{{appointment?.status}}</span>
-                            <span
-                                [ngClass]="{'text-valid-green': appointment?.dateMedecin, 'text-red': !appointment?.dateMedecin}"
-                                class="contact">{{appointment?.dateMedecin ? 'confirmé' : 'Valider'}}</span>
-                        </div>
-                    </div>
-                    <div class="time text-main-blue">{{appointment?.datePatient | date:'hh:mm'}}</div> -->
-                </div>
+                <app-appointment-infos-card [appointment]="infosAppointments"></app-appointment-infos-card>
             </div>
             <div class="spinner-container" *ngIf="loadingRv">
                 <mat-spinner [diameter]="30" mode="indeterminate"></mat-spinner>

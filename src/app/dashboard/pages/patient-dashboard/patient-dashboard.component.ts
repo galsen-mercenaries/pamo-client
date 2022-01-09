@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 
@@ -10,18 +9,21 @@ import { AuthenticationService } from "src/app/services/authentication-service/a
 })
 export class PatientDashboardComponent implements OnInit {
   menuItems = [
-    { menuTitle: "Accueil", subItems: [], router: "" },
-    { menuTitle: "Assurances", subItems: [], router: "" },
-    { menuTitle: "FAQ Santé", subItems: [], router: "" },
-    { menuTitle: "Actualités", subItems: [], router: "" },
-    { menuTitle: "Mes notifcations", subItems: [], router: "" },
+    {
+      menuTitle: "Accueil",
+      router: "home",
+    },
+    {
+      menuTitle: "Calendrier Médical",
+      router: "calendrier-medical",
+    },
+    { menuTitle: "Assurances", router: "prestataire" },
+    { menuTitle: "Actualités", router: "3" },
+    { menuTitle: "Mes notifcations", router: "4" },
   ];
   currentUser: UserModel;
 
-  constructor(
-    private authServ: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private authServ: AuthenticationService) {}
 
   ngOnInit() {
     this.getUserinfos();
@@ -33,6 +35,5 @@ export class PatientDashboardComponent implements OnInit {
 
   logout() {
     this.authServ.logout();
-    this.router.navigate(["/accueil"]);
   }
 }

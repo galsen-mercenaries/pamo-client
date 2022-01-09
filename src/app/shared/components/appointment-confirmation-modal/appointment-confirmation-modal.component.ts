@@ -34,14 +34,20 @@ export class AppointmentConfirmationModalComponent implements OnInit {
     this.confirming = true;
     this.dialogRef.disableClose = true;
     this.data.appointment.status = APPOINTMENT_STATUS.CONFIRMED;
-    this.data.appointment.dateMedecin = this.data.appointment.datePatient;
+    delete this.data.appointment.medecin;
+    this.data?.isPatient
+      ? (this.data.appointment.datePatient = this.data.appointment.dateMedecin)
+      : (this.data.appointment.dateMedecin = this.data.appointment.datePatient);
     this.appointmentService
       .updateAppointment(this.data.appointment)
       .pipe(
         tap((res) => {
           this.confirming = false;
           this.dialogRef.close(APPOINTMENT_UPDATE_STATUS.SUCCESS);
-          this.openSuccessModal(APPOINTMENTS_TEXTS.MEDECIN_CONFIRM_SUCCESS);
+          const text = this.data.isPatient
+            ? APPOINTMENTS_TEXTS.PATIENT_CONFIRM_SUCCESS
+            : APPOINTMENTS_TEXTS.MEDECIN_CONFIRM_SUCCESS;
+          this.openSuccessModal(text);
         }),
         catchError((err) => {
           this.confirming = false;
@@ -62,10 +68,19 @@ export class AppointmentConfirmationModalComponent implements OnInit {
       // backdropClass: "register-success-dialog-backdrop",
       data: {
         appointment: this.data?.appointment,
+        isPatient: this.data.isPatient,
       },
       disableClose: false,
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dialogRef.close(APPOINTMENT_UPDATE_STATUS.SUCCESS);
+        const text = this.data.isPatient
+          ? APPOINTMENTS_TEXTS.PATIENT_UPDATE_SUCCESS
+          : APPOINTMENTS_TEXTS.MEDECIN_UPDATE_SUCCESS;
+        this.openSuccessModal(text);
+      }
+    });
   }
 
   openSuccessModal(text) {
