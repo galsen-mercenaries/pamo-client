@@ -11,17 +11,15 @@ export class PatientDashboardComponent implements OnInit {
   menuItems = [
     {
       menuTitle: "Accueil",
-      subItems: [],
       router: "home",
     },
     {
       menuTitle: "Calendrier Médical",
-      subItems: [],
       router: "calendrier-medical",
     },
-    { menuTitle: "Assurances", subItems: [], router: "1" },
-    { menuTitle: "Actualités", subItems: [], router: "3" },
-    { menuTitle: "Mes notifcations", subItems: [], router: "4" },
+    { menuTitle: "Assurances", router: "prestataire" },
+    { menuTitle: "Actualités", router: "3" },
+    { menuTitle: "Mes notifcations", router: "4" },
   ];
   currentUser: UserModel;
 

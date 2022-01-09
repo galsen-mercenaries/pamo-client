@@ -80,13 +80,14 @@ export class OnBoardingPageComponent implements OnInit {
   }
 
   onCompleted(ev) {
-    if (!ev?.query) {
-      this.prestatairesSuggestions = this.prestataires;
-    }
     this.prestatairesSuggestions = this.prestataires.filter((prestataire) => {
       return prestataire.nom.toLowerCase().includes(ev?.query.toLowerCase());
     });
   }
 
-  seePrestataireDetails() {}
+  seePrestataireDetails() {
+    this.router.navigate(["/prestataire"], {
+      state: { prestataire: this.prestataire },
+    });
+  }
 }

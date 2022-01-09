@@ -26,6 +26,14 @@ const routes: Routes = [
         (m) => m.RegistrationModule
       ),
   },
+  {
+    path: "prestataire",
+    // canActivate: [AuthGuardService],
+    loadChildren: () =>
+      import(
+        "./prestataires-structures-map/prestataires-structures-map.module"
+      ).then((m) => m.PrestatairesStructuresMapModule),
+  },
 ];
 
 @NgModule({
