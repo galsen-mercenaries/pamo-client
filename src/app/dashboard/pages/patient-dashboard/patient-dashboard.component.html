@@ -48,8 +48,8 @@
             </div>
             <div class="home-page-body">
                 <div class="header-menu">
-                    <div class="header-menu-item" [routerLink]="[item?.router]" routerLinkActive="menu-opened" *ngFor="let item of menuItems">
-                        <span class="text-main-blue">{{item.menuTitle}}</span>
+                    <div class="header-menu-item text-main-blue" [routerLink]="[item?.router]" routerLinkActive="menu-opened" *ngFor="let item of menuItems">
+                        {{item.menuTitle}}
                     </div>
                 </div>
                 <div class="medium-screen-header">

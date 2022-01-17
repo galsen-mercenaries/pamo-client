@@ -35,6 +35,30 @@
         <div class="map" id="map" class="map-container"></div>
     </ng-container>
     <ng-template #list>
-
+        <p-table [value]="structures">
+            <ng-template pTemplate="header">
+                <tr class="my-tab">
+                    <th *ngFor="let col of cols" class="col-title">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-structure>
+                <tr class="my-tab tab-cell">
+                    <td class="cell-content">
+                        {{structure.nom}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.ville}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.email}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.email}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
     </ng-template>
 </div>
