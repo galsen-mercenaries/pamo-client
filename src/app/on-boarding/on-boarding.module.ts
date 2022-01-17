@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { OnBoardingRoutingModule } from "./on-boarding-routing.module";
 import { OnBoardingPageComponent } from "./pages/on-boarding-page/on-boarding-page.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   MatIconModule,
   MatInputModule,
@@ -18,6 +18,7 @@ import {
 } from "ngx-swiper-wrapper";
 import { NewsCardItemComponent } from "./components/news-card-item/news-card-item.component";
 import { LoginFormDialogComponent } from "./components/login-form-dialog/login-form-dialog.component";
+import { AutoCompleteModule } from "primeng/autocomplete";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: "horizontal",
@@ -36,11 +37,13 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     OnBoardingRoutingModule,
     MatIconModule,
     ReactiveFormsModule,
+    FormsModule,
     MatInputModule,
     MatFormFieldModule,
     SwiperModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    AutoCompleteModule,
   ],
   providers: [
     {

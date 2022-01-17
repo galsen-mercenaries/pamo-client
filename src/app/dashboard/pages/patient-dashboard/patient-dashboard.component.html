@@ -3,7 +3,7 @@
         <mat-nav-list>
             <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/home'"> Accueil </a>
             <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/calendrier-medical'"> Calendrier médical </a>
-            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/contacts'"> Assurances </a>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/prestataire'"> Assurances </a>
             <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/create-contact'"> Actualités </a>
             <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/activities'"> Notifications </a>
             <a (click)="sidenav.toggle()" mat-list-item (click)="logout()"> Se déconnecter </a>
@@ -48,8 +48,8 @@
             </div>
             <div class="home-page-body">
                 <div class="header-menu">
-                    <div class="header-menu-item" [routerLink]="[item?.router]" routerLinkActive="menu-opened" *ngFor="let item of menuItems">
-                        <span class="text-main-blue">{{item.menuTitle}}</span>
+                    <div class="header-menu-item text-main-blue" [routerLink]="[item?.router]" routerLinkActive="menu-opened" *ngFor="let item of menuItems">
+                        {{item.menuTitle}}
                     </div>
                 </div>
                 <div class="medium-screen-header">

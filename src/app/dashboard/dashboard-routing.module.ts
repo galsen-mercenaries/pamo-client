@@ -30,6 +30,14 @@ const routes: Routes = [
         component: AppointmentValidationComponent,
       },
       {
+        path: "prestataire",
+        // canActivate: [AuthGuardService],
+        loadChildren: () =>
+          import(
+            "../prestataires-structures-map/prestataires-structures-map.module"
+          ).then((m) => m.PrestatairesStructuresMapModule),
+      },
+      {
         path: "appointment-making",
         canActivate: [AuthGuardService],
         loadChildren: () =>

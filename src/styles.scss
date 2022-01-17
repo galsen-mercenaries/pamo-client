@@ -226,3 +226,32 @@ button[disabled] {
 //     }
 //   }
 // }
+
+.search-agency-form {
+  p-autocomplete {
+    width: 100% !important;
+    .p-autocomplete {
+      width: 100%;
+      height: 35px;
+      .p-autocomplete-input {
+        border-radius: 5px 0 0 5px !important;
+        width: 100% !important;
+      }
+      .p-autocomplete-dropdown {
+        border-radius: 0 5px 5px 0 !important;
+        border-left: 0px;
+        background-color: rgba($color: $main-blue, $alpha: 0.2);
+      }
+      .p-autocomplete-panel {
+        background-color: $white !important;
+        border-radius: 0 0 5px 5px;
+        border: solid 0.5px #1735a1;
+        border-top: none;
+        padding: 0 5px;
+      }
+      .p-autocomplete-empty-message {
+        font-family: "NotoSansKR-Light";
+      }
+    }
+  }
+}

@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { SwiperComponent } from "ngx-swiper-wrapper";
+import { tap } from "rxjs/operators";
 import { SWIPER_CONFIGURATION } from "src/app";
+import { PrestataireModel } from "src/app/models/prestataire.model";
 import { NewsService } from "src/app/services/news-service/news.service";
 import { LoginFormDialogComponent } from "../../components/login-form-dialog/login-form-dialog.component";
 
@@ -14,6 +16,9 @@ import { LoginFormDialogComponent } from "../../components/login-form-dialog/log
 export class OnBoardingPageComponent implements OnInit {
   swiperConfig = SWIPER_CONFIGURATION;
   news = [];
+  prestataire: PrestataireModel;
+  prestataires: PrestataireModel[];
+  prestatairesSuggestions: PrestataireModel[];
   @ViewChild("swiper", { static: false }) swiper: SwiperComponent;
   constructor(
     public dialog: MatDialog,
@@ -23,6 +28,19 @@ export class OnBoardingPageComponent implements OnInit {
 
   ngOnInit() {
     this.getNews();
+    this.getPrestataires();
+  }
+
+  getPrestataires() {
+    this.newsService
+      .getAllPrestataires()
+      .pipe(
+        tap((prestataires) => {
+          this.prestataires = [...prestataires];
+          console.log(this.prestataires);
+        })
+      )
+      .subscribe();
   }
 
   onWindowScroll(e) {
@@ -58,6 +76,18 @@ export class OnBoardingPageComponent implements OnInit {
   getNews() {
     this.newsService.getNews().subscribe((news) => {
       this.news = news;
+    });
+  }
+
+  onCompleted(ev) {
+    this.prestatairesSuggestions = this.prestataires.filter((prestataire) => {
+      return prestataire.nom.toLowerCase().includes(ev?.query.toLowerCase());
+    });
+  }
+
+  seePrestataireDetails() {
+    this.router.navigate(["/prestataire"], {
+      state: { prestataire: this.prestataire },
     });
   }
 }

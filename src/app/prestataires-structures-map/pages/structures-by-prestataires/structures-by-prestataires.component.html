@@ -1,0 +1,64 @@
+<div class="map-page-container" [ngClass]="{'light-mod': lightMod}">
+    <div class="search-agency-form">
+        <div class="title">
+            <mat-icon class="back-ico" (click)="goBack()">arrow_back</mat-icon>
+            <span class="text">Sélectionner un prestataire</span>
+        </div>
+        <p-autoComplete name="nom" field="nom" [(ngModel)]="prestataire" [suggestions]="prestatairesSuggestions"
+            [emptyMessage]="'Aucun résultat'" (completeMethod)="onCompleted($event)" [dropdown]="true"
+            [forceSelection]="true" [showEmptyMessage]="true" (onSelect)="onPrestataireSelected($event)">
+            <ng-template let-prest pTemplate="item">
+                <div class="prestataire-item">
+                    <span class="prest-name">{{prest.nom}}</span>
+                </div>
+            </ng-template>
+        </p-autoComplete>
+        <div class="display-toggle">
+            <div class="icon-parent" [ngClass]="{'selected': isMapDisplay}" (click)="displayMap(true)">
+                <mat-icon class="toggle-icon">map</mat-icon>
+            </div>
+            <div class="icon-parent" [ngClass]="{'selected': !isMapDisplay}" (click)="displayMap(false)">
+                <mat-icon class="toggle-icon">list</mat-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="select-prestataire-text" *ngIf="!prestataire else selectedPrest">Veuillez choisir un prestataire pour
+        voir la liste des structures sous couverture</div>
+    <ng-template #selectedPrest>
+        <div class="empty-structure select-prestataire-text" *ngIf="!prestataires?.length">
+            Ce prestataire ne couvre aucune structure sanitaire pour le moment.
+        </div>
+    </ng-template>
+
+    <ng-container *ngIf="isMapDisplay else list">
+        <div class="map" id="map" class="map-container"></div>
+    </ng-container>
+    <ng-template #list>
+        <p-table [value]="structures">
+            <ng-template pTemplate="header">
+                <tr class="my-tab">
+                    <th *ngFor="let col of cols" class="col-title">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-structure>
+                <tr class="my-tab tab-cell">
+                    <td class="cell-content">
+                        {{structure.nom}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.ville}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.email}}
+                    </td>
+                    <td class="cell-content">
+                        {{structure.email}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</div>
