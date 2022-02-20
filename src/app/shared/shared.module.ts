@@ -34,6 +34,7 @@ import {
   NgxMatTimepickerModule,
 } from "@angular-material-components/datetime-picker";
 import { SwiperModule } from "ngx-swiper-wrapper";
+import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
 
 registerLocaleData(localeFr, "fr");
 FullCalendarModule.registerPlugins([
@@ -52,8 +53,13 @@ FullCalendarModule.registerPlugins([
     AppointmentInfosCardComponent,
     AppointmentConfirmationModalComponent,
     SetAppointmentNewDateModalComponent,
+    PrevisualizeAvatarPopupComponent,
   ],
-  entryComponents: [EditFicheMedicalComponent, SetDatetimeDialogComponent],
+  entryComponents: [
+    EditFicheMedicalComponent,
+    SetDatetimeDialogComponent,
+    PrevisualizeAvatarPopupComponent,
+  ],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -89,6 +95,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     AppointmentInfosCardComponent,
     AppointmentConfirmationModalComponent,
+    PrevisualizeAvatarPopupComponent,
   ],
 })
 export class SharedModule {}

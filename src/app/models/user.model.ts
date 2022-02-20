@@ -10,6 +10,7 @@ export interface UserModel {
   image?: string;
   roleCode?: string;
   medecinId?: number;
+  structuresanitaireId?: number;
 }
 
 export enum ROLE_ENUM {

@@ -109,7 +109,11 @@
                 <div class="fiche">
                     <mat-icon *ngIf="userFicheMedical" (click)="editFicheMedical()" class="edit">edit</mat-icon>
                     <div class="header-block">
-                        <img src="assets/images/profil.jpg" alt="" class="avatar">
+                        <img [src]="currentUser?.image" alt="" class="avatar"
+                            *ngIf="currentUser?.image && currentUser?.image !== '' else userAvatar">
+                        <ng-template #userAvatar>
+                            <img src="assets/images/profil-mob.png" alt="" class="avatar no-avatar">
+                        </ng-template>
                         <div class="names-block">
                             <span class="nom">{{currentUser?.prenom}} {{currentUser?.nom}}</span>
                             <span *ngIf="userFicheMedical" class="birthdate">{{userFicheMedical?.date_naissance | date:

@@ -13,6 +13,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatProgressSpinnerModule,
+  MatDialogModule,
 } from "@angular/material";
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
@@ -25,7 +26,7 @@ import {
   DlDateTimeDateModule,
   DlDateTimePickerModule,
 } from "angular-bootstrap-datetimepicker";
-import { MedecinsCalendarComponent } from './components/medecins-calendar/medecins-calendar.component';
+import { MedecinsCalendarComponent } from "./components/medecins-calendar/medecins-calendar.component";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MedecinsCalendarComponent } from './components/medecins-calendar/medeci
     MatListModule,
     CalendarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     SharedModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
