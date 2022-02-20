@@ -1,3 +1,5 @@
+@import "src/styles-variables.scss";
+
 .registration-desktop-page {
   width: 100%;
   height: auto;
@@ -150,6 +152,18 @@
                 width: 47.5%;
                 &.full-width {
                   width: 100% !important;
+                }
+              }
+            }
+            .search-agency-form {
+              padding: 0 20px 20px;
+              .structure-item {
+                padding: 2.5px 0;
+                .struct-name {
+                  font-family: "NotoSansKR-Light";
+                }
+                &:not(:last-child) {
+                  border-bottom: solid 1px $main-blue;
                 }
               }
             }

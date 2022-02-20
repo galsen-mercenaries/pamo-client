@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material";
 import { SwiperComponent, SwiperConfigInterface } from "ngx-swiper-wrapper";
+import { tap } from "rxjs/operators";
 import { REGEX_PASSWORD } from "src/app";
 import { ROLE_ENUM, UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { NewsService } from "src/app/services/news-service/news.service";
 import { RegistrationSuccessDialogComponent } from "../../components/registration-success-dialog/registration-success-dialog.component";
 
 @Component({
@@ -34,6 +36,9 @@ export class RegistrationComponent implements OnInit {
   addressForm: FormGroup;
   @ViewChild("swiper", { static: false }) swiperComponent: SwiperComponent;
   selectedProfile: "patient" | "medecin";
+  medecinStructures;
+  structures: any[];
+  structuresSuggestions: any[];
   specialities = [
     { name: "Dentiste", code: "1" },
     { name: "Ophtalmologue", code: "2" },
@@ -54,7 +59,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private newsService: NewsService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +69,18 @@ export class RegistrationComponent implements OnInit {
     this.initSpecialitiesForm();
     this.initPasswordForm();
     this.initAddressForm();
+    this.getAllStructures();
+  }
+
+  getAllStructures() {
+    this.newsService
+      .getAllStructures()
+      .pipe(
+        tap((structures) => {
+          this.structures = structures;
+        })
+      )
+      .subscribe();
   }
 
   registerUser() {
@@ -87,6 +105,10 @@ export class RegistrationComponent implements OnInit {
         this.profileForm.value.profile === "patient"
           ? ROLE_ENUM.PATIENT
           : ROLE_ENUM.MEDECIN,
+      structuresanitaireId:
+        this.profileForm.value.profile === "patient"
+          ? null
+          : this.addressForm.value?.medecinStructure?.structuresanitaireId,
     };
     this.authenticationService.registerUser(newUser).subscribe(
       (createdUser) => {
@@ -153,7 +175,7 @@ export class RegistrationComponent implements OnInit {
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
       email: ["", Validators.required],
-      numero: [""],
+      numero: ["", Validators.required],
     });
   }
 
@@ -172,7 +194,8 @@ export class RegistrationComponent implements OnInit {
 
   initAddressForm() {
     this.addressForm = this.formBuilder.group({
-      address: [""],
+      address: ["", Validators.required],
+      medecinStructure: [Validators.required],
     });
   }
 
@@ -196,5 +219,11 @@ export class RegistrationComponent implements OnInit {
     setTimeout(() => {
       this.currentSlideIndex = index;
     }, 500);
+  }
+
+  onCompleted(event) {
+    this.structuresSuggestions = this.structures.filter((prestataire) => {
+      return prestataire.nom.toLowerCase().includes(event?.query.toLowerCase());
+    });
   }
 }

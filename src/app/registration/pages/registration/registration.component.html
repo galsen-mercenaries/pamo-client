@@ -134,6 +134,17 @@
                                 <mat-icon matSuffix (click)="swapInputType()">place</mat-icon>
                             </mat-form-field>
                         </div>
+                        <div class="search-agency-form">
+                            <p-autoComplete name="nom" field="nom" formControlName="medecinStructure" [suggestions]="structuresSuggestions"
+                                [emptyMessage]="'Aucun résultat'" (completeMethod)="onCompleted($event)" [dropdown]="true"
+                                [forceSelection]="true" [showEmptyMessage]="true">
+                                <ng-template let-prest pTemplate="item">
+                                    <div class="structure-item">
+                                        <span class="struct-name">{{prest.nom}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
                         <div class="btn-container">
                             <button [disabled]="!addressForm.valid" (click)="nextStep()">Valider</button>
                         </div>

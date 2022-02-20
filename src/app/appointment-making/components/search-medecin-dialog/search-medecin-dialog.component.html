@@ -16,7 +16,7 @@
                     <div class="medecin-item" *ngFor="let doctor of filteredDoctors" (click)="chooseMedecin(doctor)">
                         <img [src]="doctor.user.image" alt="">
                         <div class="inf-block">
-                            <div class="name">{{doctor.user.prenom + ' ' +doctor.user.nom}}</div>
+                            <div class="name">{{doctor.user.prenom + ' ' + doctor.user.nom}}</div>
                             <div class="specialite">{{doctor.user?.specialite?.nom}}</div>
                             <div class="lieu">{{doctor.structuresanitaire.nom}}</div>
                         </div>

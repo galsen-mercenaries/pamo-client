@@ -17,7 +17,13 @@
             </div>
             <div class="medecin-menu-block">
                 <div class="profile-img-container">
-                    <img class="profile-pic" src="https://i.ibb.co/rM6XTtd/doc.jpg" alt="">
+                    <img class="med-avatar" [src]="currentMedecin?.user?.image" alt=""
+                        *ngIf="currentMedecin?.user?.image && currentMedecin?.user?.image !== '' else defaultAvatar"
+                        (click)="inputAvatar.click()">
+                    <ng-template #defaultAvatar>
+                        <img src="assets/images/profil-mob.png" alt="" class="med-avatar no-avatar" (click)="inputAvatar.click()">
+                    </ng-template>
+                    <input type="file" #inputAvatar (change)="onFileUploaded($event)" class="hidden-input">
                 </div>
                 <div class="menu-list">
                     <div class="menu-item" routerLink="home" routerLinkActive="is-route-active" title="Accueil">

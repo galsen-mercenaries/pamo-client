@@ -45,10 +45,16 @@ mat-sidenav-container {
     background-color: $main-blue;
     .profile-img-container {
       text-align: center;
-      .profile-pic {
+      .med-avatar {
         width: 60px;
         height: 60px;
         border-radius: 50%;
+        cursor: pointer;
+      }
+      .hidden-input {
+        width: 0;
+        height: 0;
+        visibility: hidden;
       }
     }
     .menu-list {

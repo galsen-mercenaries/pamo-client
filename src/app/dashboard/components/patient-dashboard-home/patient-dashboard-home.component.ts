@@ -96,11 +96,21 @@ export class PatientDashboardHomeComponent implements OnInit {
     this.getUserinfos();
     this.getDatesOfMonth();
     this.getUserAppointments();
+    this.patientServ
+      .userUpdatedObservable()
+      .pipe(
+        tap((res) => {
+          this.getUserinfos(true);
+        })
+      )
+      .subscribe();
   }
 
-  async getUserinfos() {
+  async getUserinfos(notRefreshMedical?: boolean) {
     this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
-    this.getUserficheMedicalInfos();
+    if (!notRefreshMedical) {
+      this.getUserficheMedicalInfos();
+    }
   }
 
   openAppointmentModal(eventClick) {
@@ -138,10 +148,6 @@ export class PatientDashboardHomeComponent implements OnInit {
             };
           });
           this.calendarOptions.events = events;
-          // const response = res.filter((appointment) =>
-          //   this.isAppointmentInCurrentMonth(appointment)
-          // );
-          // return response;
           return res;
         }),
         tap((res: AppointmentModel[]) => {

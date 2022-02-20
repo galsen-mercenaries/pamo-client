@@ -14,7 +14,12 @@
         <div class="home-page">
             <div class="sidemenu">
                 <div class="user-profile">
-                    <img src="assets/images/profil.jpg" alt="">
+                    <img class="user-avatar" [src]="currentUser?.image" alt=""
+                        *ngIf="currentUser?.image && currentUser?.image !== '' else userAvatar" (click)="inputAvatar.click()">
+                    <ng-template #userAvatar>
+                        <img src="assets/images/profil-mob.png" alt="" class="user-avatar no-avatar" (click)="inputAvatar.click()">
+                    </ng-template>
+                    <input type="file" #inputAvatar (change)="onFileUploaded($event)" class="hidden-input">
                     <div class="names">
                         <span class="firstname">{{currentUser?.prenom}}</span>
                         <span class="lastname">{{currentUser?.nom}}</span>

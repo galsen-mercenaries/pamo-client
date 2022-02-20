@@ -6,7 +6,7 @@ import { RegistrationComponent } from "./pages/registration/registration.compone
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { SWIPER_CONFIG } from "ngx-swiper-wrapper";
 import { SwiperConfigInterface } from "ngx-swiper-wrapper";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   MatDialogModule,
   MatFormFieldModule,
@@ -16,6 +16,7 @@ import {
   MatSelectModule,
 } from "@angular/material";
 import { RegistrationSuccessDialogComponent } from "./components/registration-success-dialog/registration-success-dialog.component";
+import { AutoCompleteModule } from "primeng/autocomplete";
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: "horizontal",
@@ -35,7 +36,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatInputModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    FormsModule,
     MatDialogModule,
+    AutoCompleteModule,
   ],
   providers: [
     {
