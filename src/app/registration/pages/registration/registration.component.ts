@@ -1,11 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {MatDialog} from '@angular/material/dialog';
-import {SwiperComponent, SwiperConfigInterface} from 'ngx-swiper-wrapper';
-import {REGEX_PASSWORD} from 'src/app';
-import {ROLE_ENUM, UserModel} from 'src/app/models/user.model';
-import {AuthenticationService} from 'src/app/services/authentication-service/authentication.service';
-import {RegistrationSuccessDialogComponent} from '../../components/registration-success-dialog/registration-success-dialog.component';
+import { SwiperComponent, SwiperConfigInterface } from "ngx-swiper-wrapper";
+import { tap } from "rxjs/operators";
+import { REGEX_PASSWORD } from "src/app";
+import { ROLE_ENUM, UserModel } from "src/app/models/user.model";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { NewsService } from "src/app/services/news-service/news.service";
+import { RegistrationSuccessDialogComponent } from "../../components/registration-success-dialog/registration-success-dialog.component";
 
 @Component({
     selector: 'app-registration',
@@ -13,54 +15,73 @@ import {RegistrationSuccessDialogComponent} from '../../components/registration-
     styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-    swiperConfig: SwiperConfigInterface = {
-        direction: 'horizontal',
-        slidesPerView: 1,
-        keyboard: false,
-        mousewheel: false,
-        scrollbar: false,
-        navigation: false,
-        pagination: false,
-        autoplay: false,
-        loop: false,
-        allowTouchMove: false,
-        speed: 500,
-        centeredSlides: true
-    };
-    profileForm: FormGroup;
-    usernamesForm: FormGroup;
-    specialitiesForm: FormGroup;
-    passwordForm: FormGroup;
-    addressForm: FormGroup;
-    @ViewChild('swiper', {static: false})
-    swiperComponent: SwiperComponent;
-    selectedProfile: 'patient' | 'medecin';
-    specialities = [
-        {name: 'Dentiste', code: '1'},
-        {name: 'Ophtalmologue', code: '2'},
-        {name: 'Urologue', code: '3'},
-        {name: 'Pédiatrie', code: '4'},
-        {name: 'Chirurgie plastique', code: '5'}
-    ];
-    isPasswordVisible: boolean;
-    isConfirmPasswordVisible: boolean;
-    steps = [1, 2, 3, 4, 5];
-    currentSlideIndex = 0;
-    registeringUser: boolean;
-    registrationError: string;
-    registerHasError: boolean;
-    checkingEmail: boolean;
-    mailErrorText: string;
-    mailHasError: boolean;
-    constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder, public dialog: MatDialog) {}
+  swiperConfig: SwiperConfigInterface = {
+    direction: "horizontal",
+    slidesPerView: 1,
+    keyboard: false,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: false,
+    pagination: false,
+    autoplay: false,
+    loop: false,
+    allowTouchMove: false,
+    speed: 500,
+    centeredSlides: true,
+  };
+  profileForm: FormGroup;
+  usernamesForm: FormGroup;
+  specialitiesForm: FormGroup;
+  passwordForm: FormGroup;
+  addressForm: FormGroup;
+  @ViewChild("swiper", { static: false }) swiperComponent: SwiperComponent;
+  selectedProfile: "patient" | "medecin";
+  medecinStructures;
+  structures: any[];
+  structuresSuggestions: any[];
+  specialities = [
+    { name: "Dentiste", code: "1" },
+    { name: "Ophtalmologue", code: "2" },
+    { name: "Urologue", code: "3" },
+    { name: "Pédiatrie", code: "4" },
+    { name: "Chirurgie plastique", code: "5" },
+  ];
+  isPasswordVisible: boolean;
+  isConfirmPasswordVisible: boolean;
+  steps = [1, 2, 3, 4, 5];
+  currentSlideIndex = 0;
+  registeringUser: boolean;
+  registrationError: string;
+  registerHasError: boolean;
+  checkingEmail: boolean;
+  mailErrorText: string;
+  mailHasError: boolean;
+  constructor(
+    private authenticationService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private newsService: NewsService
+  ) {}
 
-    ngOnInit(): void {
-        this.initProfileForm();
-        this.initUsernamesForm();
-        this.initSpecialitiesForm();
-        this.initPasswordForm();
-        this.initAddressForm();
-    }
+  ngOnInit(): void {
+    this.initProfileForm();
+    this.initUsernamesForm();
+    this.initSpecialitiesForm();
+    this.initPasswordForm();
+    this.initAddressForm();
+    this.getAllStructures();
+  }
+
+  getAllStructures() {
+    this.newsService
+      .getAllStructures()
+      .pipe(
+        tap((structures) => {
+          this.structures = structures;
+        })
+      )
+      .subscribe();
+  }
 
     registerUser() {
         this.registeringUser = true;
@@ -157,18 +178,12 @@ export class RegistrationComponent implements OnInit {
         });
     }
 
-    initPasswordForm() {
-        this.passwordForm = this.formBuilder.group({
-            password: ['', [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
-            confirmPassword: ['', Validators.required]
-        });
-    }
-
-    initAddressForm() {
-        this.addressForm = this.formBuilder.group({
-            address: ['']
-        });
-    }
+  initAddressForm() {
+    this.addressForm = this.formBuilder.group({
+      address: ["", Validators.required],
+      medecinStructure: [Validators.required],
+    });
+  }
 
     swapInputType() {
         this.isPasswordVisible = !this.isPasswordVisible;
@@ -186,9 +201,22 @@ export class RegistrationComponent implements OnInit {
         this.swiperComponent.directiveRef.prevSlide();
     }
 
-    onIndexChanged(index) {
-        setTimeout(() => {
-            this.currentSlideIndex = index;
-        }, 500);
-    }
+  onIndexChanged(index) {
+    setTimeout(() => {
+      this.currentSlideIndex = index;
+    }, 500);
+  }
+
+  onCompleted(event) {
+    this.structuresSuggestions = this.structures.filter((prestataire) => {
+      return prestataire.nom.toLowerCase().includes(event?.query.toLowerCase());
+    });
+  }
+
+  initPasswordForm() {
+    this.passwordForm = this.formBuilder.group({
+        password: ['', [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
+        confirmPassword: ['', Validators.required]
+    });
+}
 }

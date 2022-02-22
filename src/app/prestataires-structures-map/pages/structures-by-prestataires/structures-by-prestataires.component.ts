@@ -27,10 +27,18 @@ export class StructuresByPrestatairesComponent
   isMapDisplay: boolean = true;
   lightMod: boolean;
   markers: any[] = [];
+  cols = [
+    { header: "Nom de la structure" },
+    { header: "Ville" },
+    { header: "Numéro de téléphone" },
+    { header: "Docteur principal" },
+  ];
   constructor(private newsService: NewsService, private router: Router) {}
 
   ngOnInit() {
     this.prestataire = history?.state?.prestataire;
+    console.log(this.prestataire);
+
     this.lightMod = this.router.url === "/prestataire";
   }
 

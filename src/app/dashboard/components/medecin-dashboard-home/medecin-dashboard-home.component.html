@@ -70,7 +70,11 @@
                 <div class="navigation-content">
                     <div class="medecin-profile">
                         <div class="medecin-profile-top-block">
-                            <img src="https://i.ibb.co/rM6XTtd/doc.jpg" alt="">
+                            <img class="med-avatar" [src]="currentMedecin?.user?.image" alt=""
+                                *ngIf="currentMedecin?.user?.image && currentMedecin?.user?.image !== '' else wihtoutAvatar">
+                            <ng-template #wihtoutAvatar>
+                                <img src="assets/images/profil-mob.png" alt="" class="med-avatar no-avatar">
+                            </ng-template>
                             <div class="main-infos">
                                 <div class="main-inf-item">
                                     <span class="item-name">Nom : </span>

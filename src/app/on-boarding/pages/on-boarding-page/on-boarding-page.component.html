@@ -78,7 +78,7 @@
             <div class="tranparent-side-effect tranparent-side-effect-right" (click)="nextSlide()">
                 <mat-icon>keyboard_arrow_right</mat-icon>
             </div>
-            <swiper class="swiper-container" [config]="swiperConfig" #swiper>
+            <swiper class="swiper-container" [config]="swiperConfig" #swiper *ngIf="news?.length">
                 <div class="swiper-slide" *ngFor="let newsItem of news">
                     <app-news-card-item [news]="newsItem"></app-news-card-item>
                 </div>

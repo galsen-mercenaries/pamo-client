@@ -68,6 +68,27 @@
     font-size: 20px;
     margin-bottom: 10px;
   }
+  p-table {
+    .my-tab {
+      border-top: solid 1px $darkGray;
+      .col-title {
+        text-align: center;
+        padding: 7px 0;
+      }
+    }
+    .tab-cell {
+      .cell-content {
+        text-align: center;
+        font-family: "NotoSansKR-Light";
+        padding: 7px 0;
+      }
+      &:nth-child(odd) {
+        background-color: $platinum !important;
+        border-top: solid 1px $darkGray;
+        border-bottom: solid 1px $darkGray;
+      }
+    }
+  }
 }
 
 @media screen and( max-width:900px) {

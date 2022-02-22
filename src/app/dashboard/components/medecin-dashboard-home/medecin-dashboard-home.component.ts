@@ -11,6 +11,7 @@ import { getAppointmentClass, isEqualDate } from "src/app";
 import { throwError } from "rxjs";
 import { CalendarOptions } from "@fullcalendar/angular";
 import { Router } from "@angular/router";
+import { PatientService } from "src/app/services/patient-service/patient.service";
 
 @Component({
   selector: "app-medecin-dashboard-home",
@@ -107,18 +108,22 @@ export class MedecinDashboardHomeComponent implements OnInit {
   constructor(
     private apptService: AppointmentService,
     private medecinService: MedecinService,
-    private router: Router
+    private router: Router,
+    private patientService: PatientService
   ) {}
 
   ngOnInit() {
     this.setMomentLocale();
     this.getMedecinAppointments();
     this.getMedecinInfos();
-  }
-
-  handleDateClick(arg) {
-    console.log(arg);
-    // alert('date click! ' + arg.dateStr)
+    this.patientService
+      .userUpdatedObservable()
+      .pipe(
+        tap((res) => {
+          this.getMedecinInfos();
+        })
+      )
+      .subscribe();
   }
 
   setMomentLocale() {

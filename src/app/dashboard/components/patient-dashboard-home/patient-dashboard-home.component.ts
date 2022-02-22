@@ -92,16 +92,26 @@ export class PatientDashboardHomeComponent implements OnInit {
     private matDialog: MatDialog
   ) {}
 
-    ngOnInit(): void {
-        this.getUserinfos();
-        this.getDatesOfMonth();
-        this.getUserAppointments();
-    }
+  ngOnInit(): void {
+    this.getUserinfos();
+    this.getDatesOfMonth();
+    this.getUserAppointments();
+    this.patientServ
+      .userUpdatedObservable()
+      .pipe(
+        tap((res) => {
+          this.getUserinfos(true);
+        })
+      )
+      .subscribe();
+  }
 
-    async getUserinfos() {
-        this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
-        this.getUserficheMedicalInfos();
+  async getUserinfos(notRefreshMedical?: boolean) {
+    this.currentUser = await this.authServ.getUserInfosSaved().toPromise();
+    if (!notRefreshMedical) {
+      this.getUserficheMedicalInfos();
     }
+  }
 
   openAppointmentModal(eventClick) {
     const dialogRef = this.matDialog.open(
@@ -138,10 +148,6 @@ export class PatientDashboardHomeComponent implements OnInit {
             };
           });
           this.calendarOptions.events = events;
-          // const response = res.filter((appointment) =>
-          //   this.isAppointmentInCurrentMonth(appointment)
-          // );
-          // return response;
           return res;
         }),
         tap((res: AppointmentModel[]) => {
