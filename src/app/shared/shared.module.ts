@@ -1,20 +1,16 @@
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { CommonModule, DatePipe, registerLocaleData } from "@angular/common";
 import { EditFicheMedicalComponent } from "./components/edit-fiche-medical/edit-fiche-medical.component";
-import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatNativeDateModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatSelectModule,
-  MAT_DATE_LOCALE,
-  MAT_DIALOG_DATA,
-} from "@angular/material";
+import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AgePipe } from "src/app/pipes/age.pipe";
 import { DisplayDateGaugePipe } from "src/app/pipes/display-date-gauge.pipe";
@@ -36,13 +32,13 @@ import {
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
 
-registerLocaleData(localeFr, "fr");
+registerLocaleData(localeFr, 'fr');
 FullCalendarModule.registerPlugins([
-  // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin,
-  timeGridPlugin,
-  listPlugin,
+    // register FullCalendar plugins
+    dayGridPlugin,
+    interactionPlugin,
+    timeGridPlugin,
+    listPlugin
 ]);
 @NgModule({
   declarations: [

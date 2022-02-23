@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import {MatDialog} from '@angular/material/dialog';
 import { Router } from "@angular/router";
 import { SwiperComponent } from "ngx-swiper-wrapper";
 import { tap } from "rxjs/operators";
@@ -9,9 +9,9 @@ import { NewsService } from "src/app/services/news-service/news.service";
 import { LoginFormDialogComponent } from "../../components/login-form-dialog/login-form-dialog.component";
 
 @Component({
-  selector: "app-on-boarding-page",
-  templateUrl: "./on-boarding-page.component.html",
-  styleUrls: ["./on-boarding-page.component.scss"],
+    selector: 'app-on-boarding-page',
+    templateUrl: './on-boarding-page.component.html',
+    styleUrls: ['./on-boarding-page.component.scss']
 })
 export class OnBoardingPageComponent implements OnInit {
   swiperConfig = SWIPER_CONFIGURATION;

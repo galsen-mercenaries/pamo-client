@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { tap } from "rxjs/operators";
 import { SpecializationModel } from "src/app/models/specialization.model";
 import { StructureSanitaireModel } from "src/app/models/structure-sanitaire.model";

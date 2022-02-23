@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
+import {MatDialog} from '@angular/material/dialog';
 import { SwiperComponent, SwiperConfigInterface } from "ngx-swiper-wrapper";
 import { tap } from "rxjs/operators";
 import { REGEX_PASSWORD } from "src/app";
@@ -10,9 +10,9 @@ import { NewsService } from "src/app/services/news-service/news.service";
 import { RegistrationSuccessDialogComponent } from "../../components/registration-success-dialog/registration-success-dialog.component";
 
 @Component({
-  selector: "app-registration",
-  templateUrl: "./registration.component.html",
-  styleUrls: ["./registration.component.scss"],
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
   swiperConfig: SwiperConfigInterface = {
@@ -83,114 +83,100 @@ export class RegistrationComponent implements OnInit {
       .subscribe();
   }
 
-  registerUser() {
-    this.registeringUser = true;
-    this.registerHasError = false;
-    const password = this.passwordForm.value.password;
-    const confirmPassword = this.passwordForm.value.confirmPassword;
-    if (password !== confirmPassword) {
-      this.registerHasError = true;
-      this.registrationError = "Les deux mots de passe ne sont pas identiques";
-      this.registeringUser = false;
-      return;
-    }
-    const newUser: UserModel = {
-      email: this.usernamesForm.value.email,
-      nom: this.usernamesForm.value.lastName,
-      prenom: this.usernamesForm.value.firstName,
-      password,
-      numero: this.usernamesForm.value.numero,
-      adresse: this.addressForm.value.address,
-      roleCode:
-        this.profileForm.value.profile === "patient"
-          ? ROLE_ENUM.PATIENT
-          : ROLE_ENUM.MEDECIN,
-      structuresanitaireId:
-        this.profileForm.value.profile === "patient"
-          ? null
-          : this.addressForm.value?.medecinStructure?.structuresanitaireId,
-    };
-    this.authenticationService.registerUser(newUser).subscribe(
-      (createdUser) => {
-        this.registeringUser = false;
-        this.nextStep();
-        this.openSuccessDialog();
-      },
-      (err) => {
-        this.registeringUser = false;
-        this.registerHasError = true;
-        this.registrationError = "Une erreur est survenue. Veuillez réessayer";
-      }
-    );
-  }
-
-  checkUserMail() {
-    this.checkingEmail = true;
-    this.mailHasError = false;
-    const email = this.usernamesForm.value.email;
-    this.authenticationService.checkEmail(email).subscribe(
-      (isMailUsed) => {
-        this.checkingEmail = false;
-        if (isMailUsed) {
-          this.mailHasError = true;
-          this.mailErrorText = "Cet email est déjà utilisé";
-        } else {
-          this.nextStep();
+    registerUser() {
+        this.registeringUser = true;
+        this.registerHasError = false;
+        const password = this.passwordForm.value.password;
+        const confirmPassword = this.passwordForm.value.confirmPassword;
+        if (password !== confirmPassword) {
+            this.registerHasError = true;
+            this.registrationError = 'Les deux mots de passe ne sont pas identiques';
+            this.registeringUser = false;
+            return;
         }
-      },
-      (err) => {
-        this.mailHasError = true;
-        this.checkingEmail = false;
-        this.mailErrorText =
-          err && err.error && err.error.email && err.error.email.length
-            ? err.error.email[0]
-            : "Une erreur est survenue. Veuillez réessayer";
-      }
-    );
-  }
+        const newUser: UserModel = {
+            email: this.usernamesForm.value.email,
+            nom: this.usernamesForm.value.lastName,
+            prenom: this.usernamesForm.value.firstName,
+            password,
+            numero: this.usernamesForm.value.numero,
+            adresse: this.addressForm.value.address,
+            roleCode: this.profileForm.value.profile === 'patient' ? ROLE_ENUM.PATIENT : ROLE_ENUM.MEDECIN
+        };
+        this.authenticationService.registerUser(newUser).subscribe(
+            createdUser => {
+                this.registeringUser = false;
+                this.nextStep();
+                this.openSuccessDialog();
+            },
+            err => {
+                this.registeringUser = false;
+                this.registerHasError = true;
+                this.registrationError = 'Une erreur est survenue. Veuillez réessayer';
+            }
+        );
+    }
 
-  openSuccessDialog() {
-    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
-      panelClass: "register-success-dialog-style",
-      backdropClass: "register-success-dialog-backdrop",
-      disableClose: true,
-      data: {
-        nom: this.usernamesForm.value.lastName,
-        prenom: this.usernamesForm.value.firstName,
-        email: this.usernamesForm.value.email,
-        password: this.passwordForm.value.password,
-      },
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
+    checkUserMail() {
+        this.checkingEmail = true;
+        this.mailHasError = false;
+        const email = this.usernamesForm.value.email;
+        this.authenticationService.checkEmail(email).subscribe(
+            isMailUsed => {
+                this.checkingEmail = false;
+                if (isMailUsed) {
+                    this.mailHasError = true;
+                    this.mailErrorText = 'Cet email est déjà utilisé';
+                } else {
+                    this.nextStep();
+                }
+            },
+            err => {
+                this.mailHasError = true;
+                this.checkingEmail = false;
+                this.mailErrorText =
+                    err && err.error && err.error.email && err.error.email.length
+                        ? err.error.email[0]
+                        : 'Une erreur est survenue. Veuillez réessayer';
+            }
+        );
+    }
 
-  initProfileForm() {
-    this.profileForm = this.formBuilder.group({
-      profile: ["", Validators.required],
-    });
-  }
+    openSuccessDialog() {
+        const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+            panelClass: 'register-success-dialog-style',
+            backdropClass: 'register-success-dialog-backdrop',
+            disableClose: true,
+            data: {
+                nom: this.usernamesForm.value.lastName,
+                prenom: this.usernamesForm.value.firstName,
+                email: this.usernamesForm.value.email,
+                password: this.passwordForm.value.password
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {});
+    }
 
-  initUsernamesForm() {
-    this.usernamesForm = this.formBuilder.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-      email: ["", Validators.required],
-      numero: ["", Validators.required],
-    });
-  }
+    initProfileForm() {
+        this.profileForm = this.formBuilder.group({
+            profile: ['', Validators.required]
+        });
+    }
 
-  initSpecialitiesForm() {
-    this.specialitiesForm = this.formBuilder.group({
-      specialities: [[]],
-    });
-  }
+    initUsernamesForm() {
+        this.usernamesForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', Validators.required],
+            numero: ['']
+        });
+    }
 
-  initPasswordForm() {
-    this.passwordForm = this.formBuilder.group({
-      password: ["", [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
-      confirmPassword: ["", Validators.required],
-    });
-  }
+    initSpecialitiesForm() {
+        this.specialitiesForm = this.formBuilder.group({
+            specialities: [[]]
+        });
+    }
 
   initAddressForm() {
     this.addressForm = this.formBuilder.group({
@@ -199,21 +185,21 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  swapInputType() {
-    this.isPasswordVisible = !this.isPasswordVisible;
-  }
+    swapInputType() {
+        this.isPasswordVisible = !this.isPasswordVisible;
+    }
 
-  swapConfirmInputType() {
-    this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
-  }
+    swapConfirmInputType() {
+        this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
+    }
 
-  nextStep() {
-    this.swiperComponent.directiveRef.nextSlide();
-  }
+    nextStep() {
+        this.swiperComponent.directiveRef.nextSlide();
+    }
 
-  previousStep() {
-    this.swiperComponent.directiveRef.prevSlide();
-  }
+    previousStep() {
+        this.swiperComponent.directiveRef.prevSlide();
+    }
 
   onIndexChanged(index) {
     setTimeout(() => {
@@ -226,4 +212,11 @@ export class RegistrationComponent implements OnInit {
       return prestataire.nom.toLowerCase().includes(event?.query.toLowerCase());
     });
   }
+
+  initPasswordForm() {
+    this.passwordForm = this.formBuilder.group({
+        password: ['', [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
+        confirmPassword: ['', Validators.required]
+    });
+}
 }

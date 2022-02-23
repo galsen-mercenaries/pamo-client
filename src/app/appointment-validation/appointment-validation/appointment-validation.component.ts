@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import {MatDialog} from '@angular/material/dialog';
 import { Router } from "@angular/router";
 import { CalendarOptions } from "@fullcalendar/core";
 import { throwError } from "rxjs";
@@ -7,15 +7,14 @@ import { catchError, map, tap } from "rxjs/operators";
 import { getAppointmentClass } from "src/app";
 import {
   AppointmentModel,
-  APPOINTMENT_STATUS,
 } from "src/app/models/appointment.model";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
 import { AppointmentConfirmationModalComponent } from "src/app/shared/components/appointment-confirmation-modal/appointment-confirmation-modal.component";
 
 @Component({
-  selector: "app-appointment-validation",
-  templateUrl: "./appointment-validation.component.html",
-  styleUrls: ["./appointment-validation.component.scss"],
+    selector: 'app-appointment-validation',
+    templateUrl: './appointment-validation.component.html',
+    styleUrls: ['./appointment-validation.component.scss']
 })
 export class AppointmentValidationComponent implements OnInit {
   loadingRv;

@@ -1,20 +1,13 @@
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  NgModule,
-  NO_ERRORS_SCHEMA,
-} from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { PatientDashboardComponent } from "./pages/patient-dashboard/patient-dashboard.component";
-import {
-  MatMenuModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatListModule,
-  MatProgressSpinnerModule,
-  MatDialogModule,
-} from "@angular/material";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
 import { MedecinDashboardHomeComponent } from "./components/medecin-dashboard-home/medecin-dashboard-home.component";
@@ -27,6 +20,7 @@ import {
   DlDateTimePickerModule,
 } from "angular-bootstrap-datetimepicker";
 import { MedecinsCalendarComponent } from "./components/medecins-calendar/medecins-calendar.component";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
