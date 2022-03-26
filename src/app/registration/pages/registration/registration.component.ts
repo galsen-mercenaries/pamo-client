@@ -103,6 +103,10 @@ export class RegistrationComponent implements OnInit {
             adresse: this.addressForm.value.address,
             roleCode: this.profileForm.value.profile === 'patient' ? ROLE_ENUM.PATIENT : ROLE_ENUM.MEDECIN
         };
+
+        if(newUser.roleCode === ROLE_ENUM.MEDECIN) {
+          newUser.structuresanitaireId = this.addressForm.value.medecinStructure.structuresanitaireId;
+        }
         this.authenticationService.registerUser(newUser).subscribe(
             createdUser => {
                 this.registeringUser = false;
