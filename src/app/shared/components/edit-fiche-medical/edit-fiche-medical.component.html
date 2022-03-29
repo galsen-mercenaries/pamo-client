@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>Editer la fiche médicale</h2>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  novalidate
+  autocomplete="false"
+>
 <mat-dialog-content>
   <div>Vous pouvez éditer les champs actifs puis valider la sauvegarde.</div>
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    novalidate
-    autocomplete="false"
-  >
   <div>
       <mat-form-field appearance="fill">
         <mat-label>Poids</mat-label>
@@ -20,10 +20,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Groupe Sanguin</mat-label>
         <input
-          formControlName="groupeSanguin"
+          formControlName="groupe_sanguin"
           matInput
           placeholder="Votre groupe Sanguin"
-          disabled
+          readonly
         />
       </mat-form-field>
 
@@ -50,7 +50,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Date de naissance</mat-label>
         <input
-          formControlName="dateNaissance"
+          formControlName="date_naissance"
           type="date"
           matInput
           placeholder="Votre date de naissance"
@@ -59,7 +59,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Contacts urgents</mat-label>
         <input
-          formControlName="contactUrgents"
+          formControlName="contact_urgence"
           matInput
           placeholder="Vos contacts urgents"
           disabled
@@ -67,18 +67,18 @@
       </mat-form-field>
   </div>
     <mat-form-field appearance="fill">
-      <mat-label>Maladies</mat-label>
+      <mat-label>Maladies ou Allergies</mat-label>
       <textarea
         formControlName="maladies"
         matInput
-        placeholder="Vos maladies"
+        placeholder="Vos maladies/Vos Allergies"
 
       ></textarea>
     </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close="'CANCEL'">Fermer</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button type="submit" mat-button>Enregistrer les modifications</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Fermer</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button type="submit" mat-button>Enregistrer les modifications</button>
+  </mat-dialog-actions>
+</form>
