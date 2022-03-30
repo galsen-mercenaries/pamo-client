@@ -134,7 +134,7 @@
                                 <mat-icon matSuffix (click)="swapInputType()">place</mat-icon>
                             </mat-form-field>
                         </div>
-                        <div class="search-agency-form">
+                        <div *ngIf="profileForm.value.profile !== 'patient'" class="search-agency-form">
                             <p-autoComplete name="nom" field="nom" formControlName="medecinStructure" [suggestions]="structuresSuggestions"
                                 [emptyMessage]="'Aucun résultat'" (completeMethod)="onCompleted($event)" [dropdown]="true"
                                 [forceSelection]="true" [showEmptyMessage]="true">

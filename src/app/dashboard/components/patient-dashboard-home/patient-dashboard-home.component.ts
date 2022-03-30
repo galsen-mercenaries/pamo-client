@@ -60,6 +60,7 @@ export class PatientDashboardHomeComponent implements OnInit {
   };
   currentUser: UserModel;
   userFicheMedical: FicheMedicalModel;
+  hasficheMedical = true;
   loadingFiche: boolean;
   userAppointments: AppointmentModel[] = [];
   currentDayOfMonth: number;
@@ -192,9 +193,13 @@ export class PatientDashboardHomeComponent implements OnInit {
                 tap((res: FicheMedicalModel) => {
                     this.loadingFiche = false;
                     this.userFicheMedical = res;
+                    this.hasficheMedical = true;
                 }),
                 catchError((err: any) => {
                     this.loadingFiche = false;
+                    if(err?.error?.error?.statusCode === 404) {
+                      this.hasficheMedical = false;
+                    }
                     return of(err);
                 })
             )
@@ -204,13 +209,15 @@ export class PatientDashboardHomeComponent implements OnInit {
     editFicheMedical() {
         this.matDialog
             .open(EditFicheMedicalComponent, {
-                data: this.userFicheMedical,
-                width: '350px'
+                data: { ficheMedical: this.userFicheMedical, update: this.hasficheMedical},
+                width: '450px'
             })
             .afterClosed()
-            .subscribe((res: 'EDIT' | 'CANCEL') => {
-                if (res === 'EDIT') {
-                    this.getUserficheMedicalInfos();
+            .subscribe((res: FicheMedicalModel) => {
+              console.log('rres', res);
+                if (res) {
+                    this.hasficheMedical = true;
+                    this.userFicheMedical = res;
                 }
             });
     }
