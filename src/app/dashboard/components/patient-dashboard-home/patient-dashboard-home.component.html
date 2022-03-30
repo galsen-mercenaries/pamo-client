@@ -107,7 +107,7 @@
             <div class="fiche-medical">
                 <span class="ma-fiche">Ma fiche médicale</span>
                 <div class="fiche">
-                    <mat-icon *ngIf="userFicheMedical" (click)="editFicheMedical()" class="edit">edit</mat-icon>
+                    <mat-icon *ngIf="hasficheMedical" (click)="editFicheMedical()" class="edit">edit</mat-icon>
                     <div class="header-block">
                         <img [src]="currentUser?.image" alt="" class="avatar"
                             *ngIf="currentUser?.image && currentUser?.image !== '' else userAvatar">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="utils">
-                        <ng-container *ngIf="!loadingFiche && userFicheMedical">
+                        <ng-container *ngIf="!loadingFiche && hasficheMedical">
                             <div class="medical-info-block">
                                 <div class="item-info">
                                     <span class="intitule">Poids :</span><span class="info">{{userFicheMedical?.poids}}
@@ -164,9 +164,9 @@
                                 </div> -->
                             </div>
                         </ng-container>
-                        <ng-container *ngIf="!loadingFiche && !userFicheMedical">
-                            <span>
-                                Aucune fiche médicale n'a été renseignée
+                        <ng-container *ngIf="!loadingFiche && !hasficheMedical">
+                            <span class="fiche c-pointer" (click)="editFicheMedical()">
+                                Aucune fiche médicale n'a été renseignée. Cliquer ici pour crééer votre fiche médical.
                             </span>
                         </ng-container>
                         <ng-container *ngIf="loadingFiche">

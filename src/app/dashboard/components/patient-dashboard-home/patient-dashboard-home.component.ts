@@ -193,10 +193,13 @@ export class PatientDashboardHomeComponent implements OnInit {
                 tap((res: FicheMedicalModel) => {
                     this.loadingFiche = false;
                     this.userFicheMedical = res;
+                    this.hasficheMedical = true;
                 }),
                 catchError((err: any) => {
                     this.loadingFiche = false;
-                    console.log('err', err.error);
+                    if(err?.error?.error?.statusCode === 404) {
+                      this.hasficheMedical = false;
+                    }
                     return of(err);
                 })
             )
@@ -213,8 +216,8 @@ export class PatientDashboardHomeComponent implements OnInit {
             .subscribe((res: FicheMedicalModel) => {
               console.log('rres', res);
                 if (res) {
+                    this.hasficheMedical = true;
                     this.userFicheMedical = res;
-
                 }
             });
     }

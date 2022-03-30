@@ -19,12 +19,11 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Groupe Sanguin</mat-label>
-        <input
-          formControlName="groupe_sanguin"
-          matInput
-          placeholder="Votre groupe Sanguin"
-          readonly
-        />
+        <mat-select formControlName="groupe_sanguin" placeholder="Votre groupe Sanguin">
+          <mat-option *ngFor="let item of listGroupeSanguin" [value]="item">
+            {{item}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -38,12 +37,14 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Genre</mat-label>
-        <input
-          formControlName="sexe"
-          matInput
-          placeholder="Votre sexe"
-          readonly
-        />
+        <mat-select formControlName="sexe" placeholder="Votre sexe">
+          <mat-option value="MASCULIN">
+            Masculin
+          </mat-option>
+          <mat-option value="FEMININ">
+            Feminin
+          </mat-option>
+        </mat-select>
       </mat-form-field>
   </div>
   <div>

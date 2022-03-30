@@ -17,7 +17,7 @@ export class FicheMedicalService {
 
   async registerFicheMedical(data: FicheMedicalModel) {
     const user = await this.authServ.getUserInfosSaved().toPromise();
-    return this.http.post(`${FICHE_MEDICAL_ENDPOINT}/${user?.userId}/fichemedicale`, data);
+    return await this.http.post(`${FICHE_MEDICAL_ENDPOINT}/${user?.userId}/fichemedicale`, data).toPromise();
   }
   async updateFicheMedical(data: FicheMedicalModel) {
     const user = await this.authServ.getUserInfosSaved().toPromise();

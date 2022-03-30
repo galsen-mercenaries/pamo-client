@@ -14,6 +14,9 @@ export class EditFicheMedicalComponent implements OnInit {
     form: FormGroup;
     user: any;
     hasError: boolean;
+    listGroupeSanguin: string[] = [
+        "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"
+    ]
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: { ficheMedical: FicheMedicalModel, update: boolean},
         public dialogRef: MatDialogRef<EditFicheMedicalComponent>,
@@ -24,13 +27,13 @@ export class EditFicheMedicalComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            poids: [this.data.ficheMedical.poids, [Validators.required]],
-            taille: [this.data.ficheMedical.taille, [Validators.required]],
-            sexe: [this.data.ficheMedical.sexe],
-            date_naissance: [this.date.transform(this.data.ficheMedical.date_naissance, 'yyyy-MM-dd')],
-            groupe_sanguin: [this.data.ficheMedical.groupe_sanguin],
-            maladies: [this.data.ficheMedical.maladies],
-            contact_urgence: [this.data.ficheMedical.contact_urgence]
+            poids: [this.data?.ficheMedical?.poids ? this.data?.ficheMedical?.poids : 0, [Validators.required]],
+            taille: [this.data?.ficheMedical?.taille ? this.data?.ficheMedical?.taille : 0, [Validators.required]],
+            sexe: [this.data?.ficheMedical?.sexe],
+            date_naissance: [this.date.transform(this.data?.ficheMedical?.date_naissance, 'yyyy-MM-dd')],
+            groupe_sanguin: [this.data?.ficheMedical?.groupe_sanguin],
+            maladies: [this.data?.ficheMedical?.maladies ? this.data?.ficheMedical?.maladies : ''],
+            contact_urgence: [this.data?.ficheMedical?.contact_urgence ? this.data?.ficheMedical?.contact_urgence: '']
         });
     }
 
@@ -50,6 +53,16 @@ export class EditFicheMedicalComponent implements OnInit {
                     this.hasError = true;
                 }
             );
+        } else {
+            this.ficheMedical.registerFicheMedical(data).then(
+                () => {
+                    this.dialogRef.close(data);
+                }
+            ).catch(
+                () => {
+                    this.hasError = true;
+                }
+            )
         }
     }
 
