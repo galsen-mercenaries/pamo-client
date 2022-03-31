@@ -27,12 +27,12 @@ export class EditFicheMedicalComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            poids: [this.data?.ficheMedical?.poids ? this.data?.ficheMedical?.poids : 0, [Validators.required]],
-            taille: [this.data?.ficheMedical?.taille ? this.data?.ficheMedical?.taille : 0, [Validators.required]],
+            poids: [this.data?.ficheMedical?.poids, [Validators.required]],
+            taille: [this.data?.ficheMedical?.taille, [Validators.required]],
             sexe: [this.data?.ficheMedical?.sexe],
             date_naissance: [this.date.transform(this.data?.ficheMedical?.date_naissance, 'yyyy-MM-dd')],
             groupe_sanguin: [this.data?.ficheMedical?.groupe_sanguin],
-            maladies: [this.data?.ficheMedical?.maladies ? this.data?.ficheMedical?.maladies : ''],
+            maladies: [this.data?.ficheMedical?.maladies ],
             contact_urgence: [this.data?.ficheMedical?.contact_urgence ? this.data?.ficheMedical?.contact_urgence: '']
         });
     }
@@ -43,6 +43,8 @@ export class EditFicheMedicalComponent implements OnInit {
         const data: FicheMedicalModel = this.form.value;
         data.date_naissance = new Date(data.date_naissance);
         this.hasError = false;
+        if(!data?.groupe_sanguin) delete data?.groupe_sanguin;
+        if(!data?.maladies) delete data?.maladies;
         if(this.data?.update) {
             this.ficheMedical.updateFicheMedical(data).then(
                 () => {

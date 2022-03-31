@@ -6,25 +6,32 @@
   autocomplete="false"
 >
 <mat-dialog-content>
-  <div>Vous pouvez éditer les champs actifs puis valider la sauvegarde.</div>
-  <div>
+  <div class="description">Vous pouvez éditer les champs actifs puis valider pour sauvegarder.</div>
+  <div class="sub-description">
+    * Les champs avec  <mat-icon>lock</mat-icon> sont seulement éditables par un medecin.
+  </div>
+  <div class="content">
       <mat-form-field appearance="fill">
         <mat-label>Poids</mat-label>
         <input
           formControlName="poids"
           matInput
           placeholder="Votre poids"
-          readonly
+          type="number"
         />
+        <span matSuffix>Kg</span>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Groupe Sanguin</mat-label>
-        <mat-select formControlName="groupe_sanguin" placeholder="Votre groupe Sanguin">
-          <mat-option *ngFor="let item of listGroupeSanguin" [value]="item">
-            {{item}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="item">
+        <mat-form-field appearance="fill" class="disabled">
+          <mat-label>Groupe Sanguin</mat-label>
+          <mat-select formControlName="groupe_sanguin" placeholder="Votre groupe Sanguin">
+            <mat-option *ngFor="let item of listGroupeSanguin" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon>lock</mat-icon>
+      </div>
 
       <mat-form-field appearance="fill">
         <mat-label>Taille</mat-label>
@@ -32,8 +39,10 @@
           formControlName="taille"
           matInput
           placeholder="Votre taille"
-          readonly
+          type="number"
+          step=".01"
         />
+        <span matSuffix>Kg</span>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Genre</mat-label>
@@ -46,8 +55,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-  </div>
-  <div>
       <mat-form-field appearance="fill">
         <mat-label>Date de naissance</mat-label>
         <input
@@ -63,19 +70,21 @@
           formControlName="contact_urgence"
           matInput
           placeholder="Vos contacts urgents"
-          disabled
         />
       </mat-form-field>
+    <div class="item">
+      <mat-form-field appearance="fill">
+        <mat-label>Maladies ou Allergies</mat-label>
+        <textarea
+          formControlName="maladies"
+          matInput
+          placeholder="Vos maladies/Vos Allergies"
+          readonly
+        ></textarea>
+      </mat-form-field>
+      <mat-icon>lock</mat-icon>
+    </div>
   </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Maladies ou Allergies</mat-label>
-      <textarea
-        formControlName="maladies"
-        matInput
-        placeholder="Vos maladies/Vos Allergies"
-
-      ></textarea>
-    </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-dialog-close>Fermer</button>

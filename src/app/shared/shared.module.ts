@@ -31,6 +31,7 @@ import {
 } from "@angular-material-components/datetime-picker";
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
+import { MatIconModule } from "@angular/material/icon";
 
 registerLocaleData(localeFr, 'fr');
 FullCalendarModule.registerPlugins([
@@ -76,6 +77,7 @@ FullCalendarModule.registerPlugins([
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     NgxMatTimepickerModule,
+    MatIconModule
   ],
   providers: [
     DatePipe,

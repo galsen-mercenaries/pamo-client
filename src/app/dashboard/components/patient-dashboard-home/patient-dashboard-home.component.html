@@ -134,11 +134,11 @@
                                 <div class="item-info">
                                     <span class="intitule">Taille :</span><span class="info">{{
                                         userFicheMedical?.taille}}
-                                        cm</span>
+                                        mètre(s) </span>
                                 </div>
                                 <div class="item-info">
                                     <span class="intitule">Groupe Sanguin :</span><span class="info red">{{
-                                        userFicheMedical?.groupe_sanguin}} </span>
+                                        userFicheMedical?.groupe_sanguin ? userFicheMedical?.groupe_sanguin : 'Non renseigné'}} </span>
                                 </div>
                                 <div class="item-info">
                                     <span class="intitule">Contact d'urgence :</span>
@@ -150,7 +150,7 @@
                             <div class="medical-info-block">
                                 <div class="item-info">
                                     <span class="intitule">Problèmes médicaux : </span><span
-                                        class="info">{{userFicheMedical?.maladies}}</span>
+                                        class="info">{{userFicheMedical?.maladies ? userFicheMedical?.maladies : 'Non renseigné'}}</span>
                                 </div>
                                 <!-- <div class="item-info">
                                     <span class="intitule">Allergies et réactions : </span><span
