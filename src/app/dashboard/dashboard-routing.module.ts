@@ -72,6 +72,13 @@ const routes: Routes = [
             "./../appointment-validation/appointment-validation.module"
           ).then((m) => m.AppointmentValidationModule),
       },
+      {
+        path: "users",
+        loadChildren: () =>
+          import(
+            "./pages/user-actions-medecins-page/user-actions-medecins-page.module"
+          ).then((m) => m.UserActionsMedecinsPageModule),
+      },
     ],
   },
 ];

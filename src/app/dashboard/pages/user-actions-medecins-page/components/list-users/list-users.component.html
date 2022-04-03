@@ -1,0 +1,65 @@
+<div class="user-container">
+    <div class="title">
+        Les utilisateurs
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef> Avatar </th>
+            <td mat-cell *matCellDef="let element">
+                <img class="avatar" *ngIf="element?.image" [src]="element?.image" alt="">
+                <span class="font-s-10" *ngIf="!element?.image"> Pas de photo </span>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef> Prenom </th>
+            <td class="font-s-13" mat-cell *matCellDef="let element"> {{element?.prenom}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td class="font-s-13" mat-cell *matCellDef="let element"> {{element?.nom}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="adresse">
+            <th mat-header-cell *matHeaderCellDef> Adresse </th>
+            <td class="font-s-13" mat-cell *matCellDef="let element"> {{element?.adresse}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <ng-container *ngIf="element?.fichemedicale">
+                    <span (click)="editFicheMedical(element, i)" class="c-pointer underline">
+                        <mat-icon class="c-pointer">
+                            edit
+                        </mat-icon>
+                        Editer
+                    </span>
+                </ng-container>
+                <ng-container *ngIf="!element?.fichemedicale">
+                    <span (click)="editFicheMedical(element, i)" class="c-pointer underline">
+                        <mat-icon>fiber_new</mat-icon>
+                        Créer la fiche médicale
+                    </span>
+                </ng-container>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10]"
+        (page)="goTo($event)" showFirstLastButtons></mat-paginator>
+      </div>
+</div>
