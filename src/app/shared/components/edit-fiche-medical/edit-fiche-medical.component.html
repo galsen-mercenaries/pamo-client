@@ -22,7 +22,7 @@
         <span matSuffix>Kg</span>
       </mat-form-field>
       <div class="item">
-        <mat-form-field appearance="fill" class="disabled">
+        <mat-form-field appearance="fill" [ngClass]="{'disabled': !isMedecin}">
           <mat-label>Groupe Sanguin</mat-label>
           <mat-select formControlName="groupe_sanguin" placeholder="Votre groupe Sanguin">
             <mat-option *ngFor="let item of listGroupeSanguin" [value]="item">
@@ -42,7 +42,7 @@
           type="number"
           step=".01"
         />
-        <span matSuffix>Kg</span>
+        <span matSuffix>Cm</span>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Genre</mat-label>
@@ -79,7 +79,7 @@
           formControlName="maladies"
           matInput
           placeholder="Vos maladies/Vos Allergies"
-          readonly
+          [readonly]="!isMedecin"
         ></textarea>
       </mat-form-field>
       <mat-icon>lock</mat-icon>

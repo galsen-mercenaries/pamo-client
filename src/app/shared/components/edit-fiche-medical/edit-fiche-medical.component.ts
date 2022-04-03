@@ -17,8 +17,9 @@ export class EditFicheMedicalComponent implements OnInit {
     listGroupeSanguin: string[] = [
         "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"
     ]
+    isMedecin: boolean;
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: { ficheMedical: FicheMedicalModel, update: boolean},
+        @Inject(MAT_DIALOG_DATA) public data: { ficheMedical: FicheMedicalModel, update: boolean, isMedecin: boolean, userId: number},
         public dialogRef: MatDialogRef<EditFicheMedicalComponent>,
         private fb: FormBuilder,
         private date: DatePipe,
@@ -26,6 +27,7 @@ export class EditFicheMedicalComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.isMedecin = this.data.isMedecin;
         this.form = this.fb.group({
             poids: [this.data?.ficheMedical?.poids, [Validators.required]],
             taille: [this.data?.ficheMedical?.taille, [Validators.required]],
@@ -46,7 +48,7 @@ export class EditFicheMedicalComponent implements OnInit {
         if(!data?.groupe_sanguin) delete data?.groupe_sanguin;
         if(!data?.maladies) delete data?.maladies;
         if(this.data?.update) {
-            this.ficheMedical.updateFicheMedical(data).then(
+            this.ficheMedical.updateFicheMedical(data, this.data?.userId).then(
                 () => {
                     this.dialogRef.close(data);
                 }
@@ -56,7 +58,7 @@ export class EditFicheMedicalComponent implements OnInit {
                 }
             );
         } else {
-            this.ficheMedical.registerFicheMedical(data).then(
+            this.ficheMedical.registerFicheMedical(data, this.data?.userId).then(
                 () => {
                     this.dialogRef.close(data);
                 }

@@ -15,12 +15,12 @@ export class FicheMedicalService {
 
   constructor(private http: HttpClient, private authServ: AuthenticationService) { }
 
-  async registerFicheMedical(data: FicheMedicalModel) {
+  async registerFicheMedical(data: FicheMedicalModel, userId?: number) {
     const user = await this.authServ.getUserInfosSaved().toPromise();
-    return await this.http.post(`${FICHE_MEDICAL_ENDPOINT}/${user?.userId}/fichemedicale`, data).toPromise();
+    return await this.http.post(`${FICHE_MEDICAL_ENDPOINT}/${userId ? userId : user?.userId}/fichemedicale`, data).toPromise();
   }
-  async updateFicheMedical(data: FicheMedicalModel) {
+  async updateFicheMedical(data: FicheMedicalModel, userId?: number) {
     const user = await this.authServ.getUserInfosSaved().toPromise();
-    return await this.http.patch(`${FICHE_MEDICAL_ENDPOINT}/${user?.userId}/fichemedicale`, data).toPromise();
+    return await this.http.patch(`${FICHE_MEDICAL_ENDPOINT}/${userId ? userId : user?.userId}/fichemedicale`, data).toPromise();
   }
 }

@@ -29,7 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MedecinDashboardComponent,
     MedecinDashboardHomeComponent,
     DashboardTamponComponent,
-    MedecinsCalendarComponent,
+    MedecinsCalendarComponent
   ],
   imports: [
     CommonModule,

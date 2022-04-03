@@ -92,6 +92,7 @@ mat-sidenav-container {
     flex-direction: column;
     flex-grow: 1;
     width: calc(100% - 80px);
+    overflow-y: auto;
   }
 }
 
