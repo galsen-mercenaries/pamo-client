@@ -15,6 +15,8 @@ const REGISTER_USER_URL = `${SERVER_URL}/user/signup`;
 const CHECK_EMAIL_URL = `${SERVER_URL}/users/check-account`;
 const LOGIN_URL = `${SERVER_URL}/users/login`;
 const CURRENT_USER_INFOS = `${SERVER_URL}/user/me`;
+const RESET_PWD_INIT_ENDPOINT = `${SERVER_URL}/reset-password/init`;
+const RESET_PWD_FINISH_ENDPOINT = `${SERVER_URL}/reset-password/finish`;
 
 @Injectable({
   providedIn: "root",
@@ -59,5 +61,13 @@ export class AuthenticationService {
     const userInfos = ls.get(LOCAL_STORAGE_KEYS.USER);
     if (userInfos) return of(userInfos);
     return this.getUserInfos();
+  }
+
+  initResetPassword(data : { email: string }) {
+    return this.http.post(`${RESET_PWD_INIT_ENDPOINT}`, data);
+  }
+
+  finishResetPassword(data : { password: string, resetKey: string, confirmPassword: string }) {
+    return this.http.put(`${RESET_PWD_FINISH_ENDPOINT}`, data);
   }
 }

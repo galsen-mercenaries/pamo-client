@@ -27,6 +27,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "reset-password",
+    loadChildren: () =>
+      import("./reset-pwd/reset-pwd.module").then(
+        (m) => m.ResetPwdModule
+      ),
+  },
+  {
     path: "prestataire",
     // canActivate: [AuthGuardService],
     loadChildren: () =>

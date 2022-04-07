@@ -31,6 +31,8 @@ import {
 } from "@angular-material-components/datetime-picker";
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
+import { MatIconModule } from "@angular/material/icon";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 registerLocaleData(localeFr, 'fr');
 FullCalendarModule.registerPlugins([
@@ -76,6 +78,9 @@ FullCalendarModule.registerPlugins([
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     NgxMatTimepickerModule,
+    MatIconModule,
+    MatSnackBarModule
+
   ],
   providers: [
     DatePipe,
@@ -92,6 +97,13 @@ FullCalendarModule.registerPlugins([
     AppointmentInfosCardComponent,
     AppointmentConfirmationModalComponent,
     PrevisualizeAvatarPopupComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
 })
 export class SharedModule {}
