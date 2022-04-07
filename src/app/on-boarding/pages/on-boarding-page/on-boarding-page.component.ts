@@ -57,6 +57,10 @@ export class OnBoardingPageComponent implements OnInit {
     this.router.navigate(["/register"]);
   }
 
+  goToForgottenPwd() {
+    this.router.navigate(["/reset-password"]);
+  }
+
   nextSlide() {
     this.swiper.directiveRef.nextSlide();
   }

@@ -32,6 +32,7 @@ import {
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
 import { MatIconModule } from "@angular/material/icon";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
@@ -83,7 +84,8 @@ FullCalendarModule.registerPlugins([
     MatIconModule,
     MatTabsModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [
     DatePipe,
@@ -100,7 +102,13 @@ FullCalendarModule.registerPlugins([
     AppointmentInfosCardComponent,
     AppointmentConfirmationModalComponent,
     PrevisualizeAvatarPopupComponent,
+    MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule
