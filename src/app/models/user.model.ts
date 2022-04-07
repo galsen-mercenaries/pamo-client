@@ -1,3 +1,5 @@
+import { FicheMedicalModel } from "./fiche-medical.model";
+
 export interface UserModel {
   userId?: number;
   nom: string;
@@ -11,6 +13,7 @@ export interface UserModel {
   roleCode?: string;
   medecinId?: number;
   structuresanitaireId?: number;
+  fichemedicale?: FicheMedicalModel;
 }
 
 export enum ROLE_ENUM {

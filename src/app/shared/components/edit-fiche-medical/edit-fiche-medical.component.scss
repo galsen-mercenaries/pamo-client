@@ -1,0 +1,27 @@
+
+mat-dialog-actions {
+    flex-direction: column-reverse;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+
+    .item {
+        display: flex;
+        align-items: center;
+        mat-form-field {
+            width: 90%;
+            margin-right: 15px;
+        }
+    }
+}
+.disabled {
+    pointer-events: none;
+}
+
+.description {
+    font-size: 13px;
+}
+.sub-description {
+    font-size: 12px;
+}

@@ -33,6 +33,9 @@ import { SwiperModule } from "ngx-swiper-wrapper";
 import { PrevisualizeAvatarPopupComponent } from "./components/previsualize-avatar-popup/previsualize-avatar-popup.component";
 import { MatIconModule } from "@angular/material/icon";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 registerLocaleData(localeFr, 'fr');
 FullCalendarModule.registerPlugins([
@@ -79,8 +82,10 @@ FullCalendarModule.registerPlugins([
     NgxMatNativeDateModule,
     NgxMatTimepickerModule,
     MatIconModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatSnackBarModule
-
   ],
   providers: [
     DatePipe,
@@ -103,7 +108,10 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
 })
 export class SharedModule {}

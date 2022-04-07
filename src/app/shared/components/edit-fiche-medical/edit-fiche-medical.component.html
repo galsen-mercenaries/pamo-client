@@ -1,31 +1,37 @@
 <h2 mat-dialog-title>Editer la fiche médicale</h2>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  novalidate
+  autocomplete="false"
+>
 <mat-dialog-content>
-  <div>Vous pouvez éditer les champs actifs puis valider la sauvegarde.</div>
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    novalidate
-    autocomplete="false"
-  >
-  <div>
+  <div class="description">Vous pouvez éditer les champs actifs puis valider pour sauvegarder.</div>
+  <div class="sub-description">
+    * Les champs avec  <mat-icon>lock</mat-icon> sont seulement éditables par un medecin.
+  </div>
+  <div class="content">
       <mat-form-field appearance="fill">
         <mat-label>Poids</mat-label>
         <input
           formControlName="poids"
           matInput
           placeholder="Votre poids"
-          readonly
+          type="number"
         />
+        <span matSuffix>Kg</span>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Groupe Sanguin</mat-label>
-        <input
-          formControlName="groupeSanguin"
-          matInput
-          placeholder="Votre groupe Sanguin"
-          disabled
-        />
-      </mat-form-field>
+      <div class="item">
+        <mat-form-field appearance="fill" [ngClass]="{'disabled': !isMedecin}">
+          <mat-label>Groupe Sanguin</mat-label>
+          <mat-select formControlName="groupe_sanguin" placeholder="Votre groupe Sanguin">
+            <mat-option *ngFor="let item of listGroupeSanguin" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon>lock</mat-icon>
+      </div>
 
       <mat-form-field appearance="fill">
         <mat-label>Taille</mat-label>
@@ -33,24 +39,26 @@
           formControlName="taille"
           matInput
           placeholder="Votre taille"
-          readonly
+          type="number"
+          step=".01"
         />
+        <span matSuffix>Cm</span>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Genre</mat-label>
-        <input
-          formControlName="sexe"
-          matInput
-          placeholder="Votre sexe"
-          readonly
-        />
+        <mat-select formControlName="sexe" placeholder="Votre sexe">
+          <mat-option value="MASCULIN">
+            Masculin
+          </mat-option>
+          <mat-option value="FEMININ">
+            Feminin
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-  </div>
-  <div>
       <mat-form-field appearance="fill">
         <mat-label>Date de naissance</mat-label>
         <input
-          formControlName="dateNaissance"
+          formControlName="date_naissance"
           type="date"
           matInput
           placeholder="Votre date de naissance"
@@ -59,26 +67,28 @@
       <mat-form-field appearance="fill">
         <mat-label>Contacts urgents</mat-label>
         <input
-          formControlName="contactUrgents"
+          formControlName="contact_urgence"
           matInput
           placeholder="Vos contacts urgents"
-          disabled
         />
       </mat-form-field>
+    <div class="item">
+      <mat-form-field appearance="fill">
+        <mat-label>Maladies ou Allergies</mat-label>
+        <textarea
+          formControlName="maladies"
+          matInput
+          placeholder="Vos maladies/Vos Allergies"
+          [readonly]="!isMedecin"
+        ></textarea>
+      </mat-form-field>
+      <mat-icon>lock</mat-icon>
+    </div>
   </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Maladies</mat-label>
-      <textarea
-        formControlName="maladies"
-        matInput
-        placeholder="Vos maladies"
-
-      ></textarea>
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close="'CANCEL'">Fermer</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button type="submit" mat-button>Enregistrer les modifications</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Fermer</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button type="submit" mat-button>Enregistrer les modifications</button>
+  </mat-dialog-actions>
+</form>
