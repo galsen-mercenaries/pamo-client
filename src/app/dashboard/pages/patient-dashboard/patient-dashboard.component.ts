@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { tap } from "rxjs/operators";
 import { UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
@@ -22,15 +23,16 @@ export class PatientDashboardComponent implements OnInit {
       router: "calendrier-medical",
     },
     { menuTitle: "Assurances", router: "prestataire" },
-    { menuTitle: "Actualités", router: "3" },
-    { menuTitle: "Mes notifcations", router: "4" },
+    { menuTitle: "Mon profil", router: "mon-profil" },
+    { menuTitle: "Mes notifications", router: "4" },
   ];
   currentUser: UserModel;
 
   constructor(
     private authServ: AuthenticationService,
     public dialog: MatDialog,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -69,5 +71,9 @@ export class PatientDashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
     });
+  }
+
+  updateProfile() {
+    this.router.navigate(["dashboard/patient/mon-profil"])
   }
 }
