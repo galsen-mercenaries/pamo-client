@@ -1,0 +1,39 @@
+<div class="profile-page">
+    <div class="page-title">
+        <mat-icon class="back-ico" (click)="goBack()">arrow_back</mat-icon>
+        <span class="back-text">Modifier mes informations personnelles</span>
+    </div>
+    <div class="profile-page-content">
+        <ng-container *ngIf="loading else formBlock"></ng-container>
+        <ng-template #formBlock>
+            <form [formGroup]="form" class="form">
+                <mat-form-field class="form-item disabled" [appearance]="'standard'">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="text" readonly>
+                </mat-form-field>
+                <mat-form-field class="form-item" [appearance]="'standard'">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="prenom" type="text">
+                </mat-form-field>
+                <mat-form-field class="form-item" [appearance]="'standard'">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="nom" type="text">
+                </mat-form-field>
+                <mat-form-field class="form-item" [appearance]="'standard'">
+                    <mat-label>Adresse</mat-label>
+                    <input matInput formControlName="adresse" type="text">
+                </mat-form-field>
+                <mat-form-field class="form-item" [appearance]="'standard'">
+                    <mat-label>Numéro</mat-label>
+                    <input matInput formControlName="numero" type="text">
+                </mat-form-field>
+            </form>
+            <div class="btn-container">
+                <button class="btn btn-confirm text-white" (click)="update()" [disabled]="!form.touched || updating">
+                    Enregistrer les modifications
+                    <mat-spinner *ngIf="updating" [diameter]="20" mode="indeterminate"></mat-spinner>
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

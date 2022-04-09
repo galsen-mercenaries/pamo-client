@@ -45,6 +45,14 @@ const routes: Routes = [
             (m) => m.AppointmentMakingModule
           ),
       },
+      {
+        path: "mon-profil",
+        canActivate: [AuthGuardService],
+        loadChildren: () =>
+          import("../my-profile/my-profile.module").then(
+            (m) => m.MyProfileModule
+          ),
+      },
     ],
   },
   {

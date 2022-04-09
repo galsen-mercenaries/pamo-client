@@ -153,6 +153,7 @@ export class AppointmentValidationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(["/"]);
+    const route = this.isPatient ? '/' : 'dashboard/personnel'
+    this.router.navigate([route]);
   }
 }
