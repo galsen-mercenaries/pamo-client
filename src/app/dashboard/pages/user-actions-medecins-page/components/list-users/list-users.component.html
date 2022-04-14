@@ -1,8 +1,18 @@
 <div class="user-container">
     <div class="title">
-        Les utilisateurs
+        Liste des utilisateurs
+    </div>
+    <div>
+
     </div>
     <div class="mat-elevation-z8">
+      <div class="description">
+        Filtrer suivant l'email, l'adresse, nom, prénom, ou numéro de téléphone de l'utilisateur
+      </div>
+      <mat-form-field class="filter">
+        <mat-label>Filtre</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Valeur du filtre" #input>
+      </mat-form-field>
         <table mat-table [dataSource]="dataSource">
 
 
@@ -55,6 +65,9 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Pas de resultats pour le filtre "{{input.value}}"</td>
+          </tr>
         </table>
 
         <mat-paginator [length]="length"
