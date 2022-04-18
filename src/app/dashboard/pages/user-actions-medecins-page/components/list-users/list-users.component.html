@@ -1,6 +1,6 @@
 <div class="user-container">
     <div class="title">
-        Liste des utilisateurs
+        Liste des utilisateurs <mat-spinner *ngIf="isLoading" [diameter]="20" mode="indeterminate"></mat-spinner>
     </div>
     <div>
 
@@ -65,14 +65,49 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">Pas de resultats pour le filtre "{{input.value}}"</td>
+          <tr class="mat-row" *matNoDataRow >
+            <td class="mat-cell" colspan="4">Pas de resultats pour le filtre "{{input.value || filterInfos?.value}}"</td>
           </tr>
         </table>
+        <div class="footer">
+          <button (click)="filter.hidden = !filter.hidden"  mat-stroked-button color="primary" aria-label="Filtre avancée sur la liste">
+            Filtre avancée<mat-icon>filter_list</mat-icon>
+          </button>
 
-        <mat-paginator [length]="length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[5, 10]"
-        (page)="goTo($event)" showFirstLastButtons></mat-paginator>
-      </div>
+          <mat-paginator [length]="length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10]"
+          (page)="goTo($event)" showFirstLastButtons></mat-paginator>
+        </div>
+        <div #filter  class="filter-section">
+          <div class="text">
+            Effectuer un filtre sur les éléments de la fiche médicale
+          </div>
+          <div class="filter-input">
+            <mat-form-field class="choice" appearance="fill">
+              <mat-label>Selection du type de filtre</mat-label>
+              <mat-select #select [(ngModel)]="filterInfos.filterType" >
+                <mat-option value="gSanguin">Groupe sanguin</mat-option>
+                <mat-option value="genre">Genre</mat-option>
+                <!-- <mat-option value="poids">Poids</mat-option> -->
+                <!-- <mat-option value="birthdate">Date de naissance</mat-option> -->
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="select.value === 'gSanguin' " class="example-full-width">
+              <mat-label>Sélectionner</mat-label>
+              <mat-select #select [(ngModel)]="filterInfos.value">
+                <mat-option *ngFor="let item of gSanguins" [value]="item.value"> {{ item?.label}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="select.value === 'genre' " class="example-full-width">
+              <mat-label>Sélectionner</mat-label>
+              <mat-select #select [(ngModel)]="filterInfos.value">
+                <mat-option *ngFor="let item of genres" [value]="item.value"> {{ item?.label}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <button (click)="applyAdvancedFilter()" class="apply" mat-flat-button color="primary">Appliquer Filtre</button>
+          <button (click)="clearFilter()" class="clear" mat-stroked-button color="accent">Annuler les filtres</button>
+        </div>
+    </div>
 </div>

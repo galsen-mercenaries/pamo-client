@@ -40,7 +40,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatListModule,
     CalendarModule,
-    MatProgressSpinnerModule,
     MatDialogModule,
     SharedModule,
     DlDateTimeDateModule,

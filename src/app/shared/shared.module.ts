@@ -85,7 +85,8 @@ FullCalendarModule.registerPlugins([
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DatePipe,
@@ -111,7 +112,9 @@ FullCalendarModule.registerPlugins([
     MatSnackBarModule,
     MatTabsModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
 })
 export class SharedModule {}
