@@ -1,3 +1,5 @@
+import { UserModel } from "./user.model";
+
 export interface FicheMedicalModel {
   date_naissance: Date;
   groupe_sanguin: any;
@@ -6,4 +8,5 @@ export interface FicheMedicalModel {
   poids: any;
   taille: any;
   contact_urgence: any;
+  user?: UserModel;
 }

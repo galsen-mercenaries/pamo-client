@@ -1,4 +1,5 @@
 import { FicheMedicalModel } from "./fiche-medical.model";
+import { SpecializationModel } from "./specialization.model";
 
 export interface UserModel {
   userId?: number;
@@ -14,6 +15,7 @@ export interface UserModel {
   medecinId?: number;
   structuresanitaireId?: number;
   fichemedicale?: FicheMedicalModel;
+  specialite?: SpecializationModel;
 }
 
 export enum ROLE_ENUM {

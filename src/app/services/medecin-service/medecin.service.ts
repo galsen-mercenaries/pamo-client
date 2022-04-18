@@ -32,7 +32,9 @@ export class MedecinService {
       map((res) => {
         res.forEach((medecin) => {
           const randomImgNum = this.generateRandomNumber();
-          medecin.user.image = `https://picsum.photos/id/${randomImgNum}/200`;
+          if(medecin.user) {
+            medecin.user.image = `https://picsum.photos/id/${randomImgNum}/200`;
+          }
         });
         return res;
       })

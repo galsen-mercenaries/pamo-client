@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { FicheMedicalModel } from 'src/app/models/fiche-medical.model';
 import { environment } from 'src/environments/environment';
 const { SERVER_URL } = environment;
 const USERS_RESOURCES = `${SERVER_URL}/users`;
+const FICHE_MEDICALES_RESOURCES = `${SERVER_URL}/fichemedicales`;
 @Injectable({
   providedIn: 'root'
 })
@@ -35,5 +38,47 @@ export class UsersService {
   const encodedFilter = encodeURIComponent(JSON.stringify(inclusionFilter));
     return this.http.get<any>(
       USERS_RESOURCES + '?filter='+encodedFilter );
+  }
+
+  getUsersByFilter(filter?: {filterType: 'gSanguin' | 'genre' | 'poids' | 'birthdate', value: any} ,options?: {limit: any, skip: any, orderBy?: 'ASC' | 'DESC'}) {
+    const whereFilter = {where : {}};
+    switch (filter?.filterType) {
+      case 'gSanguin':
+        whereFilter.where = Object.assign({}, {groupe_sanguin: filter.value});
+        break;
+      case 'genre':
+        whereFilter.where = Object.assign({}, {sexe: filter.value});
+        break;
+      case 'poids':
+        whereFilter.where = Object.assign({}, {poids: {gt : +filter.value}});
+        break;
+      case 'birthdate':
+        whereFilter.where = Object.assign({}, {date_naissance: {gt: filter.value}});
+        break;
+      default:
+        break;
+    }
+
+    const inclusionFilter = {
+      include: [
+        {
+          relation: "user",
+          scope: {
+            where: { roleId: 5}, // only select order with id 5
+          }
+        }
+      ],
+      ...whereFilter,
+      limit: options?.limit,
+      skip: options?.skip,
+    }
+  const encodedFilter = encodeURIComponent(JSON.stringify(inclusionFilter));
+    return this.http.get<FicheMedicalModel[]>(
+      FICHE_MEDICALES_RESOURCES + '?filter='+encodedFilter ).pipe(map((resp: FicheMedicalModel[]) => {
+        const ficheMedicales: FicheMedicalModel[] = resp.filter((item: FicheMedicalModel) => item?.user);
+        return ficheMedicales.map((item: FicheMedicalModel) => {
+          return {...item.user, fichemedicale: item}
+        })
+      }));
   }
 }
