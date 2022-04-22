@@ -50,10 +50,10 @@ export class UsersService {
         whereFilter.where = Object.assign({}, {sexe: filter.value});
         break;
       case 'poids':
-        whereFilter.where = Object.assign({}, {poids: {gt : +filter.value}});
+        whereFilter.where = Object.assign({}, {poids: {gte : +filter.value}});
         break;
       case 'birthdate':
-        whereFilter.where = Object.assign({}, {date_naissance: {gt: filter.value}});
+        whereFilter.where = Object.assign({}, {date_naissance: {gte: filter.value}});
         break;
       default:
         break;
