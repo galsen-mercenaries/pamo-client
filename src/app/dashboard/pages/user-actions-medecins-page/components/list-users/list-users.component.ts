@@ -121,5 +121,6 @@ export class ListUsersComponent implements OnInit {
   clearFilter() {
     this.filterInfos = {filterType: null, value: null};
     this.fetchUsers();
+    this.filter.nativeElement.hidden = true;
   }
 }

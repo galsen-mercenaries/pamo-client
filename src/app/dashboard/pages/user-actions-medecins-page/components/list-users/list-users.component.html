@@ -89,24 +89,29 @@
               <mat-select #select [(ngModel)]="filterInfos.filterType" >
                 <mat-option value="gSanguin">Groupe sanguin</mat-option>
                 <mat-option value="genre">Genre</mat-option>
-                <!-- <mat-option value="poids">Poids</mat-option> -->
+                <mat-option value="poids">Poids</mat-option>
                 <!-- <mat-option value="birthdate">Date de naissance</mat-option> -->
               </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="select.value === 'gSanguin' " class="example-full-width">
+            <mat-form-field *ngIf="select.value === 'gSanguin' " class="">
               <mat-label>Sélectionner</mat-label>
               <mat-select #select [(ngModel)]="filterInfos.value">
                 <mat-option *ngFor="let item of gSanguins" [value]="item.value"> {{ item?.label}} </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="select.value === 'genre' " class="example-full-width">
+            <mat-form-field *ngIf="select.value === 'genre' " class="">
               <mat-label>Sélectionner</mat-label>
               <mat-select #select [(ngModel)]="filterInfos.value">
                 <mat-option *ngFor="let item of genres" [value]="item.value"> {{ item?.label}} </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-form-field *ngIf="select.value === 'poids' " class="" appearance="outline">
+                <mat-label>Poids minimum</mat-label>
+                <input matInput type="number" [(ngModel)]="filterInfos.value" step=".01" placeholder="Entrer le poids minimum">
+                <mat-icon matSuffix>arrow_forward_ios</mat-icon>
+            </mat-form-field>
           </div>
-          <button (click)="applyAdvancedFilter()" class="apply" mat-flat-button color="primary">Appliquer Filtre</button>
+          <button (click)="applyAdvancedFilter()" [disabled]="isLoading" class="apply" mat-flat-button color="primary">Appliquer Filtre</button>
           <button (click)="clearFilter()" class="clear" mat-stroked-button color="accent">Annuler les filtres</button>
         </div>
     </div>
