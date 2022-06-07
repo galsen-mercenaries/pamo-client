@@ -1,0 +1,17 @@
+<div class="appointment-confirmation-page">
+    <div class="title">
+        <mat-icon class="back-ico" (click)="goBack()">arrow_back</mat-icon>
+        <span class="text">Calendrier des rendez-vous</span>
+    </div>
+    <div class="body-block">
+        <div class="calendar-container">
+            <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+        <div class="legends-block">
+            <div class="legend" *ngFor="let legend of legends">
+                <div class="color" [ngStyle]="{'background-color': legend.color}"></div>
+                <span class="legend-name">{{legend.name}}</span>
+            </div>
+        </div>
+    </div>
+</div>

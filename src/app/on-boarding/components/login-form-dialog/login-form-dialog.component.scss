@@ -1,0 +1,48 @@
+.login-dialog-page {
+  padding: 15px 7%;
+  width: 100%;
+  .img-container {
+    text-align: center;
+    img {
+      width: 80px;
+      height: 80px;
+      margin: 20px auto;
+    }
+  }
+  .login-form {
+    mat-form-field {
+      width: 100%;
+    }
+    .error-message {
+      margin-bottom: 10px;
+      color: red;
+      font-family: "NotoSansKR-Light";
+      font-size: 12px;
+    }
+    .button-container {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0 20px;
+      button {
+        position: relative;
+        height: 40px;
+        text-align: center;
+        line-height: 1;
+        border-radius: 12px;
+        background-color: #47afff;
+        border: unset;
+        color: white;
+        width: 100%;
+        max-width: 300px;
+        mat-spinner {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
+        .mat-spinner::ng-deep circle {
+          stroke: white;
+        }
+      }
+    }
+  }
+}

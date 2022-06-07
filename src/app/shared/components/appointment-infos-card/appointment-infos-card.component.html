@@ -1,0 +1,68 @@
+<div [ngClass]="{
+    'confirmed': appointment?.status === APPOINTMENT_STATUS.CONFIRMED, 
+    'canceled': appointment?.status === APPOINTMENT_STATUS.CANCELED, 
+    'pending': (appointment?.status === APPOINTMENT_STATUS.PENDING) || !appointment?.status, 
+    'postponed': appointment?.status === APPOINTMENT_STATUS.POSTPONED,
+    'performed': appointment?.status === APPOINTMENT_STATUS.PERFORMED,
+    'expired': appointment?.status === APPOINTMENT_STATUS.EXPIRED,
+    'ignored': appointment?.status === APPOINTMENT_STATUS.NOT_ANSWERED}"
+    class="appointment-item canceled" (click)="validate()">
+    <div class="app-object">
+        <div class="app-type"><span>{{appointment?.datePatient | date:'EEEE dd MMMM'}}</span> à
+            <span>{{appointment?.datePatient |
+                date:'HH:mm'}}</span>
+        </div>
+        <div class="app-status text-white" [ngSwitch]="appointment.status">
+            <span *ngSwitchCase="APPOINTMENT_STATUS.CONFIRMED">confirmé</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.CANCELED">annulé</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.PENDING">en attente de validation</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.POSTPONED">reporté</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.PERFORMED">déjà effectué</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.EXPIRED">rendez-vous expiré</span>
+            <span *ngSwitchCase="APPOINTMENT_STATUS.NOT_ANSWERED">rendez-vous expiré</span>
+            <span *ngSwitchDefault>en attente de validation ?</span>
+        </div>
+    </div>
+    <div class="app-patient">
+        <ng-container *ngIf="isPatient else forDoctor">
+            {{'Rendez-vous chez Dr ' + appointment?.medecin?.user?.prenom + ' ' + appointment?.medecin?.user?.nom}}
+        </ng-container>
+        <ng-template #forDoctor>
+            {{'Rendez-vous avec ' + appointment?.prenomPatient + ' ' + appointment?.nomPatient}}
+        </ng-template>
+    </div>
+    <div class="app-symptoms"><span class="motif">Motif:</span><br>{{ ' ' + appointment?.symptomes}}</div>
+    <div class="more-inf" [ngSwitch]="appointment.status">
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.CONFIRMED">
+            Ce rendez-vous a été confirmé et se tiendra le <span>{{appointment?.dateMedecin | date:'EEEE dd MMMM à HH:mm'}}</span>
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.CANCELED">
+            Ce rendez-vous a été annulé
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.PENDING">
+            {{isPatient ? 
+                'Ce rendez-vous est en attente de la validation du médecin. Vous serez notifié dès qu\'il y aura du nouveau' : 
+                'Ce rendez-vous est en attente de votre validation. Merci de le prendre en compte pour notifier le patient dans les meilleurs délais'
+            }}
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.POSTPONED">
+            <span *ngIf="isPatient else isDoc">
+                Ce rendez-vous a été reporté/ramené au <span>{{appointment?.dateMedecin | date:'EEEE dd MMMM à HH:mm'}}</span>.
+                Merci de le confirmer si la date vous convient.
+            </span>
+            <ng-template #isDoc>
+                Vous avez reporté/ramené ce rendez-vous  au  <span>{{appointment?.dateMedecin | date:'EEEE dd MMMM à HH:mm'}}</span>.
+                En attente de confirmation de la part du patient.
+            </ng-template>
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.PERFORMED">
+            Ce rendez-vous s'est déjà tenu.
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.EXPIRED">
+            Ce rendez-vous n'a pas été confirmé à temps et est expiré.
+        </ng-container>
+        <ng-container *ngSwitchCase="APPOINTMENT_STATUS.NOT_ANSWERED">
+            Ce rendez-vous n'a pas été confirmé à temps et est expiré.
+        </ng-container>
+    </div>
+</div>

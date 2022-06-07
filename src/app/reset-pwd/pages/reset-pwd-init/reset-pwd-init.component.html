@@ -1,0 +1,27 @@
+<div class="reset-pwd-container">
+    <span class="title">
+        Réinitialisation de votre mot de passe
+    </span>
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="process()">
+            <div class="input">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Votre mail</mat-label>
+                    <input matInput placeholder="mail" type="email"  formControlName="email">
+                    <mat-hint>Renseigner votre mail</mat-hint>
+                  </mat-form-field>
+            </div>
+            <div class="error" *ngIf="error">
+                {{error}}
+            </div>
+              <div class="btns">
+                  <button class="confirm" [disabled]="!form.valid" mat-raised-button color="primary" type="submit">Je confirme</button>
+                  <button mat-stroked-button color="primary" type="reset">Tout effacer</button>
+
+              </div>
+              <span class="redirect" [routerLink]="['/accueil']">
+                Retour à l'accueil
+              </span>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav>
+        <mat-nav-list>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/home'"> Accueil </a>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/calendrier-medical'"> Calendrier médical </a>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/prestataire'"> Assurances </a>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/dashboard/patient/mon-profil'"> Mon Profil </a>
+            <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/activities'"> Notifications </a>
+            <a (click)="sidenav.toggle()" mat-list-item (click)="logout()"> Se déconnecter </a>
+            <a (click)="sidenav.toggle()" mat-list-item (click)="sidenav.toggle()" mat-list-item>fermer</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="home-page">
+            <div class="sidemenu">
+                <div class="user-profile">
+                    <img class="user-avatar" [src]="currentUser?.image" alt=""
+                        *ngIf="currentUser?.image && currentUser?.image !== '' else userAvatar" (click)="inputAvatar.click()">
+                    <ng-template #userAvatar>
+                        <img src="assets/images/profil-mob.png" alt="" class="user-avatar no-avatar" (click)="inputAvatar.click()">
+                    </ng-template>
+                    <input type="file" #inputAvatar (change)="onFileUploaded($event)" class="hidden-input">
+                    <div class="names">
+                        <span class="firstname">{{currentUser?.prenom}}</span>
+                        <span class="lastname">{{currentUser?.nom}}</span>
+                    </div>
+                </div>
+                <div class="side-menu-items">
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}">account_circle</mat-icon>
+                        <span class="text-main-blue" (click)="updateProfile()">Modifier mes infos personnelles</span>
+                    </div>
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}">receipt</mat-icon>
+                        <span class="text-main-blue" (click)="meetingHistory()">Historique de mes rendez-vous</span>
+                    </div>
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}">account_circle</mat-icon>
+                        <span class="text-main-blue" (click)="addAnotherUser()">Mes Utilisateurs Rattachés</span>
+                    </div>
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
+                            feed</mat-icon>
+                        <span class="text-main-blue">Remplir ma fiche de santé</span>
+                    </div>
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
+                            privacy_tip</mat-icon>
+                        <span class="text-main-blue">Conseils et actu santé</span>
+                    </div>
+                    <div (click)="logout()" class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">
+                            logout</mat-icon>
+                        <span class="text-main-blue">Je me déconnecte</span>
+                    </div>
+                </div>
+            </div>
+            <div class="home-page-body">
+                <div class="header-menu">
+                    <div class="header-menu-item text-main-blue" [routerLink]="[item?.router]" routerLinkActive="menu-opened" *ngFor="let item of menuItems">
+                        {{item.menuTitle}}
+                    </div>
+                </div>
+                <div class="medium-screen-header">
+                    <mat-icon (click)="sidenav.toggle()" [ngStyle]="{'color':'#000000'}" class="menu-toggle">menu
+                    </mat-icon>
+                    <div class="bienvenue">Bienvenue, &nbsp;&nbsp;<span class="noms">{{currentUser?.prenom + ' ' +
+                            currentUser?.nom}}</span> </div>
+                </div>
+                <div class="home-page-body-content">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

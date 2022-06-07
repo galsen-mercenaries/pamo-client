@@ -1,0 +1,106 @@
+<div class="welcome-page" (window:scroll)="onWindowScroll($event)" #welcomePage>
+    <div class="welcome-page-header" id="header">
+        <div class="pamo-title">Pamo</div>
+        <div class="right-block">
+            <div class="profil">Vous êtes professionnel de santé ?</div>
+            <div class="sign-in-up sign-in-up-1" (click)="goPageRegister()">
+                <mat-icon class="icone">person_outline</mat-icon>
+                <div class="action">
+                    <span class="title">Pas de compte</span>
+                    <span class="sub-title">créer un compte</span>
+                </div>
+            </div>
+            <div class="sign-in-up sign-in-up-1" (click)="goToForgottenPwd()">
+                <mat-icon class="icone">person_outline</mat-icon>
+                <div class="action">
+                    <span class="title">Mot de passe oublié</span>
+                    <span class="sub-title">Réinitialiser mon mot de passe</span>
+                </div>
+            </div>
+            <div class="sign-in-up sign-in-up-2" (click)="openLoginDialog()">
+                <mat-icon class="icone">person_outline</mat-icon>
+                <div class="action">
+                    <span class="title">Se connecter</span>
+                    <span class="sub-title">Gérer mes RV</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="welcome-page-body">
+        <div class="welcome-banniere">
+            <div class="banniere-container"></div>
+            <div class="register-block" (click)="goPageRegister()">S'inscrire</div>
+            <div class="form-container">
+                <div class="form-title">
+                    Rechercher un prestataire
+                </div>
+                <form class="search-agency-form">
+                    <p-autoComplete name="nom" field="nom" [(ngModel)]="prestataire" [suggestions]="prestatairesSuggestions" [emptyMessage]="'Aucun résultat'"
+                        (completeMethod)="onCompleted($event)" [dropdown]="true" [forceSelection]="true" [showEmptyMessage]="true">
+                        <ng-template let-prest pTemplate="item">
+                            <div class="prestataire-item">
+                                <span class="prest-name">{{prest.nom}}</span>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <div class="button-container">
+                        <button [disabled]="!prestataire" (click)="seePrestataireDetails()">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="appointment-process">
+            <div class="appointment-steps-block">
+                <div class="step">
+                    <mat-icon class="act-icon">login</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-1">1</span>
+                        <span class="action">Connectez-vous</span>
+                        <span class="desc">je me connecte</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <mat-icon class="act-icon">local_hospital</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-2">2</span>
+                        <span class="action">Choisissez la spécialité</span>
+                        <span class="desc">(médecin, hôpital)</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <mat-icon class="act-icon">calendar_today</mat-icon>
+                    <div class="how-to-do">
+                        <span class="step-num step-num-3">3</span>
+                        <span class="action">Prenez rendez-vous</span>
+                        <span class="desc">en ligne 24h/24 - 7j/7</span>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+        <div class="news-slider">
+            <div class="tranparent-side-effect tranparent-side-effect-left" (click)="previousSlide()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </div>
+            <div class="tranparent-side-effect tranparent-side-effect-right" (click)="nextSlide()">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </div>
+            <swiper class="swiper-container" [config]="swiperConfig" #swiper *ngIf="news?.length">
+                <div class="swiper-slide" *ngFor="let newsItem of news">
+                    <app-news-card-item [news]="newsItem"></app-news-card-item>
+                </div>
+            </swiper>
+        </div>
+        <div class="footer">
+            <div class="copyright">Copyright ©2020 All rights reserved</div>
+            <div class="social-networks">
+                <span class="follow-us">Suivez nous sur</span>
+                <div class="social-network-block">
+                    <img src="/assets/images/facebook_icon.png" alt="">
+                    <img src="/assets/images/instagram.png" alt="">
+                    <img src="/assets/images/twitter.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

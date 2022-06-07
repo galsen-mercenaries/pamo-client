@@ -1,0 +1,98 @@
+@import "src/styles-variables.scss";
+
+:host {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+}
+
+.appointment-confirmation-page {
+  background-color: $white;
+  border-radius: 25px;
+  height: 100%;
+  padding: 15px;
+  .title {
+    display: flex;
+    .back-ico {
+      font-size: 35px;
+      width: 35px;
+      height: 35px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .text {
+      font-size: 20px;
+    }
+  }
+  .body-block {
+    margin-top: 30px;
+    height: calc(100% - 60px);
+    display: flex;
+    justify-content: space-between;
+    .calendar-container {
+      width: 80%;
+      height: 100%;
+      full-calendar {
+        height: 100%;
+      }
+    }
+    .legends-block {
+      width: 18%;
+      padding-top: 76px;
+      .legend {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .color {
+          width: 45px;
+          height: 25px;
+          border-radius: 4px;
+          flex-shrink: 0;
+          margin-right: 5px;
+        }
+        .legend-name {
+          font-family: "NotoSansKR-Light";
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1080px) {
+  .appointment-confirmation-page {
+    overflow: auto;
+    .body-block {
+      flex-direction: column-reverse;
+      overflow: auto;
+      height: unset;
+      .calendar-container {
+        width: 100%;
+      }
+      .legends-block {
+        padding-top: 0px !important;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 100px;
+        .legend {
+          width: 48%;
+          align-items: flex-start !important;
+          .color {
+            width: 25px;
+            height: 15px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-right: 5px;
+            margin-top: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .legend-name {
+    font-size: 10px;
+  }
+}

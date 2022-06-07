@@ -1,0 +1,208 @@
+<div class="registration-desktop-page">
+    <!-- title on top of page -->
+    <div class="register-title">
+        <div class="go-back-block" (click)="goHome()">
+            <mat-icon [ngStyle]="{'color':'#47afff'}">keyboard_arrow_left</mat-icon>
+            <span class="home text-main-blue">Accueil</span>
+        </div>
+        <span class="title">Créez votre compte en quelques étapes&nbsp;&nbsp;</span>
+        <span class="sub-title">(Cela vous prendra juste une minute)</span>
+    </div>
+
+    <!-- show current registration step -->
+    <div class="registration-steps">
+
+        <!-- steps status -->
+        <div class="steps-status">
+            <div class="step-nums">
+                <div [class]="'step-num step-num-'+index"
+                    [ngClass]="{'step-num-disabled': index > currentSlideIndex - 1, 'step-num-success': (index === 4 && currentSlideIndex === 4)}"
+                    *ngFor="let step of steps; let index = index">{{index === 4 && currentSlideIndex === 4 ? '' : step}}</div>
+            </div>
+            <div class="step-lines">
+                <div class="step-line" [ngClass]="{'step-line-disabled': j >= currentSlideIndex}"
+                    *ngFor="let step of [].constructor(steps.length - 1); let j = index">{{step}}
+                </div>
+            </div>
+        </div>
+
+        <!-- steps swiper -->
+        <swiper (indexChange)="onIndexChanged($event)" class="swiper-container" [config]="swiperConfig" #swiper>
+
+            <!-- step choose profile -->
+            <div class="swiper-slide">
+                <div class="slide">
+                    <form [formGroup]="profileForm">
+                        <div class="form-title">
+                            Veuillez sélectionner votre profil
+                        </div>
+                        <div class="radio-choice">
+                            <input type="radio" value="patient" formControlName="profile" #choice1>
+                            <span class="radio-label" (click)="choice1.click()">Patient</span>
+                        </div>
+                        <div class="radio-choice">
+                            <input type="radio" value="medecin" formControlName="profile" #choice2>
+                            <span class="radio-label" (click)="choice2.click()">Médecin</span>
+                        </div>
+                        <div class="note" *ngIf="choice2.checked">
+                            <img src="/assets/images/info.png" alt="" class="icone-info">
+                            Le profil <b>&nbsp;&nbsp;"Médecin"&nbsp;&nbsp;</b> requiert une validation du système qui
+                            effectue un processus de
+                            vérification sur la cohérence des informations saisies. Cela peut prendre une à plusieurs
+                            journées.<br>Merci de votre compréhension
+                        </div>
+                        <div class="btn-container">
+                            <button [disabled]="!profileForm.valid" (click)="nextStep()">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- step names -->
+            <div class="swiper-slide">
+                <div class="slide">
+                    <form [formGroup]="usernamesForm">
+                        <div class="form-title">
+                            Veuillez saisir vos infos personnelles
+                        </div>
+                        <div class="fields-block">
+                            <mat-form-field [appearance]="'outline'">
+                                <mat-label>Prénom</mat-label>
+                                <input matInput formControlName="firstName" type="text">
+                            </mat-form-field>
+                            <mat-form-field [appearance]="'outline'">
+                                <mat-label>Nom</mat-label>
+                                <input matInput formControlName="lastName" type="text">
+                            </mat-form-field>
+                            <mat-form-field [appearance]="'outline'">
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" type="email">
+                            </mat-form-field>
+                            <mat-form-field [appearance]="'outline'">
+                                <mat-label>Numéro de téléphone</mat-label>
+                                <input matInput formControlName="numero" type="tel">
+                            </mat-form-field>
+                        </div>
+                        <div class="error-block" *ngIf="mailHasError">{{mailErrorText}}</div>
+                        <div class="btn-container">
+                            <button [disabled]="!usernamesForm.valid || checkingEmail" (click)="checkUserMail()">
+                                Valider
+                                <mat-spinner mode="indeterminate" [diameter]="18" *ngIf="checkingEmail"></mat-spinner>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- step select specialities (only for medein profile)-->
+            <!-- <div class="swiper-slide">
+                <div class="slide">
+                    <form [formGroup]="specialitiesForm">
+                        <div class="form-title">
+                            Veuillez choisir vos qualifications
+                        </div>
+                        <div class="form-description">
+                            Le choix n'est pas définitif et vous pourrez modifier une fois connecté
+                        </div>
+                        <div class="fields-block">
+                            <mat-form-field class="full-width">
+                                <mat-label>Sélectionnez</mat-label>
+                                <mat-select formControlName="specialities" multiple>
+                                    <mat-option *ngFor="let speciality of specialities" [value]="speciality.code">
+                                        {{speciality.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="btn-container">
+                            <button [disabled]="!specialitiesForm.valid" (click)="nextStep()">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+
+            <!-- password step -->
+            <div class="swiper-slide">
+                <div class="slide">
+                    <form [formGroup]="addressForm">
+                        <div class="form-title">
+                            Renseigner mon adresse
+                        </div>
+                        <div class="form-description">
+                            Renseigner votre adresse pour une meilleure expérience dans PAMO (Cette étape n'est pas obligatoire)
+                        </div>
+                        <div class="fields-block password-form">
+                            <mat-form-field class="full-width" [appearance]="'outline'">
+                                <mat-label>Adresse</mat-label>
+                                <input matInput formControlName="address" type="text">
+                                <mat-icon matSuffix (click)="swapInputType()">place</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="profileForm.value.profile !== 'patient'" class="search-agency-form">
+                            <p-autoComplete name="nom" field="nom" formControlName="medecinStructure" [suggestions]="structuresSuggestions"
+                                [emptyMessage]="'Aucun résultat'" (completeMethod)="onCompleted($event)" [dropdown]="true"
+                                [forceSelection]="true" [showEmptyMessage]="true">
+                                <ng-template let-prest pTemplate="item">
+                                    <div class="structure-item">
+                                        <span class="struct-name">{{prest.nom}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                        <div class="btn-container">
+                            <button [disabled]="!addressForm.valid" (click)="nextStep()">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- password step -->
+            <div class="swiper-slide">
+                <div class="slide">
+                    <form [formGroup]="passwordForm">
+                        <div class="form-title">
+                            Création mot de passe
+                        </div>
+                        <div class="form-description">
+                            Un mot de passe doit comporter minimum huit caractères dont une majuscule et un chiffre
+                        </div>
+                        <div class="fields-block password-form">
+                            <mat-form-field class="full-width" [appearance]="'outline'">
+                                <mat-label>Mot de passe</mat-label>
+                                <input matInput formControlName="password"
+                                    [type]="isPasswordVisible ? 'text': 'password'">
+                                <mat-icon matSuffix (click)="swapInputType()" *ngIf="!isPasswordVisible">remove_red_eye
+                                </mat-icon>
+                                <span matSuffix (click)="swapInputType()" *ngIf="isPasswordVisible">cacher</span>
+                            </mat-form-field>
+                            <mat-form-field class="full-width" [appearance]="'outline'">
+                                <mat-label>Confirmation mot de passe</mat-label>
+                                <input matInput formControlName="confirmPassword"
+                                    [type]="isConfirmPasswordVisible ? 'text': 'password'">
+                                <mat-icon matSuffix (click)="swapConfirmInputType()" *ngIf="!isConfirmPasswordVisible">
+                                    remove_red_eye</mat-icon>
+                                <span matSuffix (click)="swapConfirmInputType()"
+                                    *ngIf="isConfirmPasswordVisible">cacher</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="error-block" *ngIf="registerHasError">{{registrationError}}</div>
+                        <div class="btn-container">
+                            <button [disabled]="!passwordForm.valid || registeringUser" (click)="registerUser()">
+                                Valider
+                                <mat-spinner mode="indeterminate" [diameter]="18" *ngIf="registeringUser"></mat-spinner>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="swiper-slide"></div>
+
+        </swiper>
+
+        <!-- navigation buttons to go next or previous steps -->
+        <div class="nav-buttons">
+            <button class="prev-button" [disabled]="currentSlideIndex<1" (click)="previousStep()">Précédent</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="medecin-dashboard-home">
+    <div class="dashboard-left-block">
+        <div class="key-indicators">
+            <div class="indicator-card">
+                <div class="my-card-title text-main-blue">Rendez-vous aujourd'hui</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">event_available</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="cardinal text-main-blue">18</span>
+                        <span class="description">
+                            <span>56%</span> effectué
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-card">
+                <div class="my-card-title text-main-blue">En attente de validation</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">help_outline</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="cardinal text-red">25</span>
+                        <span class="description">
+                            <span>10</span> validé
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-card">
+                <div class="my-card-title text-main-blue">Mes patients</div>
+                <div class="card-content">
+                    <div class="card-left">
+                        <div class="icon-container">
+                            <mat-icon [ngStyle]="{'color':'#47afff'}">people</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="cardinal text-valid-green">120</span>
+                        <span class="description">
+                            <span>20%</span> actifs
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full-content">
+            <div class="notifications-block">
+                <div class="notif-title text-main-blue">
+                    Mes notifications <span class="number-notif text-main-blue">(15)</span>
+                </div>
+                <div class="notifications-list">
+                    <div class="notif-item" [title]="notif?.title" *ngFor="let notif of notifications, let read = odd"
+                        [ngClass]="{'notif-read': read}">
+                        <div class="notif-item-title">{{notif?.title}}</div>
+                        <div class="notif-item-content">{{notif?.content}}</div>
+                        <div class="notif-item-date">{{notif?.date}}</div>
+                        <img *ngIf="read" class="read" src="/assets/images/checkmark.svg" alt="">
+                        <div *ngIf="!read" class="new-marker"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="navigation-content">
+                    <div class="medecin-profile">
+                        <div class="medecin-profile-top-block">
+                            <img class="med-avatar" [src]="currentMedecin?.user?.image" alt=""
+                                *ngIf="currentMedecin?.user?.image && currentMedecin?.user?.image !== '' else wihtoutAvatar">
+                            <ng-template #wihtoutAvatar>
+                                <img src="assets/images/profil-mob.png" alt="" class="med-avatar no-avatar">
+                            </ng-template>
+                            <div class="main-infos">
+                                <div class="main-inf-item">
+                                    <span class="item-name">Nom : </span>
+                                    <span class="item-content">{{currentMedecin?.user?.nom}}</span>
+                                </div>
+                                <div class="main-inf-item">
+                                    <span class="item-name">Prénom : </span>
+                                    <span class="item-content">{{currentMedecin?.user?.prenom}}</span>
+                                </div>
+                                <div class="main-inf-item">
+                                    <span class="item-name">Spécialité(s) : </span>
+                                    <span class="item-content">{{currentMedecin?.specialisations.join(', ')}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="medecin-profile-bottom-block">
+                            <div class="el-tile">À propos</div>
+                            <div class="el-text">Après l'obtention de son baccalauréat scientifique, monsieur KANE a
+                                fait ses études à l'université San Diego en Espagne, une des meilleures en Europe dans
+                                le domaine de la médecine. Après l'obtention de son diplôme, il saisit une opportunité
+                                qui lui était donnée de travailler dans un des plus grands hôpittaux du pays. Animé par
+                                son patriotisme, Abdel KANE fait son retour après dix années à l'hôpital de Grenade.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-block">
+                    <ul>
+                        <li (click)="goToMyCalender()" class="nav-item">Prochain rendez-vous</li>
+                        <li class="nav-item">Mes patients</li>
+                        <li class="nav-item">L'avis du patient</li>
+                        <li class="nav-item">Mes statistiques</li>
+                        <li class="nav-item">Prendre un congé</li>
+                        <li class="nav-item">Mes collègues</li>
+                        <li class="nav-item">Donner mon avis</li>
+                        <li class="nav-item">Monde de la santé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-right-block">
+        <div class="calendar-container">
+            <!-- <dl-date-time-picker [dayOfWeekStart]="1" startView="day" maxView="day" minView="day" minuteStep="30"
+                (change)="onDateSelected($event.value)">
+            </dl-date-time-picker> -->
+            <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+        <div class="events-container">
+            <div class="appointment-list" *ngIf="infosAppointments">
+                <app-appointment-infos-card [appointment]="infosAppointments"></app-appointment-infos-card>
+            </div>
+            <div class="spinner-container" *ngIf="loadingRv">
+                <mat-spinner [diameter]="30" mode="indeterminate"></mat-spinner>
+            </div>
+            <div class="empty-appointment" *ngIf="!getRvHasError && !loadingRv && !appointments?.length">Aucun
+                rendez-vous prévu à cette
+                date</div>
+            <div class="error-appointment text-red" *ngIf="getRvHasError">Une erreur est survenue</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="previsualize-avatar-modal">
+    <div class="title">Modifier votre photo de profil</div>
+    <div class="img-container" *ngIf="selectedImgUrl">
+        <img [src]="selectedImgUrl" alt="" id="myimage">
+    </div>
+    <div class="btns-block">
+        <button class="btn btn-confirm text-white" (click)="upload()" [disabled]="uploading">
+            Modifier
+            <mat-spinner *ngIf="uploading" [diameter]="20" mode="indeterminate"></mat-spinner>
+        </button>
+        <button class="btn btn-cancel">Annuler</button>
+    </div>
+</div>
