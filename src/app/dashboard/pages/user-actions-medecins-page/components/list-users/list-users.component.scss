@@ -17,6 +17,12 @@ table {
             text-decoration: underline;
         }
     }
+    .align-content {
+        span {
+            display: flex;
+            align-items: center;
+        }
+    }
   }
 .user-container {
     margin-top: 15px;

@@ -1,22 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { FicheMedicalModel } from 'src/app/models/fiche-medical.model';
+import { map, switchMap } from 'rxjs/operators';
+import { AppointmentModel } from 'src/app/models/appointment.model';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from '../authentication-service/authentication.service';
 const { SERVER_URL } = environment;
 const USERS_RESOURCES = `${SERVER_URL}/users`;
-const FICHE_MEDICALES_RESOURCES = `${SERVER_URL}/fichemedicales`;
+const MEDECIN_RESOURCES = `${SERVER_URL}/medecins`;
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
   getUsersCount() {
-    const inclusionFilter = {
-      where: {roleId: 4 } // only select user having role = ROLE_USER with roleId: 5
-    }
     return this.http.get(USERS_RESOURCES + '/count?[where][roleId]=4');
   }
 
@@ -40,7 +38,34 @@ export class UsersService {
       USERS_RESOURCES + '?filter='+encodedFilter );
   }
 
-  getUsersByFilter(filter?: {filterType: 'gSanguin' | 'genre' | 'poids' | 'birthdate', value: any} ,options?: {limit: any, skip: any, orderBy?: 'ASC' | 'DESC'}) {
+  getMyPatientFromMeeting() {
+    const inclusionFilter = {
+      include: [
+        {
+          relation: "user",
+          scope: {
+            include: [{
+              relation: "fichemedicale"
+            }],
+          }
+        }
+      ],
+      where: { userId: { neq :  null } }
+    }
+
+  const encodedFilter = encodeURIComponent(JSON.stringify(inclusionFilter));
+  return this.authenticationService.getUserInfosSaved().pipe(
+    switchMap((loggedMed) => {
+      const { medecinId } = loggedMed;
+      return this.http.get(`${MEDECIN_RESOURCES}/${medecinId}/meetings`+'?filter='+encodedFilter).pipe(
+        map((itemList: AppointmentModel[]) => {
+          return itemList.map((elt: AppointmentModel) => elt?.user)
+        })
+      );
+    }));
+  }
+
+  getUserByFicheMedicalFilter(filter?: {filterType: 'gSanguin' | 'genre' | 'poids' | 'birthdate', value: any}) {
     const whereFilter = {where : {}};
     switch (filter?.filterType) {
       case 'gSanguin':
@@ -64,21 +89,35 @@ export class UsersService {
         {
           relation: "user",
           scope: {
-            where: { roleId: 5}, // only select order with id 5
+            include: [{
+              relation: "fichemedicale",
+              scope: {
+                ...whereFilter
+              }
+            }],
           }
         }
       ],
-      ...whereFilter,
-      limit: options?.limit,
-      skip: options?.skip,
+      where: { userId: { neq :  null } }
     }
+
   const encodedFilter = encodeURIComponent(JSON.stringify(inclusionFilter));
-    return this.http.get<FicheMedicalModel[]>(
-      FICHE_MEDICALES_RESOURCES + '?filter='+encodedFilter ).pipe(map((resp: FicheMedicalModel[]) => {
-        const ficheMedicales: FicheMedicalModel[] = resp.filter((item: FicheMedicalModel) => item?.user);
-        return ficheMedicales.map((item: FicheMedicalModel) => {
-          return {...item.user, fichemedicale: item}
-        })
+
+    return this.authenticationService.getUserInfosSaved().pipe(
+      switchMap((loggedMed) => {
+        const { medecinId } = loggedMed;
+        return this.http.get(`${MEDECIN_RESOURCES}/${medecinId}/meetings`+'?filter='+encodedFilter).pipe(
+          map((itemList: AppointmentModel[]) => {
+            const itemListFiltered = itemList.filter((x) => {
+              return x?.user?.fichemedicale;
+            })
+            console.log('item',itemListFiltered);
+
+            return itemListFiltered.map((elt: AppointmentModel) => {
+              return elt?.user
+            })
+          })
+        );
       }));
   }
 }
