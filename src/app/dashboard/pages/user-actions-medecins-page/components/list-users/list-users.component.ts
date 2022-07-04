@@ -69,7 +69,7 @@ export class ListUsersComponent implements OnInit {
 
   fetchUsers() {
     this.isLoading = true;
-    this.userService.getUsers().pipe(
+    this.userService.getMyPatientFromMeeting().pipe(
       tap( ( res: UserModel[] ) => {
         this.isLoading = false;
         this.dataSource.data = res;
@@ -79,11 +79,12 @@ export class ListUsersComponent implements OnInit {
         return throwError(err)
       })
     ).subscribe();
+    // this.userService.getMyPatientFromMeeting().subscribe();
   }
 
   fetchFicheMedicales(filterOptions?: {filterType: 'gSanguin' | 'genre' | 'poids' | 'birthdate', value: any} ) {
     this.isLoading = true;
-    this.userService.getUsersByFilter(filterOptions).pipe(
+    this.userService.getUserByFicheMedicalFilter(filterOptions).pipe(
       tap( ( res: UserModel[] ) => {
         this.isLoading = false;
         this.dataSource.data = res;

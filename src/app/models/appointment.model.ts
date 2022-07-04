@@ -1,4 +1,5 @@
 import { MedecinModel } from "./medecin.model";
+import { UserModel } from "./user.model";
 
 export interface AppointmentModel {
   objet?: string;
@@ -18,6 +19,7 @@ export interface AppointmentModel {
   medecin?: MedecinModel;
   meetingId?: number;
   mailContact?: string;
+  user?: UserModel
 }
 
 export enum APPOINTMENT_STATUS {
