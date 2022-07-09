@@ -8,7 +8,10 @@ import { getAppointmentClass } from "src/app";
 import {
   AppointmentModel,
 } from "src/app/models/appointment.model";
+import { UserModel } from "src/app/models/user.model";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
+import { UsersService } from "src/app/services/user-service/users.service";
 import { AppointmentConfirmationModalComponent } from "src/app/shared/components/appointment-confirmation-modal/appointment-confirmation-modal.component";
 
 @Component({
@@ -43,6 +46,7 @@ export class AppointmentValidationComponent implements OnInit {
     events: [],
   };
   filteredAppointments: AppointmentModel[];
+  linkedUsers: UserModel[];
   legends = [
     { color: "#ffadc7", name: "Rendez-vous confirmé" },
     { color: "#34d57f", name: "Rendez-vous déjà effectué" },
@@ -55,11 +59,14 @@ export class AppointmentValidationComponent implements OnInit {
   constructor(
     private apptService: AppointmentService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private usersService : UsersService,
+    private authServ: AuthenticationService
   ) {}
 
   ngOnInit() {
     this.getCurrentRoute();
+    this.getLinkedUsers();
   }
 
   getCurrentRoute() {
@@ -70,6 +77,26 @@ export class AppointmentValidationComponent implements OnInit {
     }
     this.isPatient = true;
     this.getPatientAppointments();
+  }
+
+  async getLinkedUsers() {
+    const user = await this.authServ.getUserInfosSaved().toPromise();
+    this.usersService
+      .getLinkedUsers(user.userId)
+      .pipe(
+        tap((res) => {
+          this.linkedUsers = res;
+        }),
+        catchError((err) => {
+          return throwError(err);
+        })
+      )
+      .toPromise();
+  }
+
+  onUserChanged(userId) {
+    console.log(userId);
+    this.getPatientAppointments(userId)
   }
 
   openDetails(appointment) {
@@ -115,12 +142,12 @@ export class AppointmentValidationComponent implements OnInit {
       .subscribe();
   }
 
-  getPatientAppointments() {
+  getPatientAppointments(userId?) {
     this.loadingRv = true;
     this.getRvHasError = false;
     this.appointments = [];
     this.apptService
-      .getUserAppointments()
+      .getUserAppointments(userId)
       .pipe(
         map((res: AppointmentModel[]) => {
           const events: any[] = res.map((x) => {

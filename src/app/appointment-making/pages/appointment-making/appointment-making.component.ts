@@ -111,9 +111,9 @@ export class AppointmentMakingComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {});
   }
 
-  getAllLinkedUsers(user) {
+  getAllLinkedUsers(userId) {
     this.usersService
-      .getLinkedUsers(user.userId)
+      .getLinkedUsers(userId)
       .pipe(
         tap((res) => {
           this.linkedUsers = res;
@@ -127,7 +127,7 @@ export class AppointmentMakingComponent implements OnInit {
 
   async getUser(){
     this.user = await this.authServ.getUserInfosSaved().toPromise();
-    this.getAllLinkedUsers(this.user);
+    this.getAllLinkedUsers(this.user.userId);
   }
 
   createLinkedUser(){

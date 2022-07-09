@@ -13,6 +13,7 @@
   padding: 15px;
   .title {
     display: flex;
+    position: relative;
     .back-ico {
       font-size: 35px;
       width: 35px;
@@ -22,6 +23,10 @@
     }
     .text {
       font-size: 20px;
+    }
+    .select-block {
+      position: absolute;
+      right: 0;
     }
   }
   .body-block {

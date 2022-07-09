@@ -65,13 +65,29 @@ export class AppointmentService {
     }
   }
 
-  getUserAppointments() {
+  getUserAppointments(linkedUserId?) {
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
-        const { userId } = userInfos;
+        let { userId } = userInfos;
+        if (linkedUserId) {
+          userId = linkedUserId;
+        }
+        const filter: Object = {
+          include: [
+            {
+              relation: 'medecin',
+              scope: {
+                include: [{ relation: 'user' }],
+              },
+            },
+          ],
+        };
+        const filter2 = JSON.stringify(filter);
+        console.log(filter2);
+        
         return this.http
           .get<AppointmentModel[]>(
-            `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings?filter={"include":[{"relation":"medecin","scope": {"include": [{"relation": "user"}] } }]}`
+            `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings?filter=${filter2}`
           )
           .pipe(
             map((res) => {

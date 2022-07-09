@@ -2,6 +2,12 @@
     <div class="title">
         <mat-icon class="back-ico" (click)="goBack()">arrow_back</mat-icon>
         <span class="text">Calendrier des rendez-vous</span>
+        <mat-form-field appearance="fill" class="select-block" *ngIf="isPatient && linkedUsers">
+            <mat-label>filtrer pour</mat-label>
+            <mat-select matNativeControl required>
+                <mat-option [value]="linkedUser?.userId" *ngFor="let linkedUser of linkedUsers" (click)="onUserChanged(linkedUser.userId)">{{linkedUser?.prenom + ' ' + linkedUser?.nom}}</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
     <div class="body-block">
         <div class="calendar-container">
