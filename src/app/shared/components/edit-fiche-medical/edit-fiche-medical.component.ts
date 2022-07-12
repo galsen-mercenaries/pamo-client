@@ -35,6 +35,8 @@ export class EditFicheMedicalComponent implements OnInit {
             date_naissance: [this.date.transform(this.data?.ficheMedical?.date_naissance, 'yyyy-MM-dd')],
             groupe_sanguin: [this.data?.ficheMedical?.groupe_sanguin],
             maladies: [this.data?.ficheMedical?.maladies ],
+            allergies: [this.data?.ficheMedical?.allergies ],
+            traitements_anterieurs: [this.data?.ficheMedical?.traitements_anterieurs ],
             contact_urgence: [this.data?.ficheMedical?.contact_urgence ? this.data?.ficheMedical?.contact_urgence: '']
         });
     }
