@@ -22,10 +22,15 @@
                 </mat-radio-button>
             </mat-radio-group>
             <div class="patient-inf-form" *ngIf="radioGroup2.checked">
-                <span class="patient-title">Infos patient</span>
-                <div class="inputs-block">
-                    <input type="text" placeholder="nom du patient" formControlName="patientName">
-                    <input type="text" placeholder="numéro de téléphone" formControlName="numeroPatient">
+                <span class="patient-title">Sélection du patient</span>
+                <mat-radio-group class="radio-group1" aria-label="Select an option">
+                    <mat-radio-button *ngFor="let user of linkedUsers" value="{{user.userId}}" 
+                    (change)="radioChange(user)" >
+                        {{user.prenom}} {{user.nom}}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div class="add-new-user">
+                    <button class="select-med-btn text-main-blue" (click)="createLinkedUser()">Ajouter un patient</button>
                 </div>
             </div>
             <div class="select-medecin-block">

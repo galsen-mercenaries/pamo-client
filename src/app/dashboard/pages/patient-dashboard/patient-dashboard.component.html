@@ -32,7 +32,11 @@
                     </div>
                     <div class="side-menu-item">
                         <mat-icon [ngStyle]="{'color':'#47afff'}">receipt</mat-icon>
-                        <span class="text-main-blue">Historique de mes rendez-vous</span>
+                        <span class="text-main-blue" (click)="meetingHistory()">Historique de mes rendez-vous</span>
+                    </div>
+                    <div class="side-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#47afff'}">account_circle</mat-icon>
+                        <span class="text-main-blue" (click)="addAnotherUser()">Mes Utilisateurs Rattachés</span>
                     </div>
                     <div class="side-menu-item">
                         <mat-icon [ngStyle]="{'color':'#47afff'}" aria-hidden="false" aria-label="Example home icon">

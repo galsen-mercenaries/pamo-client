@@ -8,7 +8,7 @@ import {
 import { AuthenticationService } from "../authentication-service/authentication.service";
 import { map, switchMap } from "rxjs/operators";
 const { SERVER_URL } = environment;
-const APPOINTMENT_MAKING_BY_PATIENT_URL = `${SERVER_URL}/patients`;
+const APPOINTMENT_MAKING_BY_PATIENT_URL = `${SERVER_URL}/users`;
 const GET_MEDECIN_APPOINTMENT_URL = `${SERVER_URL}/medecins`;
 const APPOINTMENT_BASE_URL = `${SERVER_URL}/meetings`;
 
@@ -29,19 +29,10 @@ export class AppointmentService {
     );
   }
 
-  fixAppointment(payload: AppointmentModel) {
+  fixAppointment(payload: AppointmentModel, userId) {
+    console.log(payload)
     return this.authenticationService.getUserInfosSaved().pipe(
       switchMap((userInfos) => {
-        const { userId, prenom, nom, email, numero } = userInfos;
-        payload.patientId = userId;
-        payload.numeroPatient = payload?.numeroPatient
-          ? payload?.numeroPatient
-          : numero;
-        payload.nomPatient = payload.nomPatient ? payload.nomPatient : nom;
-        payload.prenomPatient = payload.prenomPatient
-          ? payload.prenomPatient
-          : prenom;
-        payload.mailContact = email;
         return this.http.post<any>(
           `${APPOINTMENT_MAKING_BY_PATIENT_URL}/${userId}/meetings`,
           payload

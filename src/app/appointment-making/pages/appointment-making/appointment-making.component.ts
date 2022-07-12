@@ -10,8 +10,11 @@ import {
 } from "src/app/models/appointment.model";
 import { MedecinModel } from "src/app/models/medecin.model";
 import { AppointmentService } from "src/app/services/medical-appointment/appointment.service";
+import { UsersService } from "src/app/services/user-service/users.service";
 import { AppointmentSuccessModalComponent } from "../../components/appointment-success-modal/appointment-success-modal.component";
 import { SearchMedecinDialogComponent } from "../../components/search-medecin-dialog/search-medecin-dialog.component";
+import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { AddLinkedUserComponent } from "src/app/my-profile/linked-user/add-linked-user/add-linked-user.component";
 
 @Component({
   selector: "app-appointment-making",
@@ -30,14 +33,20 @@ export class AppointmentMakingComponent implements OnInit {
     { name: "Omega" },
   ];
   selectedObject;
+  linkedUsers;
+  user;
+  selectedLinkedUser;
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    private appointService: AppointmentService
+    private appointService: AppointmentService,
+    private usersService : UsersService,
+    private authServ : AuthenticationService
   ) {}
 
   ngOnInit() {
     this.setAppointmentForm();
+    this.getUser()
   }
 
   setAppointmentForm() {
@@ -45,8 +54,6 @@ export class AppointmentMakingComponent implements OnInit {
       date: [null, Validators.required],
       symptom: ["", Validators.required],
       options: ["1"],
-      patientName: [""],
-      numeroPatient: [""],
     });
   }
 
@@ -63,15 +70,12 @@ export class AppointmentMakingComponent implements OnInit {
 
   makeAppointment() {
     this.loading = false;
+    const user = this.appointmentForm.value.options === "1" ? this.user : this.selectedLinkedUser;
+    
     const appointmentPayload: AppointmentModel = {
-      nomPatient:
-        this.appointmentForm.value.options === "1"
-          ? null
-          : this.appointmentForm.value.patientName,
-      numeroPatient:
-        this.appointmentForm.value.options === "1"
-          ? null
-          : this.appointmentForm.value.numeroPatient,
+      nomPatient: user.nom,
+      prenomPatient: user.prenom,
+      numeroPatient: user.numero,
       symptomes: this.appointmentForm.value.symptom,
       datePatient: this.appointmentForm.value.date,
       medecinId: this.medecin.medecinid,
@@ -81,7 +85,7 @@ export class AppointmentMakingComponent implements OnInit {
       status: APPOINTMENT_STATUS.PENDING,
     };
     this.appointService
-      .fixAppointment(appointmentPayload)
+      .fixAppointment(appointmentPayload, user.userId)
       .pipe(
         tap(() => {
           this.loading = false;
@@ -105,5 +109,39 @@ export class AppointmentMakingComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  getAllLinkedUsers(user) {
+    this.usersService
+      .getLinkedUsers(user.userId)
+      .pipe(
+        tap((res) => {
+          this.linkedUsers = res;
+        }),
+        catchError((err) => {
+          return throwError(err);
+        })
+      )
+      .toPromise();
+  }
+
+  async getUser(){
+    this.user = await this.authServ.getUserInfosSaved().toPromise();
+    this.getAllLinkedUsers(this.user);
+  }
+
+  createLinkedUser(){
+    const dialogRef = this.dialog.open(AddLinkedUserComponent, {
+      data: this.user,
+      width: "550px",
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getAllLinkedUsers(this.user);
+    });
+  }
+
+  radioChange(user){
+    this.selectedLinkedUser = user;
+    console.log(this.selectedLinkedUser)
   }
 }

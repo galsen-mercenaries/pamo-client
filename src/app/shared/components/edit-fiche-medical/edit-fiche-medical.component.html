@@ -74,9 +74,33 @@
       </mat-form-field>
     <div class="item">
       <mat-form-field appearance="fill">
-        <mat-label>Maladies ou Allergies</mat-label>
+        <mat-label>Maladies</mat-label>
         <textarea
           formControlName="maladies"
+          matInput
+          placeholder="Vos maladies"
+          [readonly]="!isMedecin"
+        ></textarea>
+      </mat-form-field>
+      <mat-icon>lock</mat-icon>
+    </div>
+    <div class="item">
+      <mat-form-field appearance="fill">
+        <mat-label>Allergies</mat-label>
+        <textarea
+          formControlName="allergies"
+          matInput
+          placeholder="*Vos Allergies"
+          [readonly]="!isMedecin"
+        ></textarea>
+      </mat-form-field>
+      <mat-icon>lock</mat-icon>
+    </div>
+    <div class="item">
+      <mat-form-field appearance="fill">
+        <mat-label>Vos traitements Antérieurs</mat-label>
+        <textarea
+          formControlName="traitements_anterieurs"
           matInput
           placeholder="Vos maladies/Vos Allergies"
           [readonly]="!isMedecin"
