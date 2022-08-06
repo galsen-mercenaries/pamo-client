@@ -11,6 +11,7 @@ export interface UserModel {
   password: string;
   role?: any;
   image?: string;
+  userIdLinked?: number;
   roleCode?: string;
   medecinId?: number;
   structuresanitaireId?: number;

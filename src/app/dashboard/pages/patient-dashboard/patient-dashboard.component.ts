@@ -76,4 +76,12 @@ export class PatientDashboardComponent implements OnInit {
   updateProfile() {
     this.router.navigate(["dashboard/patient/mon-profil"])
   }
+
+  meetingHistory() {
+    this.router.navigate(["dashboard/patient/mon-profil/meeting-history"])
+  }
+
+  addAnotherUser(){
+    this.router.navigate(["dashboard/patient/mon-profil/linked-user"])
+  }
 }
