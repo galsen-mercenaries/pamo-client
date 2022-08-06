@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { catchError, tap } from "rxjs/operators";
 import { UserModel } from "src/app/models/user.model";
@@ -8,10 +8,10 @@ import { UsersService } from "src/app/services/user-service/users.service";
 import { throwError } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { AddLinkedUserComponent } from "./add-linked-user/add-linked-user.component";
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { DeleteLinkedUserComponent } from "./component/delete-linked-user/delete-linked-user.component";
 import { MeetingService } from "src/app/services/meeting-service/meeting.service";
+import { EditFicheMedicalComponent } from "src/app/shared/components/edit-fiche-medical/edit-fiche-medical.component";
 
 @Component({
   selector: "app-linked-user",
@@ -36,11 +36,11 @@ export class LinkedUserComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
     private authServ: AuthenticationService,
     private userService: UsersService,
     private dialog: MatDialog,
-    private meetingService : MeetingService
+    private meetingService : MeetingService,
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,6 @@ export class LinkedUserComponent implements OnInit {
     this.user = await this.authServ.getUserInfosSaved().toPromise();
     this.usersId.push(this.user.userId);
     this.getAllLinkedUsers(this.user);
-    console.log(this.usersId);
   }
 
   getAllLinkedUsers(user) {
@@ -66,8 +65,8 @@ export class LinkedUserComponent implements OnInit {
       .pipe(
         tap((res) => {
           this.dataSource.data = res;
-          this.pushToArray(res)
-          console.log(this.usersId)
+          // this.pushToArray(res)
+          // console.log(this.usersId)
         }),
         catchError((err) => {
           return throwError(err);
@@ -82,7 +81,9 @@ export class LinkedUserComponent implements OnInit {
       width: "550px",
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getAllLinkedUsers(this.user);
+      if(result) {
+        this.dataSource.data = [...this.dataSource.data, result]
+      }
     });
   }
 
@@ -94,11 +95,10 @@ export class LinkedUserComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllLinkedUsers(this.user);
     });
-    console.log(user);
   }
 
   editLinkedUser(element, i) {
-    console.log(element, i);
+    this.editFicheMedical(element);
   }
 
   getMeeting(usersId){
@@ -113,5 +113,17 @@ export class LinkedUserComponent implements OnInit {
       console.log(e)
       this.usersId.push(e.userId);
     })
+  }
+
+  editFicheMedical(user: UserModel) {
+    this.matDialog
+        .open(EditFicheMedicalComponent, {
+            data: { ficheMedical: user?.fichemedicale, update: !!user?.fichemedicale, userId: user?.userId},
+            width: '450px'
+        }).afterClosed().subscribe((res) => {
+          if(res) {
+            this.getAllLinkedUsers(this.user)
+          }
+        })
   }
 }

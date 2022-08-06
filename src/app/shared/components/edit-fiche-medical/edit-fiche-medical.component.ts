@@ -29,14 +29,14 @@ export class EditFicheMedicalComponent implements OnInit {
     ngOnInit(): void {
         this.isMedecin = this.data.isMedecin;
         this.form = this.fb.group({
-            poids: [this.data?.ficheMedical?.poids, [Validators.required]],
-            taille: [this.data?.ficheMedical?.taille, [Validators.required]],
+            poids: [this.data?.ficheMedical?.poids ?? '', [Validators.required]],
+            taille: [this.data?.ficheMedical?.taille ?? '', [Validators.required]],
             sexe: [this.data?.ficheMedical?.sexe],
             date_naissance: [this.date.transform(this.data?.ficheMedical?.date_naissance, 'yyyy-MM-dd')],
             groupe_sanguin: [this.data?.ficheMedical?.groupe_sanguin],
-            maladies: [this.data?.ficheMedical?.maladies ],
-            allergies: [this.data?.ficheMedical?.allergies ],
-            traitements_anterieurs: [this.data?.ficheMedical?.traitements_anterieurs ],
+            maladies: [this.data?.ficheMedical?.maladies ?? '' ],
+            allergies: [this.data?.ficheMedical?.allergies ?? '' ],
+            traitements_anterieurs: [this.data?.ficheMedical?.traitements_anterieurs ?? '' ],
             contact_urgence: [this.data?.ficheMedical?.contact_urgence ? this.data?.ficheMedical?.contact_urgence: '']
         });
     }

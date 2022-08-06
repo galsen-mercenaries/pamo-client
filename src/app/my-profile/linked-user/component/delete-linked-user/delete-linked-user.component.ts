@@ -21,7 +21,7 @@ export class DeleteLinkedUserComponent implements OnInit {
   }
 
   deleteLinkedUser(){
-    this.data.userIdLinked = -1
+    // this.data.userIdLinked = -1
     this.usersService.updateLinkedUsers(this.data).subscribe(
       (res) => {
         this.goBack()
@@ -31,7 +31,7 @@ export class DeleteLinkedUserComponent implements OnInit {
       }
     )
   }
-  
+
   goBack(){
     this.dialog.close();
   }
