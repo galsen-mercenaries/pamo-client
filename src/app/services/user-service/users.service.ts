@@ -44,6 +44,11 @@ export class UsersService {
   getLinkedUsers(userId, options?: {limit: any, skip: any, orderBy?: 'ASC' | 'DESC'}) {
     const inclusionFilter = {
       where: {userIdLinked: userId}, // only select user having role = ROLE_USER with roleId: 5
+      include: [
+        {
+          relation: "fichemedicale",
+        }
+      ],
       limit: options?.limit,
       skip: options?.skip,
       order: `nom ${options?.orderBy ? options?.orderBy : 'ASC'}`,
@@ -55,7 +60,7 @@ export class UsersService {
 
   updateLinkedUsers(user) {
     const url = USERS_RESOURCES+"/"+user.userId
-    return this.http.put<any>(url,user);
+    return this.http.delete<any>(url,user);
   }
 
   addLinkedUsers(user):Observable<any>{

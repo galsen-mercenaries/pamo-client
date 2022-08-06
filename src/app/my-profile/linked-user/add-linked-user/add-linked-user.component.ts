@@ -44,8 +44,7 @@ export class AddLinkedUserComponent implements OnInit {
     console.log(value)
     this.usersService.addLinkedUsers(value).subscribe(
       (res) =>{
-        console.log(res)
-        this.goBack()
+        this.goBack(res);
       },
       (err)=>{
         this.error = 1
@@ -53,8 +52,8 @@ export class AddLinkedUserComponent implements OnInit {
       }
     )
   }
-  goBack(){
-    this.dialog.close()
+  goBack(data?: any){
+    this.dialog.close(data)
   }
 
 }
