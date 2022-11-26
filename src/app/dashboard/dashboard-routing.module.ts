@@ -7,6 +7,7 @@ import { MedecinsCalendarComponent } from "./components/medecins-calendar/medeci
 import { PatientDashboardHomeComponent } from "./components/patient-dashboard-home/patient-dashboard-home.component";
 import { DashboardTamponComponent } from "./pages/dashboard-tampon/dashboard-tampon.component";
 import { MedecinDashboardComponent } from "./pages/medecin-dashboard/medecin-dashboard.component";
+import { PharmacieGardeComponent } from "./pages/patient-dashboard/components/pharmacie-garde/pharmacie-garde.component";
 import { PatientDashboardComponent } from "./pages/patient-dashboard/patient-dashboard.component";
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "calendrier-medical",
         component: AppointmentValidationComponent,
+      },
+      {
+        path: "pharmacies-garde",
+        component: PharmacieGardeComponent,
       },
       {
         path: "prestataire",

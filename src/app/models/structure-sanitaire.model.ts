@@ -8,11 +8,15 @@ export interface StructureSanitaireModel {
   latitude?: number;
   longitude?: number;
   nom?: string;
-  periodicityType?: string;
+  periodicityType?: PeriodicityType;
   structuresanitaireId?: number;
   typePrestataire?: string;
   ville?: string;
   watch_end_date?: string;
   watch_periodicity_value?: string;
   watch_start_date?: string;
+}
+
+const enum PeriodicityType {
+  occurency='occurency', duration='duration'
 }
