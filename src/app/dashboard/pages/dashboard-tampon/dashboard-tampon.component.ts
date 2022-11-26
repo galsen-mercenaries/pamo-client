@@ -30,6 +30,9 @@ export class DashboardTamponComponent implements OnInit {
       case "ROLE_MEDECIN":
         this.router.navigate(["/dashboard/personnel/home"]);
         break;
+      default:
+        this.router.navigate(["/dashboard/patient/home"]);
+        break;
     }
   }
 }

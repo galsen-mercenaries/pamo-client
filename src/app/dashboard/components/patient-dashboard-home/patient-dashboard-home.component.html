@@ -28,7 +28,7 @@
             <div class="mob-card-title">Trouver</div>
             <div class="mob-card-desc">Pharmacie</div>
         </div>
-        <div class="mobile-act-card taxi">
+        <!-- <div class="mobile-act-card taxi">
             <div class="icon-container">
                 <span class="material-icons ico-mobile" [ngStyle]="{'color':'#ffde0a'}">
                     taxi_alert
@@ -36,7 +36,7 @@
             </div>
             <div class="mob-card-title">Taxi</div>
             <div class="mob-card-desc">Rakk takk</div>
-        </div>
+        </div> -->
     </div>
     <div class="fast-actions-block">
         <div class="card-container">
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="card-container">
-            <div class="fast-action-card green text-white">
+            <div [routerLink]="'/dashboard/patient/pharmacies-garde'" class="fast-action-card green text-white">
                 <span class="material-icons ico" [ngStyle]="{'color':'#ffffff'}">
                     local_pharmacy
                 </span>
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-container">
+        <!-- <div class="card-container">
             <div class="fast-action-card yellow text-black">
                 <span class="material-icons ico" [ngStyle]="{'color':'#000000'}">
                     taxi_alert
@@ -82,7 +82,7 @@
                     <div class="sub-title">Trouver taxi d'urgence</div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="monthly-appointments" *ngIf="0">
         <div class="semester-title">Mes rendez-vous du mois</div>

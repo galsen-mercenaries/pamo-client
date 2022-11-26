@@ -45,11 +45,7 @@
 
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
-<<<<<<< HEAD
             <td class="align-content" mat-cell *matCellDef="let element; let i = index">
-=======
-            <td mat-cell *matCellDef="let element; let i = index">
->>>>>>> 2a196c6 (Add linked User)
                 <ng-container *ngIf="element?.fichemedicale">
                     <span (click)="editFicheMedical(element, i)" class="c-pointer underline">
                         <mat-icon class="c-pointer">

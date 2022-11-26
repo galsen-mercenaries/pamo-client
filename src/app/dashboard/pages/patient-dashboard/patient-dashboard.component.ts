@@ -23,8 +23,7 @@ export class PatientDashboardComponent implements OnInit {
       router: "calendrier-medical",
     },
     { menuTitle: "Assurances", router: "prestataire" },
-    { menuTitle: "Mon profil", router: "mon-profil" },
-    { menuTitle: "Mes notifications", router: "4" },
+    { menuTitle: "Mon profil", router: "mon-profil" }
   ];
   currentUser: UserModel;
 

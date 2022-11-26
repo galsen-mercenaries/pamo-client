@@ -21,6 +21,9 @@ import {
 } from "angular-bootstrap-datetimepicker";
 import { MedecinsCalendarComponent } from "./components/medecins-calendar/medecins-calendar.component";
 import { MatDialogModule } from '@angular/material/dialog';
+import { PharmacieGardeComponent } from './pages/patient-dashboard/components/pharmacie-garde/pharmacie-garde.component';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MedecinDashboardComponent,
     MedecinDashboardHomeComponent,
     DashboardTamponComponent,
-    MedecinsCalendarComponent
+    MedecinsCalendarComponent,
+    PharmacieGardeComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +48,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
+    TableModule,
+    ButtonModule
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
