@@ -37,11 +37,16 @@ export class PharmacieGardeComponent implements OnInit {
   }
 
   fetchPharmacie(event?: any) {
+    console.log('event',event);
+
     this.pageSize = event?.rows || 5;
     const first = event?.first || 0;
     this.isLoading = true;
     const filterName = event?.filters?.nom?.value;
     const filterAdresse = event?.filters?.adresse?.value;
+    if(!event) {
+      this.fetchCount();
+    }
     this.structureService.getStructureSanitairesByType(TypePrestataire.PHARMACIE, first, this.pageSize, filterName, filterAdresse).subscribe(
       (res) => {
         this.isLoading = false;
