@@ -14,6 +14,7 @@ export class AddLinkedUserComponent implements OnInit {
   user: UserModel;
   errorMsg: String ="Erreur lors de l'ajout de l'utilisateur"
   error: number = 0
+  liens = ["père","mère","beau-père","belle-mère","fils","fille","beau-fils","belle-fille","oncle","tante","neveu","nièce","sœur","frère"]
 
   constructor(
     private fb : FormBuilder,
@@ -33,7 +34,8 @@ export class AddLinkedUserComponent implements OnInit {
       nom: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
       numero: ['', [Validators.required]],
-      email: ['', [Validators.email,Validators.required]]
+      email: ['', [Validators.email,Validators.required]],
+      relationshipWithMainUser: ['', [Validators.required]]
     });
   }
 

@@ -15,6 +15,7 @@ export interface UserModel {
   roleCode?: string;
   medecinId?: number;
   structuresanitaireId?: number;
+  relationshipWithMainUser?: string;
   fichemedicale?: FicheMedicalModel;
   specialite?: SpecializationModel;
 }
