@@ -31,6 +31,7 @@ export class LinkedUserComponent implements OnInit {
     "email",
     "adresse",
     "numero",
+    "relation",
     "actions",
   ];
 

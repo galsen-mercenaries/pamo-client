@@ -22,6 +22,14 @@
                     <mat-label>Numéro</mat-label>
                     <input matInput formControlName="numero" type="text">
                 </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Relation</mat-label>
+                    <mat-select formControlName="relationshipWithMainUser">
+                      <mat-option *ngFor="let lien of liens" [value]="lien">
+                        {{lien}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
             </form>
             <div class="btn-container">
                 <button class="btn btn-primary text-white" (click)="add()">
