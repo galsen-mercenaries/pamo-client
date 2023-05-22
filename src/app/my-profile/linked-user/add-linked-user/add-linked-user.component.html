@@ -1,33 +1,41 @@
 <div class="profile-page">
     <div class="profile-page-content">
         <p>Information du patient</p>
-            <form [formGroup]="form" class="form">
-                <mat-form-field class="form-item" [appearance]="'standard'">
-                    <mat-label>Prénom</mat-label>
-                    <input matInput formControlName="prenom" type="text">
-                </mat-form-field>
-                <mat-form-field class="form-item" [appearance]="'standard'">
-                    <mat-label>Nom</mat-label>
-                    <input matInput formControlName="nom" type="text">
-                </mat-form-field>
-                <mat-form-field class="form-item" [appearance]="'standard'">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" type="text">
-                </mat-form-field>
-                <mat-form-field class="form-item" [appearance]="'standard'">
-                    <mat-label>Adresse</mat-label>
-                    <input matInput formControlName="adresse" type="text">
-                </mat-form-field>
-                <mat-form-field class="form-item" [appearance]="'standard'">
-                    <mat-label>Numéro</mat-label>
-                    <input matInput formControlName="numero" type="text">
-                </mat-form-field>
-            </form>
-            <div class="btn-container">
-                <button class="btn btn-primary text-white" (click)="add()">
-                    Ajouter Patient
-                </button>
-            </div>
-            <p *ngIf="error==1" style="color:red">{{errorMsg}}</p>
+        <form [formGroup]="form" class="form">
+            <mat-form-field class="form-item" [appearance]="'standard'">
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="prenom" type="text">
+            </mat-form-field>
+            <mat-form-field class="form-item" [appearance]="'standard'">
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="nom" type="text">
+            </mat-form-field>
+            <mat-form-field class="form-item" [appearance]="'standard'">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="text">
+            </mat-form-field>
+            <mat-form-field class="form-item" [appearance]="'standard'">
+                <mat-label>Adresse</mat-label>
+                <input matInput formControlName="adresse" type="text">
+            </mat-form-field>
+            <mat-form-field class="form-item" [appearance]="'standard'">
+                <mat-label>Numéro</mat-label>
+                <input matInput formControlName="numero" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Relation</mat-label>
+                <mat-select formControlName="relationshipWithMainUser">
+                    <mat-option *ngFor="let lien of liens" [value]="lien">
+                        {{lien}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+        <div class="btn-container">
+            <button class="btn btn-primary text-white" (click)="add()">
+                Ajouter Patient
+            </button>
+        </div>
+        <p *ngIf="error==1" style="color:red">{{errorMsg}}</p>
     </div>
 </div>

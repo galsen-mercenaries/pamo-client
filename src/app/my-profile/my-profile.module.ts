@@ -14,6 +14,7 @@ import { AddLinkedUserComponent } from './linked-user/add-linked-user/add-linked
 import {MatTableModule} from '@angular/material/table';
 import { DeleteLinkedUserComponent } from './linked-user/component/delete-linked-user/delete-linked-user.component';
 import { MeetingHistoryComponent } from './meeting-history/meeting-history.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MeetingHistoryComponent } from './meeting-history/meeting-history.compo
     MatInputModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ]
 })
 export class MyProfileModule { }
