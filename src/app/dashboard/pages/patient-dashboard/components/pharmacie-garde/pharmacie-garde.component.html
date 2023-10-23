@@ -1,0 +1,82 @@
+<div class="list-pharmacie">
+    <span  class="title">
+        Pharmacies
+    </span>
+    <div class="subtitle">
+        Voici une liste des pharmacies avec les informations nécessaires pour les contacter ou les localiser.
+        <br/> Des filtres sont aussi mis à votre disposition pour vous aider à affiner votre recherche.
+    </div>
+    <div class="list-container">
+        <div class="description">
+          Filtrer suivant le nom ou l'adresse de la pharmacie
+        </div>
+        <p-table #dt [paginatorPosition]="'top'" [scrollable]="true" scrollHeight="350px" [columns]="cols" (onLazyLoad)="fetchPharmacie($event)" dataKey="structuresanitaireId" [globalFilterFields]="['nom','adresse']" [value]="listStructures" [lazy]="true" [paginator]="true" [rows]="pageSize" [totalRecords]="totalRecords" [loading]="isLoading" [rowsPerPageOptions]="[5,10,20]">
+          <ng-template pTemplate="caption">
+            <div class="header p-d-flex p-ai-center p-jc-between">
+                Pharmacies
+                <div class="p-d-flex p-ai-center">
+                <button pButton label="Réinitialiser les filtres" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear()"></button>
+                  <p-button class="p-ml-5" (onClick)="fetchPharmacie()" icon="pi pi-refresh"></p-button>
+                </div>
+            </div>
+        </ng-template>
+          <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                      Nom
+                      <p-columnFilter type="text" field="nom"></p-columnFilter>
+                  </div>
+              </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                      Adresse
+                      <p-columnFilter type="text" field="adresse" ></p-columnFilter>
+                  </div>
+              </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                      Email
+                      <!-- <p-columnFilter type="text" field="email" display="menu"></p-columnFilter> -->
+                  </div>
+              </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                      Disponibilité
+                      <!-- <p-columnFilter type="text" field="periodicityType" display="menu"></p-columnFilter> -->
+                  </div>
+              </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="4">Aucune pharmacie trouvée</td>
+          </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-pharmacie>
+              <tr>
+                  <td>
+                    {{pharmacie?.nom}}
+                  </td>
+                  <td>
+                    {{pharmacie?.adresse}}
+                  </td>
+                  <td>
+                    {{pharmacie?.email}}
+                  </td>
+                  <td>
+                    <span>
+                      <ng-container *ngIf="pharmacie?.periodicityType === 'occurency'">
+                        {{ pharmacie?.watch_periodicity_value }}
+                      </ng-container>
+                      <ng-container *ngIf="pharmacie?.periodicityType === 'duration'">
+                        De  {{ pharmacie?.watch_start_date | date: 'EEEE dd MMMM yyyy à HH:mm' }}
+                        à  {{ pharmacie?.watch_end_date | date: 'EEEE dd MMMM yyyy à HH:mm' }}
+                      </ng-container>
+                    </span>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+      </div>
+</div>

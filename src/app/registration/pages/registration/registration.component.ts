@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { SwiperComponent, SwiperConfigInterface } from "ngx-swiper-wrapper";
+import { tap } from "rxjs/operators";
 import { REGEX_PASSWORD } from "src/app";
-import { UserModel } from "src/app/models/user.model";
+import { ROLE_ENUM, UserModel } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication-service/authentication.service";
+import { NewsService } from "src/app/services/news-service/news.service";
 import { RegistrationSuccessDialogComponent } from "../../components/registration-success-dialog/registration-success-dialog.component";
 
 @Component({
@@ -34,6 +37,9 @@ export class RegistrationComponent implements OnInit {
   addressForm: FormGroup;
   @ViewChild("swiper", { static: false }) swiperComponent: SwiperComponent;
   selectedProfile: "patient" | "medecin";
+  medecinStructures;
+  structures: any[];
+  structuresSuggestions: any[];
   specialities = [
     { name: "Dentiste", code: "1" },
     { name: "Ophtalmologue", code: "2" },
@@ -43,7 +49,7 @@ export class RegistrationComponent implements OnInit {
   ];
   isPasswordVisible: boolean;
   isConfirmPasswordVisible: boolean;
-  steps = [1, 2, 3, 4];
+  steps = [1, 2, 3, 4, 5];
   currentSlideIndex = 0;
   registeringUser: boolean;
   registrationError: string;
@@ -54,15 +60,29 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private newsService: NewsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // this.initProfileForm();
+    this.initProfileForm();
     this.initUsernamesForm();
-    // this.initSpecialitiesForm();
+    this.initSpecialitiesForm();
     this.initPasswordForm();
     this.initAddressForm();
+    this.getAllStructures();
+  }
+
+  getAllStructures() {
+    this.newsService
+      .getAllStructures()
+      .pipe(
+        tap((structures) => {
+          this.structures = structures;
+        })
+      )
+      .subscribe();
   }
 
   registerUser() {
@@ -83,7 +103,16 @@ export class RegistrationComponent implements OnInit {
       password,
       numero: this.usernamesForm.value.numero,
       adresse: this.addressForm.value.address,
+      roleCode:
+        this.profileForm.value.profile === "patient"
+          ? ROLE_ENUM.PATIENT
+          : ROLE_ENUM.MEDECIN,
     };
+
+    if (newUser.roleCode === ROLE_ENUM.MEDECIN) {
+      newUser.structuresanitaireId =
+        this.addressForm.value.medecinStructure.structuresanitaireId;
+    }
     this.authenticationService.registerUser(newUser).subscribe(
       (createdUser) => {
         this.registeringUser = false;
@@ -159,16 +188,10 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  initPasswordForm() {
-    this.passwordForm = this.formBuilder.group({
-      password: ["", [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
-      confirmPassword: ["", Validators.required],
-    });
-  }
-
   initAddressForm() {
     this.addressForm = this.formBuilder.group({
-      address: [""],
+      address: ["", Validators.required],
+      medecinStructure: [Validators.required],
     });
   }
 
@@ -192,5 +215,22 @@ export class RegistrationComponent implements OnInit {
     setTimeout(() => {
       this.currentSlideIndex = index;
     }, 500);
+  }
+
+  onCompleted(event) {
+    this.structuresSuggestions = this.structures.filter((prestataire) => {
+      return prestataire.nom.toLowerCase().includes(event?.query.toLowerCase());
+    });
+  }
+
+  initPasswordForm() {
+    this.passwordForm = this.formBuilder.group({
+      password: ["", [Validators.required, Validators.pattern(REGEX_PASSWORD)]],
+      confirmPassword: ["", Validators.required],
+    });
+  }
+
+  goHome() {
+    this.router.navigate(["/"])
   }
 }

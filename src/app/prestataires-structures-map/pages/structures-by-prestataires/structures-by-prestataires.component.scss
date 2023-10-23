@@ -1,0 +1,101 @@
+@import "src/styles-variables.scss";
+
+:host {
+  width: 100%;
+}
+
+.map-page-container {
+  &.light-mod {
+    padding: 10px;
+  }
+  .search-agency-form {
+    max-width: 350px;
+    margin-bottom: 25px;
+    .title {
+      font-family: "NotoSansKR-Light";
+      margin-bottom: 20px;
+      display: flex;
+      .back-ico {
+        font-size: 35px;
+        width: 35px;
+        height: 35px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+      .text {
+        font-size: 20px;
+      }
+    }
+    .prestataire-item {
+      padding: 2.5px 0;
+      .prest-name {
+        font-family: "NotoSansKR-Light";
+      }
+      &:not(:last-child) {
+        border-bottom: solid 1px $main-blue;
+      }
+    }
+    .display-toggle {
+      margin-top: 20px;
+      border-radius: 4px;
+      border: solid 2px $main-blue;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      .icon-parent {
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .toggle-icon {
+          color: $main-blue;
+        }
+        &.selected {
+          background-color: $main-blue;
+          .toggle-icon {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+  .map-container {
+    width: 100%;
+    height: 500px;
+  }
+  .select-prestataire-text {
+    font-family: "NotoSansKR-Light";
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  p-table {
+    .my-tab {
+      border-top: solid 1px $darkGray;
+      .col-title {
+        text-align: center;
+        padding: 7px 0;
+      }
+    }
+    .tab-cell {
+      .cell-content {
+        text-align: center;
+        font-family: "NotoSansKR-Light";
+        padding: 7px 0;
+      }
+      &:nth-child(odd) {
+        background-color: $platinum !important;
+        border-top: solid 1px $darkGray;
+        border-bottom: solid 1px $darkGray;
+      }
+    }
+  }
+}
+
+@media screen and( max-width:900px) {
+  .map-page-container {
+    padding: 10px;
+  }
+  .select-prestataire-text {
+    font-size: 15px !important;
+  }
+}

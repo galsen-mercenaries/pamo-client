@@ -29,6 +29,11 @@ $Pamo-client-theme: mat-light-theme(
 // that you are using.
 @include angular-material-theme($Pamo-client-theme);
 
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~open-iconic/font/css/open-iconic-bootstrap.css";
+@import "src/styles-variables.scss";
+
 @font-face {
   font-family: "Lobster";
   src: local("Lobster"),
@@ -37,12 +42,13 @@ $Pamo-client-theme: mat-light-theme(
 
 @font-face {
   font-family: "NotoSansKR-Bold";
-  src: url(./assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf) format("opentype");
+  src: url("./assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "NotoSansKR-Light";
-  src: url(./assets/fonts/Noto_Sans_KR/NotoSansKR-Light.otf) format("opentype");
+  src: url("./assets/fonts/Noto_Sans_KR/NotoSansKR-Light.otf")
+    format("opentype");
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -86,6 +92,16 @@ button[disabled] {
   max-width: 350px !important;
   mat-dialog-container {
     padding: 0 !important;
+    border-radius: 10px;
+  }
+}
+
+.confirm-appointment-dialog {
+  width: 80% !important;
+  max-width: 500px !important;
+  mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 10px;
   }
 }
 
@@ -99,12 +115,6 @@ button[disabled] {
   }
 }
 
-.register-success-dialog-style {
-  mat-dialog-container {
-    border-radius: 10px;
-  }
-}
-
 .login-dialog-backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
@@ -113,4 +123,142 @@ button[disabled] {
 .register-success-dialog-backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(1.25px);
+}
+
+// customize calendar display
+.cal-month-view {
+  .cal-days {
+    border: none !important;
+  }
+  .cal-header {
+    display: none !important;
+  }
+  .cal-cell-row {
+    border: unset !important;
+    .cal-day-cell {
+      border: none !important;
+      height: 40px;
+      min-height: unset !important;
+      .cal-cell-top {
+        min-height: unset !important;
+        height: 100% !important;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .cal-day-number {
+          opacity: 0.5;
+          margin: unset !important;
+          float: unset !important;
+          color: $main-blue;
+          font-family: "NotoSansKR-Light";
+          font-size: 14px;
+        }
+      }
+      &.cal-today {
+        .cal-day-number {
+          font-family: "NotoSansKR-Bold";
+          font-size: 18px;
+        }
+      }
+      &.cal-past {
+      }
+      &.cal-out-month {
+        opacity: 0.5;
+        .cal-day-number {
+          color: #666666 !important;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// bootstrap calendar style
+.calendar-container {
+  .dl-abdtp-day-view {
+    background-color: $white;
+    .row {
+      margin-left: unset !important;
+      margin-right: unset !important;
+      &.align-items-center {
+        padding: 5px;
+      }
+      .col,
+      .dl-abdtp-date-button {
+        padding: 0 2px;
+        color: $main-blue;
+        font-family: "NotoSansKR-Light";
+      }
+      .dl-abdtp-col-label {
+        font-family: "NotoSansKR-Bold" !important;
+        color: $black !important;
+        font-size: 14px;
+        padding: 5px !important;
+      }
+      .dl-abdtp-selected {
+        font-family: "NotoSansKR-Bold" !important;
+        color: $white !important;
+      }
+      .dl-abdtp-past,
+      .dl-abdtp-future {
+        color: #dddddd;
+      }
+      .dl-abdtp-right-button,
+      .dl-abdtp-left-button {
+        background-color: $white;
+        .right-icon,
+        .left-icon {
+          color: $main-blue;
+        }
+      }
+    }
+  }
+}
+
+// calendar display in appointment validation (just for calendar header)
+// .appointment-confirmation-page {
+//   .fc-toolbar-chunk {
+//     &:last-child {
+//       text-align: end !important;
+//     }
+//   }
+// }
+
+.search-agency-form {
+  p-autocomplete {
+    width: 100% !important;
+    .p-autocomplete {
+      width: 100%;
+      height: 35px;
+      .p-autocomplete-input {
+        border-radius: 5px 0 0 5px !important;
+        width: 100% !important;
+      }
+      .p-autocomplete-dropdown {
+        border-radius: 0 5px 5px 0 !important;
+        border-left: 0px;
+        background-color: rgba($color: $main-blue, $alpha: 0.2);
+      }
+      .p-autocomplete-panel {
+        background-color: $white !important;
+        border-radius: 0 0 5px 5px;
+        border: solid 0.5px #1735a1;
+        border-top: none;
+        padding: 0 5px;
+      }
+      .p-autocomplete-empty-message {
+        font-family: "NotoSansKR-Light";
+      }
+    }
+  }
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+.previsualize-avatar-style .mat-dialog-container {
+  // border-radius: 10px !important;
 }

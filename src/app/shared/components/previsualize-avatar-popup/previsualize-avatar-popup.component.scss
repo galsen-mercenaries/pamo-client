@@ -1,0 +1,44 @@
+@import "src/styles-variables.scss";
+
+.previsualize-avatar-modal {
+  .title {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .img-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+  }
+  .btns-block {
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      position: relative;
+      width: 48%;
+      max-width: 150px;
+      min-width: 110px;
+      font-size: 12px;
+      &-confirm {
+        background-color: $main-blue;
+        margin-right: 20px;
+      }
+      &-cancel {
+        border: solid 2px $black;
+      }
+      mat-spinner {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+      }
+      .mat-spinner::ng-deep circle {
+        stroke: white;
+      }
+    }
+  }
+}

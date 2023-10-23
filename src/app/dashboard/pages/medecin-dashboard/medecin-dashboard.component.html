@@ -1,0 +1,51 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav>
+        <mat-nav-list>
+            <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dashboard/personnel/home'"> Accueil </a>
+            <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dashboard/personnel/rdv-confirmation'"> Calendrier </a>
+            <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dashboard/personnel/users'"> Fiches Médicales </a>
+            <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/create-contact'"> Mon profil </a>
+            <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/activities'"> Se déconnecter </a>
+            <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Fermer</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="medecin-dashboard">
+            <div class="medium-screen-menu">
+                <mat-icon (click)="sidenav.toggle()" [ngStyle]="{'color':'#000000'}" class="menu-toggle">menu</mat-icon>
+                <div class="bienvenue">Bienvenue, &nbsp;&nbsp;<span class="noms">Docteur</span> </div>
+            </div>
+            <div class="medecin-menu-block">
+                <div class="profile-img-container">
+                    <img class="med-avatar" [src]="currentMedecin?.user?.image" alt=""
+                        *ngIf="currentMedecin?.user?.image && currentMedecin?.user?.image !== '' else defaultAvatar"
+                        (click)="inputAvatar.click()">
+                    <ng-template #defaultAvatar>
+                        <img src="assets/images/profil-mob.png" alt="" class="med-avatar no-avatar" (click)="inputAvatar.click()">
+                    </ng-template>
+                    <input type="file" #inputAvatar (change)="onFileUploaded($event)" class="hidden-input">
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item" routerLink="home" routerLinkActive="is-route-active" title="Accueil">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">home</mat-icon>
+                    </div>
+                    <div class="menu-item" routerLink="rdv-confirmation" routerLinkActive="is-route-active" title="Mes rendez-vous">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">event</mat-icon>
+                    </div>
+                    <div class="menu-item" routerLink="users" routerLinkActive="is-route-active" title="Mes patients">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">groups</mat-icon>
+                    </div>
+                    <div class="menu-item" title="Mon profil">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">manage_accounts</mat-icon>
+                    </div>
+                    <div class="menu-item" (click)="logout()" title="Se déconnecter">
+                        <mat-icon [ngStyle]="{'color':'#FFFFFF'}">logout</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="medecin-dashboard-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

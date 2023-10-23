@@ -1,0 +1,23 @@
+<div class="set-rdv-date-modal">
+    <div class="title">Programmer à une autre date</div>
+    <form [formGroup]="form">
+        <mat-form-field appearance="fill" class="date-picker">
+            <mat-label>Choisir une date</mat-label>
+            <input matInput [ngxMatDatetimePicker]="picker" readonly formControlName="date" [min]="todayDate">
+            <mat-datepicker-toggle matSuffix ></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker [defaultTime]="[00, 00, 00]" [stepMinute]="30" #picker>
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+        <mat-form-field class="text-area">
+            <mat-label>Motif (optionnel)</mat-label>
+            <textarea formControlName="reason" matInput placeholder="Je serai pas disponible à cette heure"></textarea>
+        </mat-form-field>
+        <div class="btn-block">
+            <button class="btn btn-confirm text-white" (click)="postpone()" [disabled]="loading || !form.valid">
+                Confirmer
+                <mat-spinner *ngIf="loading" [diameter]="20" mode="indeterminate"></mat-spinner>
+            </button>
+            <button class="btn btn-cancel text-red">Annuler</button>
+        </div>
+    </form>
+</div>

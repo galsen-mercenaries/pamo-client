@@ -1,0 +1,27 @@
+<div class="appointment-confirmation-page">
+    <div class="title">
+        <mat-icon (click)="goBack()" class="back-ico">arrow_back</mat-icon>
+        <span class="text">Gestion de mes patients</span>
+    </div>
+    <div class="body-block">
+        <div class="list-menu">
+            <mat-tab-group>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                      <mat-icon>edit</mat-icon>
+                      Editer une fiche médicale
+                    </ng-template>
+                    <ng-template matTabContent>
+                        <app-list-users></app-list-users>
+                      </ng-template>
+                  </mat-tab>
+            </mat-tab-group>
+            <!-- <div *ngFor="let item of listItem" [routerLink]="[item?.path]" class="item c-pointer">
+                    <mat-icon>{{item?.matIcon}}</mat-icon>
+                    <span>
+                        {{item?.label}}
+                    </span>
+            </div> -->
+        </div>
+    </div>
+</div>

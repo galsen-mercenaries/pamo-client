@@ -1,3 +1,5 @@
+@import "src/styles-variables.scss";
+
 .registration-desktop-page {
   width: 100%;
   height: auto;
@@ -11,6 +13,14 @@
     width: 100%;
     text-align: center;
     padding: 15px 0;
+    position: relative;
+    .go-back-block {
+      cursor: pointer;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      padding-top: 5px;
+    }
     .title {
       font-family: "NotoSansKR-Bold";
       font-size: 20px;
@@ -153,6 +163,18 @@
                 }
               }
             }
+            .search-agency-form {
+              padding: 0 20px 20px;
+              .structure-item {
+                padding: 2.5px 0;
+                .struct-name {
+                  font-family: "NotoSansKR-Light";
+                }
+                &:not(:last-child) {
+                  border-bottom: solid 1px $main-blue;
+                }
+              }
+            }
             .error-block {
               padding: 5px 0;
               color: red;
@@ -226,6 +248,12 @@
       }
     }
     .register-title {
+      .go-back-block {
+        padding-top: 0 !important;
+        .home {
+          display: none;
+        }
+      }
       .title {
         font-size: 16px;
       }

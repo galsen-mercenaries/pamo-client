@@ -4,10 +4,14 @@ $gray-background: #f5f4f6;
 $pink: #f35361;
 $light-pink: #ffadc7;
 $gray: #e6e6db;
+$darkGray: #cccccc;
 $light-gray: #eeeeee;
 $black: #000000;
 $red: #ff0000;
 $green: #039203;
+$valid-green: #34d57f;
+$dark-blue: #415a77;
+$platinum: #e5e9ec;
 
 .text {
   &-red {
@@ -39,5 +43,130 @@ $green: #039203;
   }
   &-light-gray {
     color: $light-gray;
+  }
+  &-valid-green {
+    color: $valid-green;
+  }
+}
+
+.body-block,
+.patient-dashboard-body-block {
+  .fc-header-toolbar {
+    flex-wrap: nowrap !important;
+  }
+}
+
+.patient-dashboard-body-block {
+  .fc-toolbar-title {
+    font-size: 18px !important;
+  }
+}
+
+.dashboard-right-block,
+.patient-dashboard-body-block,
+.body-block {
+  table {
+    width: 100% !important;
+  }
+  .calendar-container {
+    full-calendar {
+      padding: 0 15px;
+      background-color: $white;
+      .fc-header-toolbar {
+        flex-wrap: wrap;
+        .fc-toolbar-chunk {
+          width: 50%;
+          margin-top: 10px;
+          &:first-child {
+            width: 65% !important;
+            text-align: start;
+          }
+          &:nth-child(-3n + 2) {
+            width: 30% !important;
+            text-align: end;
+          }
+        }
+      }
+      .fc-col-header {
+        .fc-col-header-cell {
+          .fc-col-header-cell-cushion {
+            text-decoration: unset;
+          }
+        }
+      }
+      .fc-daygrid-body {
+        width: 100% !important;
+        .fc-daygrid-day {
+          width: 15px !important;
+          .fc-daygrid-day-frame {
+            .fc-daygrid-day-top {
+              justify-content: center !important;
+              cursor: pointer;
+              .fc-daygrid-day-number {
+                font-size: 14px;
+                text-decoration: unset;
+              }
+            }
+          }
+        }
+      }
+      // events
+      .fc-daygrid-event,
+      .fc-timegrid-event {
+        white-space: normal;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 3px 2px;
+
+        // hide dot in event display
+        .fc-daygrid-event-dot {
+          display: none;
+        }
+
+        .fc-event-time {
+          font-family: "NotoSansKR-Bold";
+          font-size: 9px;
+          color: $white;
+        }
+        .fc-event-title {
+          font-family: "NotoSansKR-Light";
+          font-size: 8px;
+          color: $white;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+    .event-meeting {
+      cursor: pointer;
+      background-color: $darkGray;
+      &.event-canceled {
+        background-color: $darkGray;
+      }
+      &.event-confirmed {
+        background-color: $light-pink;
+      }
+      &.event-performed {
+        background-color: $valid-green;
+      }
+      &.event-ignored {
+        background-color: $platinum;
+      }
+      &.event-expired {
+        background-color: $gray;
+      }
+      &.event-pending {
+        background-color: $main-blue;
+      }
+      &.event-scheduled {
+        background-color: orange;
+      }
+    }
+    .more-link {
+      font-size: 10px;
+      text-decoration: none;
+      color: $black;
+      opacity: 0.5;
+    }
   }
 }

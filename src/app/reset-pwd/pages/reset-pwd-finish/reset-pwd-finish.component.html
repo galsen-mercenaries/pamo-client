@@ -1,0 +1,38 @@
+<div class="reset-pwd-container">
+    <span class="title">
+        Réinitialisation de votre mot de passe
+    </span>
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="process()">
+            <div class="input">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Nouveau mot de passe</mat-label>
+                    <input #pwd matInput placeholder="Mot de passe" type="password"  formControlName="password">
+                    <span *ngIf="pwd.type === 'text'" (click)="pwd.type = 'password'" matSuffix>Cacher</span>
+                    <span *ngIf="pwd.type === 'password'" (click)="pwd.type = 'text'" matSuffix>Afficher</span>
+                    <mat-hint>Votre mot de passe doit être de minimum 8 lettres, dont 1 majuscule</mat-hint>
+                  </mat-form-field>
+            </div>
+            <div class="input">
+                <mat-form-field appearance="outline"  >
+                    <mat-label>Confirmer votre mot de passe</mat-label>
+                    <input #confirm matInput placeholder="Mot de passe" type="password" formControlName="confirmPassword">
+                    <span *ngIf="confirm.type === 'text'" (click)="confirm.type = 'password'" matSuffix>Cacher</span>
+                    <span *ngIf="confirm.type === 'password'" (click)="confirm.type = 'text'" matSuffix>Afficher</span>
+                    <mat-hint>Votre mot de passe doit être de minimum 8 lettres, dont 1 majuscule</mat-hint>
+                  </mat-form-field>
+            </div>
+            <div class="error" *ngIf="error">
+                {{error}}
+            </div>
+              <div class="btns">
+                  <button class="confirm" [disabled]="!form.valid" mat-raised-button color="primary" type="submit">Je confirme</button>
+                  <button mat-stroked-button color="primary" type="reset">Tout effacer</button>
+
+              </div>
+              <span class="redirect" *ngIf="success" [routerLink]="['/accueil']">
+                Retour à l'accueil
+              </span>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuardService } from "./services/auth-guard/auth-guard.service";
+import { AuthGuardService } from "./services/auth-guard-service/auth-guard.service";
 
 const routes: Routes = [
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
@@ -8,12 +8,15 @@ const routes: Routes = [
     path: "accueil",
     canActivate: [AuthGuardService],
     loadChildren: () =>
-      import("./welcome/welcome.module").then((m) => m.WelcomeModule),
+      import("./on-boarding/on-boarding.module").then(
+        (m) => m.OnBoardingModule
+      ),
   },
   {
     path: "dashboard",
     canActivate: [AuthGuardService],
-    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+    loadChildren: () =>
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
     path: "register",
@@ -22,6 +25,21 @@ const routes: Routes = [
       import("./registration/registration.module").then(
         (m) => m.RegistrationModule
       ),
+  },
+  {
+    path: "reset-password",
+    loadChildren: () =>
+      import("./reset-pwd/reset-pwd.module").then(
+        (m) => m.ResetPwdModule
+      ),
+  },
+  {
+    path: "prestataire",
+    // canActivate: [AuthGuardService],
+    loadChildren: () =>
+      import(
+        "./prestataires-structures-map/prestataires-structures-map.module"
+      ).then((m) => m.PrestatairesStructuresMapModule),
   },
 ];
 

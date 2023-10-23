@@ -1,6 +1,10 @@
 <div class="registration-desktop-page">
     <!-- title on top of page -->
     <div class="register-title">
+        <div class="go-back-block" (click)="goHome()">
+            <mat-icon [ngStyle]="{'color':'#47afff'}">keyboard_arrow_left</mat-icon>
+            <span class="home text-main-blue">Accueil</span>
+        </div>
         <span class="title">Créez votre compte en quelques étapes&nbsp;&nbsp;</span>
         <span class="sub-title">(Cela vous prendra juste une minute)</span>
     </div>
@@ -12,8 +16,8 @@
         <div class="steps-status">
             <div class="step-nums">
                 <div [class]="'step-num step-num-'+index"
-                    [ngClass]="{'step-num-disabled': index > currentSlideIndex - 1, 'step-num-success': (index === 3 && currentSlideIndex === 3)}"
-                    *ngFor="let step of steps; let index = index">{{index === 3 && currentSlideIndex === 3 ? '' : step}}</div>
+                    [ngClass]="{'step-num-disabled': index > currentSlideIndex - 1, 'step-num-success': (index === 4 && currentSlideIndex === 4)}"
+                    *ngFor="let step of steps; let index = index">{{index === 4 && currentSlideIndex === 4 ? '' : step}}</div>
             </div>
             <div class="step-lines">
                 <div class="step-line" [ngClass]="{'step-line-disabled': j >= currentSlideIndex}"
@@ -26,7 +30,7 @@
         <swiper (indexChange)="onIndexChanged($event)" class="swiper-container" [config]="swiperConfig" #swiper>
 
             <!-- step choose profile -->
-            <!-- <div class="swiper-slide">
+            <div class="swiper-slide">
                 <div class="slide">
                     <form [formGroup]="profileForm">
                         <div class="form-title">
@@ -52,7 +56,7 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div>
 
             <!-- step names -->
             <div class="swiper-slide">
@@ -133,6 +137,17 @@
                                 <input matInput formControlName="address" type="text">
                                 <mat-icon matSuffix (click)="swapInputType()">place</mat-icon>
                             </mat-form-field>
+                        </div>
+                        <div *ngIf="profileForm.value.profile !== 'patient'" class="search-agency-form">
+                            <p-autoComplete name="nom" field="nom" formControlName="medecinStructure" [suggestions]="structuresSuggestions"
+                                [emptyMessage]="'Aucun résultat'" (completeMethod)="onCompleted($event)" [dropdown]="true"
+                                [forceSelection]="true" [showEmptyMessage]="true">
+                                <ng-template let-prest pTemplate="item">
+                                    <div class="structure-item">
+                                        <span class="struct-name">{{prest.nom}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
                         </div>
                         <div class="btn-container">
                             <button [disabled]="!addressForm.valid" (click)="nextStep()">Valider</button>

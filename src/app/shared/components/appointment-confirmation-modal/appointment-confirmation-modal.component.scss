@@ -1,0 +1,41 @@
+@import "src/styles-variables.scss";
+
+.confirm-rdv-modal {
+  padding: 15px 20px;
+  .title {
+  }
+  .card-container {
+    margin-top: 15px;
+  }
+  .btn-container {
+    display: flex;
+    button {
+      margin: 0 0 10px 0;
+      position: relative;
+      height: 38px;
+      font-size: 14px;
+      mat-spinner {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .mat-spinner::ng-deep circle {
+        stroke: white;
+      }
+      &:not(:first-child) {
+        margin-left: 10px !important;
+      }
+      &.btn-confirm {
+        background-color: $valid-green;
+        padding: 0 35px;
+      }
+      &.btn-postpone {
+        background-color: $main-blue;
+      }
+      &.btn-cancel {
+        background-color: $red;
+        padding: 0 35px;
+      }
+    }
+  }
+}
